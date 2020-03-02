@@ -26,5 +26,16 @@ namespace local_experience;
 defined('MOODLE_INTERNAL') || die;
 
 class lib {
-
+    public static function addrule() {
+        global $DB;
+        $rule = (object) array(
+            'sort' => 99,
+            'patternscriptnames' => '',
+            'patternparameters' => '',
+            'elementstohide' => '',
+            'elementstoset' => '',
+        );
+        $rule->id = $DB->insert_record('local_experience_rules', $rule);
+        return $rule;
+    }
 }

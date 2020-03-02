@@ -48,5 +48,46 @@ if (!is_siteadmin()) {
     die();
 }
 
+if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
+    $sorts = optional_param_array('sort', 0, PARAM_INT);
+    $patternscriptnames = optional_param_array('patternscriptnames', '', PARAM_TEXT);
+    $patternparameters = optional_param_array('patternparameters', '', PARAM_TEXT);
+    $elementstohide = optional_param_array('elementstohide', '', PARAM_TEXT);
+    $elementstoset = optional_param_array('elementstoset', '', PARAM_TEXT);
+    $ids = array_keys($sorts);
+    $success = array();
+    $failed = array();
+    foreach ($ids AS $id) {
+        if (empty($sorts[$id])) {
+            $DB->delete_records('local_experience_rules', array('id' => $id));
+            $success[$id] = true;
+        } else {
+            $obj = (object)array(
+                'id' => $id,
+                'sort' => $sorts[$id],
+                'patternscriptnames' => $patternscriptnames[$id],
+                'patternparameters' => $patternparameters[$id],
+                'elementstohide' => $elementstohide[$id],
+                'elementstoset' => $elementstoset[$id],
+            );
+            if ($DB->update_record('local_experience_rules', $obj)) {
+                $success[$id] = true;
+            } else {
+                $failed[$id] = true;
+            }
+        }
+    }
+    // @todo show messages.
+    echo $OUTPUT->render_from_template('local_experience/alert', array(
+        'content' => 'ok',
+        'type' => 'success'
+    ));
+}
+
+if (!empty(optional_param('addrule', '', PARAM_ALPHANUM))) {
+    lib::addrule();
+}
+
+$rules = array_values($DB->get_records('local_experience_rules', array(), 'sort ASC'));
 echo $OUTPUT->render_from_template('local_experience/rules', array('rules' => $rules));
 echo $OUTPUT->footer();

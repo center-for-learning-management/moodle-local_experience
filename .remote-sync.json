@@ -6,7 +6,7 @@
   "useAtomicWrites": false,
   "deleteLocal": false,
   "hostname": "vserver.dibig.at",
-  "target": "/var/www/www.eduvidual.org/local/experience",
+  "target": "/var/www/www.eduvidual.org/local/experience/",
   "ignore": [
     ".git/*",
     ".DS_Store",
@@ -15,5 +15,5 @@
   "watch": [],
   "transport": "scp",
   "username": "rschrenk",
-  "keyfile": "/Users/rschrenk/.ssh/id_rsa"
+  "keyfile": "/home/rschrenk/Dokumente/daten/DIBIG/Projekte/eduvidual/id_rsa"
 }

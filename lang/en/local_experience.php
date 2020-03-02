@@ -25,3 +25,13 @@ $string['pluginname'] = 'UI-experience';
 $string['privacy:metadata'] = 'This plugin does not store any personal data';
 
 $string['access_denied'] = 'Access denied!';
+$string['add_another_explevel'] = 'Add another experience level';
+
+$string['rules'] = 'Rules';
+$string['rules:add'] = 'Add rule';
+$string['rules:description'] = 'Here you can specify how the forms should be modified for the beginner level. Enter the type of activity/resource. Name all elements that should be hidden line by line. Do the same for default values, but use the syntax my_css_selector1=my_default_value1\n my_css_selector2=my_default_value2 and so on.';
+$string['rules:elementstohide'] = 'Hide Elements with the following selectors';
+$string['rules:elementstoset'] = 'Set form fields to the following values';
+$string['rules:removenotice'] = 'Remove a line by setting "sort" to an empty value.';
+$string['rules:patternparameters'] = 'Parameter-Patterns';
+$string['rules:patternscriptnames'] = 'Scriptname-Patterns';

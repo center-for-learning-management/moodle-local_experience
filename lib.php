@@ -25,7 +25,7 @@ defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->dirroot . '/local/experience/locallib.php');
 
-function block_eduvidual_before_standard_html_head() {
+function local_experience_before_standard_html_head() {
     global $CFG, $CONTEXT, $COURSE, $DB, $PAGE, $USER;
 
     $injects = array();
@@ -51,4 +51,14 @@ function block_eduvidual_before_standard_html_head() {
     }
 
     return implode("\n", $injects);
+}
+
+function local_experience_extend_navigation($navigation) {
+
+}
+/**
+ * Extend navigation.
+ */
+function local_experience_extend_navigation_frontpage($parentnode) {
+    // @TODO add a button somehow to toggle between advanced and basic mode.
 }

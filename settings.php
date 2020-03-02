@@ -24,17 +24,15 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) {
-    $settings = new admin_settingpage( 'local_experience_settings', get_string('pluginname:settings', 'local_experience'));
     $ADMIN->add('localplugins', new admin_category('local_experience', get_string('pluginname', 'local_experience')));
-    $ADMIN->add('local_experience', $settings);
 	//$ADMIN->add('localplugins', $settings);
     //$settings->add(new admin_setting_configtext('local_experience/varname', get_string('string:varname', 'local_experience'), '', '', PARAM_TEXT));
     $ADMIN->add(
         'local_experience',
         new admin_externalpage(
             'local_experience_config',
-            get_string('config', 'local_experience'),
-            $CFG->wwwroot . '/local/experience/config.php'
+            get_string('rules', 'local_experience'),
+            $CFG->wwwroot . '/local/experience/rules.php'
         )
     );
 }
