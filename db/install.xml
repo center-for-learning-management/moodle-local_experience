@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/experience/db" VERSION="20200300" COMMENT="XMLDB file for Moodle local/experience"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_experience_rules" COMMENT="List of customizations">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="true" COMMENT="rule id"/>
+        <FIELD NAME="order" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="true" COMMENT="ordering when processing rules"/>
+        <FIELD NAME="patternscriptname" TYPE="char" LENGTH="1333" NOTNULL="false" SEQUENCE="false" COMMENT="Patterns by scriptname"/>
+        <FIELD NAME="patternparameters" TYPE="char" LENGTH="1333" NOTNULL="false" SEQUENCE="false" COMMENT="Patterns by parameters"/>
+        <FIELD NAME="elementstohide" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="elements to hide, identified by css selector, separated by line break."/>
+        <FIELD NAME="elementstoset" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENt="elements to set, identified by css selector in format selector=value, separated by line break."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="patterns" UNIQUE="false" FIELDS="patternscriptname,patternparameters"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
