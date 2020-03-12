@@ -30,9 +30,25 @@ if ($hassiteconfig) {
     $ADMIN->add(
         'local_experience',
         new admin_externalpage(
-            'local_experience_config',
+            'local_experience_conditions',
+            get_string('conditions', 'local_experience'),
+            $CFG->wwwroot . '/local/experience/conditions.php'
+        )
+    );
+    $ADMIN->add(
+        'local_experience',
+        new admin_externalpage(
+            'local_experience_rules',
             get_string('rules', 'local_experience'),
             $CFG->wwwroot . '/local/experience/rules.php'
+        )
+    );
+    $ADMIN->add(
+        'local_experience',
+        new admin_externalpage(
+            'local_experience_c_r',
+            get_string('c_r', 'local_experience'),
+            $CFG->wwwroot . '/local/experience/c_r.php'
         )
     );
 }

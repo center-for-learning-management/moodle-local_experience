@@ -4,12 +4,31 @@
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
+    <TABLE NAME="local_experience_conditions" COMMENT="List of conditions">
+        <FIELDS>
+          <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="true" COMMENT="condition id"/>
+          <FIELD NAME="name" TYPE="text" NOTNULL="false" SEQUENCE="false" />
+          <FIELD NAME="patternscriptnames" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Patterns by scriptname"/>
+          <FIELD NAME="patternparameters" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Patterns by parameters"/>
+        </FIELDS>
+        <KEYS>
+          <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        </KEYS>
+    </TABLE>
+    <TABLE NAME="local_experience_c_r" COMMENT="n:m relation of conditions and rules">
+        <FIELDS>
+          <FIELD NAME="conditionid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" />
+          <FIELD NAME="ruleid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" />
+        </FIELDS>
+        <KEYS>
+          <KEY NAME="primary" TYPE="primary" FIELDS="conditionid,ruleid"/>
+        </KEYS>
+    </TABLE>
     <TABLE NAME="local_experience_rules" COMMENT="List of customizations">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="true" COMMENT="rule id"/>
+        <FIELD NAME="name" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="sort" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="ordering when processing rules"/>
-        <FIELD NAME="patternscriptnames" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Patterns by scriptname"/>
-        <FIELD NAME="patternparameters" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Patterns by parameters"/>
         <FIELD NAME="elementstohide" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="elements to hide, identified by css selector, separated by line break."/>
         <FIELD NAME="elementstoset" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="elements to set, identified by css selector in format selector=value, separated by line break."/>
       </FIELDS>

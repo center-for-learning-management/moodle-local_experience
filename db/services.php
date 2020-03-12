@@ -16,25 +16,21 @@
 
 /**
  * @package    local_experience
- * @copyright  2020 Zentrum für Lernmanagement (www.lernmanagement.at)
- * @author    Robert Schrenk
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  2020 Center for Learning Management (http://www.lernmanagement.at)
+ * @author     Robert Schrenk
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-function xmldb_local_experience_upgrade($oldversion) {
-    global $DB;
-    $dbman = $DB->get_manager();
-    if ($oldversion < 2020031201) {
-        $table = new xmldb_table('local_experience_rules');
-        $field = new xmldb_field('comment', XMLDB_TYPE_TEXT, '10', null, XMLDB_NOTNULL, null, '0', 'elementstoset');
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-
-        // savepoint reached.
-        upgrade_block_savepoint(true, 2020031201, 'local_experience');
-    }
-    return true;
-}
+// We define the web service functions to install.
+$functions = array(
+    'local_experience_switch' => array(
+        'classname'   => 'local_experience_external',
+        'methodname'  => 'switch',
+        'classpath'   => 'local/experience/externallib.php',
+        'description' => 'Switch the users experience level.',
+        'type'        => 'write',
+        'ajax'        => 1,
+    ),
+);

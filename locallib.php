@@ -29,13 +29,22 @@ class lib {
     public static function addrule() {
         global $DB;
         $rule = (object) array(
+            'name' => '',
             'sort' => 99,
-            'patternscriptnames' => '',
-            'patternparameters' => '',
             'elementstohide' => '',
             'elementstoset' => '',
         );
         $rule->id = $DB->insert_record('local_experience_rules', $rule);
         return $rule;
+    }
+    public static function addcondition() {
+        global $DB;
+        $condition = (object) array(
+            'name' => '',
+            'patternscriptnames' => '',
+            'patternparameters' => '',
+        );
+        $condition->id = $DB->insert_record('local_experience_conditions', $condition);
+        return $condition;
     }
 }

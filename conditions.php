@@ -22,7 +22,7 @@
  */
 
 /**
- * Manage the rules of local_experience.
+ * Manage the conditions of local_experience.
  */
 
 namespace local_experience;
@@ -31,7 +31,7 @@ require('../../config.php');
 require_once(__DIR__ . '/locallib.php');
 
 require_login();
-$PAGE->set_url(new \moodle_url('/local/experience/rules.php', array()));
+$PAGE->set_url(new \moodle_url('/local/experience/conditions.php', array()));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_heading(get_string('pluginname', 'local_experience'));
 $PAGE->set_title(get_string('pluginname', 'local_experience'));
@@ -50,25 +50,23 @@ if (!is_siteadmin()) {
 
 if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
     $names = optional_param_array('name', '', PARAM_TEXT);
-    $sorts = optional_param_array('sort', 0, PARAM_INT);
-    $elementstohide = optional_param_array('elementstohide', '', PARAM_TEXT);
-    $elementstoset = optional_param_array('elementstoset', '', PARAM_TEXT);
+    $patternscriptnames = optional_param_array('patternscriptnames', '', PARAM_TEXT);
+    $patternparameters = optional_param_array('patternparameters', '', PARAM_TEXT);
     $ids = array_keys($names);
     $success = array();
     $failed = array();
     foreach ($ids AS $id) {
         if (empty($names[$id])) {
-            $DB->delete_records('local_experience_rules', array('id' => $id));
+            $DB->delete_records('local_experience_conditions', array('id' => $id));
             $success[$id] = true;
         } else {
             $obj = (object)array(
                 'id' => $id,
                 'name' => $names[$id],
-                'sort' => $sorts[$id],
-                'elementstohide' => $elementstohide[$id],
-                'elementstoset' => $elementstoset[$id],
+                'patternscriptnames' => $patternscriptnames[$id],
+                'patternparameters' => $patternparameters[$id],
             );
-            if ($DB->update_record('local_experience_rules', $obj)) {
+            if ($DB->update_record('local_experience_conditions', $obj)) {
                 $success[$id] = true;
             } else {
                 $failed[$id] = true;
@@ -82,10 +80,10 @@ if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
     ));
 }
 
-if (!empty(optional_param('addrule', '', PARAM_ALPHANUM))) {
-    lib::addrule();
+if (!empty(optional_param('addcondition', '', PARAM_ALPHANUM))) {
+    lib::addcondition();
 }
 
-$rules = array_values($DB->get_records('local_experience_rules', array(), 'name ASC, sort ASC'));
-echo $OUTPUT->render_from_template('local_experience/rules', array('rules' => $rules, 'wwwroot' => $CFG->wwwroot));
+$conditions = array_values($DB->get_records('local_experience_conditions', array(), 'name ASC'));
+echo $OUTPUT->render_from_template('local_experience/conditions', array('conditions' => $conditions, 'wwwroot' => $CFG->wwwroot));
 echo $OUTPUT->footer();

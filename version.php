@@ -23,9 +23,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version  = 2020030200;
+$plugin->version  = 2020031200;
 $plugin->requires = 2014051200;
 $plugin->component = 'local_experience';
-$plugin->release = '0.1 (Build: 2020030200)';
+$plugin->release = '0.1 (Build: 2020031200)';
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = array();

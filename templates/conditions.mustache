@@ -17,13 +17,13 @@
 
 {{> local_experience/controls }}
 
-<h4>{{#str}} rules, local_experience {{/str}}</h4>
+<h4>{{#str}} conditions, local_experience {{/str}}</h4>
 
-<p>{{#str}} rules:description, local_experience {{/str}}</p>
-<p>{{#str}} rules:removenotice, local_experience {{/str}}</p>
+<p>{{#str}} conditions:description, local_experience {{/str}}</p>
+<p>{{#str}} conditions:removenotice, local_experience {{/str}}</p>
 <form method="POST" action="" enctype="multipart/form-data">
 
-{{#rules}}
+{{#conditions}}
 <table width="100%" class="generaltable" style="border-bottom: 2px solid darkgray;">
     <tr>
         <th colspan="2">
@@ -31,25 +31,20 @@
         </th>
     </tr>
     <tr>
-        <th colspan="2">
-            <input type="number" min="1" max="99" name="sort[{{id}}]" value="{{sort}}" class="btn-block" placeholder="{{#str}} sort {{/str}}" />
+        <th valign="top" width="50%">
+            <input type="text" name="patternscriptnames[{{id}}]" value="{{patternscriptnames}}"
+                placeholder="{{#str}} conditions:patternscriptnames, local_experience {{/str}}" class="btn-block" />
+        </th>
+        <th valign="top" width="50%">
+            <input type="text" name="patternparameters[{{id}}]" value="{{patternparameters}}"
+                placeholder="{{#str}} conditions:patternparameters, local_experience {{/str}}" class="btn-block" />
         </th>
     </tr>
-    <tr>
-        <td valign="top">
-            {{#str}} rules:elementstohide, local_experience {{/str}}
-            <textarea name="elementstohide[{{id}}]" class="btn-block">{{elementstohide}}</textarea>
-        </td>
-        <td valign="top">
-            {{#str}} rules:elementstoset, local_experience {{/str}}
-            <textarea name="elementstoset[{{id}}]" class="btn-block">{{elementstoset}}</textarea>
-        </td>
-    </tr>
 </table>
-{{/rules}}
+{{/conditions}}
 <table width="100%" class="generaltable">
     <tr>
-        <td><input type="submit" name="addrule" value="{{#str}} rules:add, local_experience {{/str}}" class="btn btn-block btn-secondary" /></td>
+        <td><input type="submit" name="addcondition" value="{{#str}} conditions:add, local_experience {{/str}}" class="btn btn-block btn-secondary" /></td>
         <td><input type="submit" name="store" value="{{#str}} submit {{/str}}" class="btn btn-block btn-primary" /></td>
     </tr>
 </table>

@@ -25,3 +25,4 @@ $string['pluginname'] = 'UI-Erfahrung';
 $string['privacy:metadata'] = 'Dieses Plugin speichert keine personenbezogenen Daten';
 
 $string['access_denied'] = 'Zugriff nicht gestattet!';
+$string['advanced_options'] = 'Fortgeschrittener Modus';

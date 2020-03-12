@@ -1,0 +1,41 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+
+{{> local_experience/controls }}
+
+<h4>{{#str}} c_r, local_experience {{/str}}</h4>
+
+<form method="POST" action="" enctype="multipart/form-data">
+<input type="submit" name="store" value="{{#str}} submit {{/str}}" class="btn btn-block btn-primary" />
+<table width="100%" class="generaltable" style="border-bottom: 2px solid darkgray;">
+    <tr>
+        <th>-</th>
+        {{#rules}}
+            <th>{{name}}</th>
+        {{/rules}}
+    </tr>
+{{#conditions}}
+    <tr>
+        <td>{{name}}</td>
+        {{#rules}}
+            <td><input type="checkbox" name="c_r[{{key}}]" {{#ischecked}} checked="checked" {{/ischecked}} /></td>
+        {{/rules}}
+    </tr>
+{{/conditions}}
+</table>
+<input type="submit" name="store" value="{{#str}} submit {{/str}}" class="btn btn-block btn-primary" />
+</form>
