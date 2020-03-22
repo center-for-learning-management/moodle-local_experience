@@ -16,16 +16,17 @@
 
 /**
  * @package    local_experience
- * @copyright  2020 Zentrum für Lernmanagement (www.lernmanagement.at)
- * @author    Robert Schrenk
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  2020 Center for Learning Management (http://www.lernmanagement.at)
+ * @author     Robert Schrenk
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-function xmldb_local_experience_upgrade($oldversion) {
-    global $DB;
-    $dbman = $DB->get_manager();
-
-    return true;
-}
+$capabilities = array(
+    'local/experience:cantrigger' => array(
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array(),
+    ),
+);

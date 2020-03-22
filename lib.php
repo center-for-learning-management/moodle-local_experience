@@ -28,10 +28,10 @@ require_once($CFG->dirroot . '/local/experience/locallib.php');
 function local_experience_before_standard_html_head() {
     global $CFG, $DB, $PAGE;
 
-    $level = get_user_preferences('local_experience_level', 0);
-    $rulesapplied = 0;
+    if (has_capability('local/experience:cantrigger', $PAGE->context)) {
+        $level = get_user_preferences('local_experience_level', 0);
+        $rulesapplied = 0;
 
-    if (empty($level)) {
         $scriptname = str_replace($CFG->dirroot, "", $_SERVER["SCRIPT_FILENAME"]);
         $sql = "SELECT *
                     FROM {local_experience_conditions}
@@ -52,19 +52,22 @@ function local_experience_before_standard_html_head() {
                 $applyconditions[] = $condition->id;
             }
         }
+
         if (count($applyconditions) > 0) {
-            $sql = "SELECT *
-                        FROM {local_experience_rules}
-                        WHERE id IN (" . implode(',', $applyconditions) . ")
-                        ORDER BY sort ASC";
+            $sql = "SELECT r.*
+                        FROM {local_experience_rules} r, {local_experience_c_r} cr
+                        WHERE cr.conditionid IN (" . implode(',', $applyconditions) . ")
+                            AND cr.ruleid=r.id
+                        ORDER BY r.sort ASC";
             $rules = $DB->get_records_sql($sql, array());
             foreach ($rules AS $rule) {
                 $rulesapplied = 1;
-                $PAGE->requires->js_call_amd("local_experience/main", "applyRules", array($rule->elementstohide, $rule->elementstoset));
+                $PAGE->requires->js_call_amd("local_experience/main", "applyRules", array($rule->name, $level, $rule->elementstohide, $rule->elementstoset));
             }
         }
+        $containers = get_config('local_experience', 'attachlevelselectto');
+        $PAGE->requires->js_call_amd("local_experience/main", "injectButton", array($level, $rulesapplied, $containers));
     }
-    $PAGE->requires->js_call_amd("local_experience/main", "injectButton", array($level, $rulesapplied));
 
     return "";
 }

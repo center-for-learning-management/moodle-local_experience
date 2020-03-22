@@ -27,6 +27,8 @@ $string['privacy:metadata'] = 'This plugin does not store any personal data';
 $string['access_denied'] = 'Access denied!';
 $string['add_another_explevel'] = 'Add another experience level';
 $string['advanced_options'] = 'Advanced options';
+$string['attachlevelselectto'] = 'Attach level selector to';
+$string['attachlevelselectto:description'] = 'Specify all containers, where the level attach selector should be added to. Delimit several selectors by a comma. The level-switch will be prepended.';
 
 $string['conditions'] = 'Conditions';
 $string['conditions:add'] = 'Add condition';
@@ -36,6 +38,10 @@ $string['conditions:patternparameters'] = 'Parameter patterns';
 $string['conditions:patternscriptnames'] = 'Scriptname patterns';
 
 $string['c_r'] = 'Relation conditions <=> rules';
+
+$string['experience:cantrigger'] = 'Can trigger experience';
+
+$string['pluginname:settings'] = 'UI-experience settings';
 
 $string['rules'] = 'Rules';
 $string['rules:add'] = 'Add rule';

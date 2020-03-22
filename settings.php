@@ -24,7 +24,10 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) {
+    $settings = new admin_settingpage( 'local_experience_settings', get_string('pluginname:settings', 'local_experience'));
     $ADMIN->add('localplugins', new admin_category('local_experience', get_string('pluginname', 'local_experience')));
+    $ADMIN->add('local_experience', $settings);
+    $settings->add(new admin_setting_configtextarea('local_experience/attachlevelselectto', get_string('attachlevelselectto', 'local_experience'), get_string('attachlevelselectto:description', 'local_experience'), '#page-wrapper>.navbar>ul:last-child', PARAM_TEXT));
 	//$ADMIN->add('localplugins', $settings);
     //$settings->add(new admin_setting_configtext('local_experience/varname', get_string('string:varname', 'local_experience'), '', '', PARAM_TEXT));
     $ADMIN->add(

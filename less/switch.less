@@ -1,7 +1,11 @@
 // out: ../style/switch.css, sourcemap: false, compress: true
 
-#nav-local-experience-switch {
+.nav-local-experience-switch {
+    display: inline-block;
     margin: 8px 5px;
+    padding-top: 8px;
+    /* position: relative;
+    /z-index: 9999; */
 
 
     .switch {
@@ -42,10 +46,10 @@
     }
 
     input:checked + .slider {
-        background-color: #2196F3;
+        background-color: rgb(33, 150, 243);
     }
     input + .slider.rulesapplied {
-        background-color: #FD12129C;
+        background-color: rgba(253, 18, 18, 0.3);
     }
 
     input:focus + .slider {

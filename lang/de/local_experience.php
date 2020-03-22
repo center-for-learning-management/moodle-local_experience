@@ -26,3 +26,9 @@ $string['privacy:metadata'] = 'Dieses Plugin speichert keine personenbezogenen D
 
 $string['access_denied'] = 'Zugriff nicht gestattet!';
 $string['advanced_options'] = 'Fortgeschrittener Modus';
+$string['attachlevelselectto'] = 'Level-Auswahl hinzufügen zu';
+$string['attachlevelselectto:description'] = 'Geben Sie alle HTML-Container mit CSS-Regeln an, zu denen die Level-Auswahl hinzugefügt werden soll. Trennen Sie mehrere Selektoren durch einen Beistrich. Das Auswahlfeld wird an den Anfang hinzugefügt.';
+
+$string['experience:cantrigger'] = 'Kann Erfahrungslevel wählen';
+
+$string['pluginname:settings'] = 'UI-Erfahrung Einstellungen';
