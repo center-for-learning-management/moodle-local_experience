@@ -26,6 +26,45 @@ defined('MOODLE_INTERNAL') || die;
 require_once($CFG->libdir . "/externallib.php");
 
 class local_experience_external extends external_api {
+    public static function injecttext_parameters() {
+        return new external_function_parameters(array(
+            'pageid' => new external_value(PARAM_TEXT, 'the page id'),
+        ));
+    }
+
+    /**
+     * Get a tutorial text to inject.
+     */
+    public static function injecttext($pageid) {
+        global $PAGE;
+        $PAGE->set_context(context_system::instance());
+        $params = self::validate_parameters(self::injecttext_parameters(), array('pageid' => $pageid));
+        $ret = array(
+            'appendto' => '',
+            'prependto' => '',
+            'text' => '',
+        );
+        switch ($pageid) {
+            case 'page-question-type-multianswer':
+                $ret['prependto'] = 'form[action="question.php"]';
+                $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience');
+            break;
+        }
+        return $ret;
+    }
+    /**
+     * Return definition.
+     * @return external_value
+     */
+    public static function injecttext_returns() {
+        return new external_single_structure(array(
+            'appendto' => new external_value(PARAM_TEXT, 'element(s) to append text to'),
+            'prependto' => new external_value(PARAM_TEXT, 'element(s) to prepend text to'),
+            'text' => new external_value(PARAM_RAW, 'the text'), // may contain HTML
+        ));
+    }
+
+
     public static function switch_parameters() {
         return new external_function_parameters(array(
             'level' => new external_value(PARAM_INT, 'the new level'),

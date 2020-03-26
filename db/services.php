@@ -25,6 +25,14 @@ defined('MOODLE_INTERNAL') || die;
 
 // We define the web service functions to install.
 $functions = array(
+    'local_experience_injecttext' => array(
+        'classname'   => 'local_experience_external',
+        'methodname'  => 'injecttext',
+        'classpath'   => 'local/experience/externallib.php',
+        'description' => 'Retrieves an injecttext.',
+        'type'        => 'read',
+        'ajax'        => 1,
+    ),
     'local_experience_switch' => array(
         'classname'   => 'local_experience_external',
         'methodname'  => 'switch',

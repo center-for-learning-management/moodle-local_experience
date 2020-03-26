@@ -41,6 +41,8 @@ $string['c_r'] = 'Relation conditions <=> rules';
 
 $string['experience:cantrigger'] = 'Can trigger experience';
 
+$string['injecttext:page-question-type-multianswer'] = 'Cloze works as follows ...';
+
 $string['pluginname:settings'] = 'UI-experience settings';
 
 $string['rules'] = 'Rules';

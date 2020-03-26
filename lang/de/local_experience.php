@@ -31,4 +31,6 @@ $string['attachlevelselectto:description'] = 'Geben Sie alle HTML-Container mit 
 
 $string['experience:cantrigger'] = 'Kann Erfahrungslevel wählen';
 
+$string['injecttext:page-question-type-multianswer'] = 'Lückentext funktioniert wie folgt ...';
+
 $string['pluginname:settings'] = 'UI-Erfahrung Einstellungen';

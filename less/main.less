@@ -1,5 +1,120 @@
-// out: ../style/main.css, sourcemap: false, compress: true
+// out: ../style/main.css, sourcemap: false, compress: false
 
-.local-experience {
+
+body.local-experience-level-0 {
+    form#add_block {
+        option[value="blog_recent"],
+        option[value="analytics_graphs"],
+        option[value="blog_menu"],
+        option[value="blog_tags"],
+        option[value="catalogue"] {
+            display: none;
+        }
+    }
+
+    form#chooserform {
+        label[for="item_adaptivequiz"],
+        label[for="item_bigbluebutton"],
+        label[for="item_chat"],
+        label[for="item_confman"],
+        label[for="item_data"],
+        label[for="item_dialogue"],
+        label[for="item_lti"],
+        label[for="item_groupselect"],
+        label[for="item_workshop"],
+        label[for="item_geogebra"],
+        label[for="item_choicegroup"],
+        label[for="item_hotpot"],
+        label[for="item_jazzquiz"],
+        label[for="item_mediagallery"],
+        label[for="item_lesson"],
+        label[for="item_scorm"],
+        label[for="item_activequiz"],
+        label[for="item_mootyper"],
+        label[for="item_scheduler"],
+        label[for="item_quizgame"],
+        label[for="item_treasurehunt"],
+        label[for*="type=bookquiz"],
+        label[for*="type=hangman"],
+        label[for*="type=cross"],
+        label[for*="type=snakes"],
+        label[for*="type=cryptex"],
+        label[for*="type=sudoku"],
+        label[for*="type=hiddenpicture"],
+        label[for*="type=millionaire"],
+        label[for="item_studentquiz"],
+        label[for="item_publication"],
+        label[for="item_techproject"],
+        label[for="item_organizer"],
+        label[for="item_tincanlaunch"],
+        label[for="item_survey"],
+        label[for="item_vpl"],
+        label[for="item_wiki"],
+        label[for="item_customcert"],
+        label[for="item_imscp"],
+        label[for="item_lightboxgallery"] {
+            display: none;
+        }
+    }
+
+    &#page-question-edit {
+        form#chooserform {
+            label[for="item_qtype_algebra"],
+            label[for="item_qtype_calculatedmulti"],
+            label[for="item_qtype_coderunner"],
+            label[for="item_qtype_ddimageortext"],
+            label[for="item_qtype_ddmarker"],
+            label[for="item_qtype_freehanddrawing"],
+            label[for="item_qtype_multichoiceset"] {
+                display: none;
+            }
+        }
+    }
+
+    &.path-mod-quiz {
+        form[action="modedit"] {
+            /* General */
+            #id_tagshdr,
+            /* test */
+            #fitem_id_graceperiod,
+            #fitem_id_overduehandling,
+            #fitem_id_gradepass,
+            #id_layouthdr,
+            #id_interactionhdr,
+            #id_reviewoptionshdr,
+            #id_display,
+            #id_security,
+            #id_overallfeedbackhdr,
+            #id_tagshdr,
+            /* Forum */
+            #id_subscriptionandtrackinghdr,
+            #id_discussionlocking,
+            #id_blockafterheader,
+            #id_attachmentswordcounthdr {
+                display: none;
+            }
+        }
+    }
+    &#page-question-type-multichoice {
+        form[action="question.php"] {
+            #fitem_id_generalfeedback,
+            #fitem_id_single,
+            #fitem_id_addanswers,
+            #fitem_id_answernumbering,
+            #id_combinedfeedbackhdr,
+            #id_multitriesheader,
+            #id_tagsheader,
+            #fitem_id_feedback_0,
+            #fitem_id_feedback_1,
+            #fitem_id_feedback_2,
+            #fitem_id_feedback_3,
+            #fitem_id_answer_4,
+            #fitem_id_fraction_4,
+            #fitem_id_feedback_4 {
+                display: none;
+            }
+        }
+    }
+
 
 }

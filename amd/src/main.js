@@ -16,6 +16,8 @@ define(
             elementstohide = elementstohide.split("\n");
             elementstoset = elementstoset.split("\n");
             if (MAIN.debug) console.log('local_experience/main:applyRule(rulename, level, elementstohide, elementstoset, rulename)', rulename, level, elementstohide, elementstoset);
+            $('body').removeClass('local-experience-level-0').removeClass('local-experience-level-1').addClass('local-experience-level-' + level);
+            /*
             elementstohide.forEach(function(item) {
                 try {
                     MAIN.rules[MAIN.rules.length] = item;
@@ -25,6 +27,7 @@ define(
                     }
                 } catch(e) {}
             });
+            */
             elementstoset.forEach(function(item) {
                 try {
                     var pair = item.split('=');
@@ -76,7 +79,6 @@ define(
             if (typeof rulesapplied === 'undefined') rulesapplied = 0;
             if (typeof containers === 'undefined') containers = '#page-wrapper>.navbar>ul:last-child';
             if (this.debug) console.log('local_experience/main:injectButton(level, rulesapplied, containers)', level, rulesapplied, containers);
-            this.injectCSS();
             STR.get_strings([
                     {'key' : 'advanced_options', component: 'local_experience' },
                 ]).done(function(s) {
@@ -103,12 +105,28 @@ define(
             ).fail(NOTIFICATION.exception);
         },
         /**
-         * Ensure we load specific CSS code.
+         * Inject tutorial texts based on page id or other criteria.
          */
-        injectCSS: function() {
-            if ($('head>link[href$="/local/experience/style/switch.css"]').length == 0) {
-                console.log('Adding CSS File ', URL.relativeUrl('/local/experience/style/switch.css'));
-                $('head').append($('<link rel="stylesheet" type="text/css" href="' + URL.relativeUrl('/local/experience/style/switch.css') + '">'));
+        injectText: function() {
+            if (this.debug) console.log('local_experience/main:injectText()');
+            var pageids = ['page-question-type-multianswer'];
+            var id = $('body').attr('id');
+            if (pageids.indexOf(id) > -1) {
+                AJAX.call([{
+                    methodname: 'local_experience_injecttext',
+                    args: { 'pageid': id },
+                    done: function(result) {
+                        if (typeof result.text !== 'undefined' && result.text != '') {
+                            if (typeof result.appendto !== 'undefined' && result.appendto != '') {
+                                $(result.prependto).append($('<p>').addClass('alert alert-info').html(result.text));
+                            }
+                            if (typeof result.prependto !== 'undefined' && result.prependto != '') {
+                                $(result.prependto).prepend($('<p>').addClass('alert alert-info').html(result.text));
+                            }
+                        }
+                    },
+                    fail: NOTIFICATION.exception
+                }]);
             }
         },
         /**
@@ -119,6 +137,7 @@ define(
             console.log('local_experience/main:switchExperience(level)', level);
             $('.nav-local-experience-switch input').prop('checked', level);
             level = (level) ? 1 : 0;
+            $('body').removeClass('local-experience-level-0').removeClass('local-experience-level-1').addClass('local-experience-level-' + level);
             var MAIN = this;
 
             AJAX.call([{

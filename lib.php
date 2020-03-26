@@ -29,6 +29,9 @@ function local_experience_before_standard_html_head() {
     global $CFG, $DB, $PAGE;
 
     if (has_capability('local/experience:cantrigger', $PAGE->context)) {
+        $PAGE->requires->css('/local/experience/style/main.css');
+        $PAGE->requires->css('/local/experience/style/switch.css');
+        $PAGE->requires->js_call_amd("local_experience/main", "injectText", array());
         $level = get_user_preferences('local_experience_level', 0);
         $rulesapplied = 0;
 
