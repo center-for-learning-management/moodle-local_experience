@@ -1,80 +1,93 @@
-body.local-experience-level-0 form#add_block option[value="blog_recent"],
-body.local-experience-level-0 form#add_block option[value="analytics_graphs"],
-body.local-experience-level-0 form#add_block option[value="blog_menu"],
-body.local-experience-level-0 form#add_block option[value="blog_tags"],
-body.local-experience-level-0 form#add_block option[value="catalogue"] {
-  display: none;
+body.local-experience-level-0 {
+  /* Course view page */
+  /* Question edit page */
+  /* Editing a module */
 }
-body.local-experience-level-0 form#chooserform label[for="item_adaptivequiz"],
-body.local-experience-level-0 form#chooserform label[for="item_bigbluebutton"],
-body.local-experience-level-0 form#chooserform label[for="item_chat"],
-body.local-experience-level-0 form#chooserform label[for="item_confman"],
-body.local-experience-level-0 form#chooserform label[for="item_data"],
-body.local-experience-level-0 form#chooserform label[for="item_dialogue"],
-body.local-experience-level-0 form#chooserform label[for="item_lti"],
-body.local-experience-level-0 form#chooserform label[for="item_groupselect"],
-body.local-experience-level-0 form#chooserform label[for="item_workshop"],
-body.local-experience-level-0 form#chooserform label[for="item_geogebra"],
-body.local-experience-level-0 form#chooserform label[for="item_choicegroup"],
-body.local-experience-level-0 form#chooserform label[for="item_hotpot"],
-body.local-experience-level-0 form#chooserform label[for="item_jazzquiz"],
-body.local-experience-level-0 form#chooserform label[for="item_mediagallery"],
-body.local-experience-level-0 form#chooserform label[for="item_lesson"],
-body.local-experience-level-0 form#chooserform label[for="item_scorm"],
-body.local-experience-level-0 form#chooserform label[for="item_activequiz"],
-body.local-experience-level-0 form#chooserform label[for="item_mootyper"],
-body.local-experience-level-0 form#chooserform label[for="item_scheduler"],
-body.local-experience-level-0 form#chooserform label[for="item_quizgame"],
-body.local-experience-level-0 form#chooserform label[for="item_treasurehunt"],
-body.local-experience-level-0 form#chooserform label[for*="type=bookquiz"],
-body.local-experience-level-0 form#chooserform label[for*="type=hangman"],
-body.local-experience-level-0 form#chooserform label[for*="type=cross"],
-body.local-experience-level-0 form#chooserform label[for*="type=snakes"],
-body.local-experience-level-0 form#chooserform label[for*="type=cryptex"],
-body.local-experience-level-0 form#chooserform label[for*="type=sudoku"],
-body.local-experience-level-0 form#chooserform label[for*="type=hiddenpicture"],
-body.local-experience-level-0 form#chooserform label[for*="type=millionaire"],
-body.local-experience-level-0 form#chooserform label[for="item_studentquiz"],
-body.local-experience-level-0 form#chooserform label[for="item_publication"],
-body.local-experience-level-0 form#chooserform label[for="item_techproject"],
-body.local-experience-level-0 form#chooserform label[for="item_organizer"],
-body.local-experience-level-0 form#chooserform label[for="item_tincanlaunch"],
-body.local-experience-level-0 form#chooserform label[for="item_survey"],
-body.local-experience-level-0 form#chooserform label[for="item_vpl"],
-body.local-experience-level-0 form#chooserform label[for="item_wiki"],
-body.local-experience-level-0 form#chooserform label[for="item_customcert"],
-body.local-experience-level-0 form#chooserform label[for="item_imscp"],
-body.local-experience-level-0 form#chooserform label[for="item_lightboxgallery"] {
-  display: none;
+body.local-experience-level-0 form#add_block option {
+  display: inline-block !important;
 }
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_algebra"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_calculatedmulti"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_coderunner"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_ddimageortext"],
+body.local-experience-level-0 form#add_block option {
+  display: none !important;
+}
+body.local-experience-level-0 form#add_block option[value="calendar_upcoming"],
+body.local-experience-level-0 form#add_block option[value="course_contacts"],
+body.local-experience-level-0 form#add_block option[value="completionstatus"],
+body.local-experience-level-0 form#add_block option[value="calendar_month"],
+body.local-experience-level-0 form#add_block option[value="xp"],
+body.local-experience-level-0 form#add_block option[value="edureportbook"],
+body.local-experience-level-0 form#add_block option[value="navigation"],
+body.local-experience-level-0 form#add_block option[value="recent_activity"],
+body.local-experience-level-0 form#add_block option[value="news_items"],
+body.local-experience-level-0 form#add_block option[value="participants"],
+body.local-experience-level-0 form#add_block option[value="stash"],
+body.local-experience-level-0 form#add_block option[value="html"] {
+  display: unset !important;
+}
+body.local-experience-level-0 form#chooserform div.alloptions label {
+  display: none !important;
+}
+body.local-experience-level-0 form#chooserform div.alloptions .moduletypetitle > label {
+  display: block !important;
+}
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_choice"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_assign"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_questionnaire"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_bigbluebuttonbn"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_checklist"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_forum"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_glossary"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_hvp"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_quiz"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_book"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_resource"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_url"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_label"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_page"],
+body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_folder"] {
+  display: block !important;
+}
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_multichoice"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_truefalse"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_match"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_shortanswer"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_numerical"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_essay"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_multichoiceset"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_ordering"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_calculatedobjects"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_ddwtos"],
 body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_ddmarker"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_freehanddrawing"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_multichoiceset"] {
-  display: none;
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_ddmatch"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_multianswer"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_wordselect"],
+body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_description"] {
+  display: block !important;
 }
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] {
+body.local-experience-level-0.path-mod {
   /* General */
+  /* Editing a Forum-Module */
+  /* Editing a Quiz-Module */
 }
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_tagshdr,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #fitem_id_graceperiod,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #fitem_id_overduehandling,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #fitem_id_gradepass,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_layouthdr,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_interactionhdr,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_reviewoptionshdr,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_display,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_security,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_overallfeedbackhdr,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_tagshdr,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_subscriptionandtrackinghdr,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_discussionlocking,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_blockafterheader,
-body.local-experience-level-0.path-mod-quiz form[action="modedit"] #id_attachmentswordcounthdr {
-  display: none;
+body.local-experience-level-0.path-mod form[action="modedit.php"] #id_tagshdr {
+  display: none !important;
+}
+body.local-experience-level-0.path-mod.path-mod-forum form[action="modedit.php"] #id_subscriptionandtrackinghdr,
+body.local-experience-level-0.path-mod.path-mod-forum form[action="modedit.php"] #id_discussionlocking,
+body.local-experience-level-0.path-mod.path-mod-forum form[action="modedit.php"] #id_blockafterheader,
+body.local-experience-level-0.path-mod.path-mod-forum form[action="modedit.php"] #id_attachmentswordcounthdr {
+  display: none !important;
+}
+body.local-experience-level-0.path-mod.path-mod-quiz form[action="modedit.php"] #fitem_id_graceperiod,
+body.local-experience-level-0.path-mod.path-mod-quiz form[action="modedit.php"] #fitem_id_overduehandling,
+body.local-experience-level-0.path-mod.path-mod-quiz form[action="modedit.php"] #fitem_id_gradepass,
+body.local-experience-level-0.path-mod.path-mod-quiz form[action="modedit.php"] #id_layouthdr,
+body.local-experience-level-0.path-mod.path-mod-quiz form[action="modedit.php"] #id_interactionhdr,
+body.local-experience-level-0.path-mod.path-mod-quiz form[action="modedit.php"] #id_reviewoptionshdr,
+body.local-experience-level-0.path-mod.path-mod-quiz form[action="modedit.php"] #id_display,
+body.local-experience-level-0.path-mod.path-mod-quiz form[action="modedit.php"] #id_security,
+body.local-experience-level-0.path-mod.path-mod-quiz form[action="modedit.php"] #id_overallfeedbackhdr,
+body.local-experience-level-0.path-mod.path-mod-quiz form[action="modedit.php"] #id_tagshdr {
+  display: none !important;
 }
 body.local-experience-level-0#page-question-type-multichoice form[action="question.php"] #fitem_id_generalfeedback,
 body.local-experience-level-0#page-question-type-multichoice form[action="question.php"] #fitem_id_single,

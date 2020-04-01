@@ -45,7 +45,15 @@ class local_experience_external extends external_api {
             'text' => '',
         );
         switch ($pageid) {
+            case 'page-question-type-ddwtos':
+                $ret['prependto'] = 'form[action="question.php"]';
+                $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience');
+            break;
             case 'page-question-type-multianswer':
+                $ret['prependto'] = 'form[action="question.php"]';
+                $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience');
+            break;
+            case 'page-question-type-wordselect':
                 $ret['prependto'] = 'form[action="question.php"]';
                 $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience');
             break;

@@ -42,6 +42,7 @@ $string['c_r'] = 'Relation conditions <=> rules';
 $string['experience:cantrigger'] = 'Can trigger experience';
 
 $string['injecttext:page-question-type-multianswer'] = 'Cloze works as follows ...';
+$string['injecttext:page-question-type-ddwtos'] = 'Add the question to the text editor, using any formatting you wish. Use double square brackets \'[[n]]\' with a number in place of the word you wish the students to find.';
 
 $string['pluginname:settings'] = 'UI-experience settings';
 

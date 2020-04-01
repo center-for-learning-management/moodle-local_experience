@@ -53,6 +53,7 @@ if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
     $ids = array_keys($c_rs);
     $success = array();
     $failed = array();
+    $DB->delete_records('local_experience_c_r', array());
     foreach ($ids AS $id) {
         $pair = explode('_', $id);
         if (count($pair) != 2) continue;

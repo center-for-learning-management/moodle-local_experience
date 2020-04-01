@@ -57,6 +57,7 @@ if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
     $failed = array();
     foreach ($ids AS $id) {
         if (empty($names[$id])) {
+            $DB->delete_records('local_experience_c_r', array('conditionid' => $id));
             $DB->delete_records('local_experience_conditions', array('id' => $id));
             $success[$id] = true;
         } else {

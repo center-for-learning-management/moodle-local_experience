@@ -32,5 +32,5 @@ $string['attachlevelselectto:description'] = 'Geben Sie alle HTML-Container mit 
 $string['experience:cantrigger'] = 'Kann Erfahrungslevel wählen';
 
 $string['injecttext:page-question-type-multianswer'] = 'Lückentext funktioniert wie folgt ...';
-
+$string['injecttext:page-question-type-ddwtos'] = 'In diesem Textbereich geben Sie den Fragetext als Lückentext ein. Die Lücken kennzeichnen Sie mit doppelten eckigen Klammern und einer fortlaufenden Nummer: [[1]], [[2]], [[3]]';
 $string['pluginname:settings'] = 'UI-Erfahrung Einstellungen';

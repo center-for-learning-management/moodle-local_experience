@@ -29,12 +29,13 @@ function local_experience_before_standard_html_head() {
     global $CFG, $DB, $PAGE;
 
     if (has_capability('local/experience:cantrigger', $PAGE->context)) {
+        // Show trigger and add basic functionality.
         $PAGE->requires->css('/local/experience/style/main.css');
         $PAGE->requires->css('/local/experience/style/switch.css');
         $PAGE->requires->js_call_amd("local_experience/main", "injectText", array());
-        $level = get_user_preferences('local_experience_level', 0);
-        $rulesapplied = 0;
 
+        // We only process rules that set default values when we add new things.
+        // Determine if there are any rules for the current page.
         $scriptname = str_replace($CFG->dirroot, "", $_SERVER["SCRIPT_FILENAME"]);
         $sql = "SELECT *
                     FROM {local_experience_conditions}
@@ -56,20 +57,23 @@ function local_experience_before_standard_html_head() {
             }
         }
 
+        // Set all rules according to our level.
+        $level = get_user_preferences('local_experience_level', 0);
+        $allrules = array();
         if (count($applyconditions) > 0) {
-            $sql = "SELECT r.*
+            $sql = "SELECT r.id,r.*
                         FROM {local_experience_rules} r, {local_experience_c_r} cr
                         WHERE cr.conditionid IN (" . implode(',', $applyconditions) . ")
                             AND cr.ruleid=r.id
                         ORDER BY r.sort ASC";
             $rules = $DB->get_records_sql($sql, array());
             foreach ($rules AS $rule) {
-                $rulesapplied = 1;
-                $PAGE->requires->js_call_amd("local_experience/main", "applyRules", array($rule->name, $level, $rule->elementstohide, $rule->elementstoset));
+                $allrules[] = $rule;
             }
         }
+        $PAGE->requires->js_call_amd("local_experience/main", "applyRules", array($level, $allrules));
         $containers = get_config('local_experience', 'attachlevelselectto');
-        $PAGE->requires->js_call_amd("local_experience/main", "injectButton", array($level, $rulesapplied, $containers));
+        $PAGE->requires->js_call_amd("local_experience/main", "injectButton", array($level, $containers));
     }
 
     return "";

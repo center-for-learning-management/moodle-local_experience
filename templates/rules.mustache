@@ -27,23 +27,17 @@
 <h5>#{{id}}: {{name}}</h5>
 <table width="100%" class="generaltable" style="border-bottom: 2px solid darkgray;">
     <tr>
-        <th colspan="2">
+        <th>
             <input type="text" name="name[{{id}}]" value="{{name}}" class="btn-block" placeholder="{{#str}} name {{/str}}" />
         </th>
-    </tr>
-    <tr>
-        <th colspan="2">
+        <th>
             <input type="number" min="1" max="99" name="sort[{{id}}]" value="{{sort}}" class="btn-block" placeholder="{{#str}} sort {{/str}}" />
         </th>
     </tr>
     <tr>
-        <td valign="top">
-            {{#str}} rules:elementstohide, local_experience {{/str}}
-            <textarea name="elementstohide[{{id}}]" class="btn-block" rows="10">{{elementstohide}}</textarea>
-        </td>
-        <td valign="top">
+        <td valign="top" colspan="2">
             {{#str}} rules:elementstoset, local_experience {{/str}}
-            <textarea name="elementstoset[{{id}}]" class="btn-block" rows="10">{{elementstoset}}</textarea>
+            <textarea name="elementstoset[{{id}}]" class="btn-block" rows="3">{{elementstoset}}</textarea>
         </td>
     </tr>
 </table>

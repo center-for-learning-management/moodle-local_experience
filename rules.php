@@ -51,13 +51,13 @@ if (!is_siteadmin()) {
 if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
     $names = optional_param_array('name', '', PARAM_TEXT);
     $sorts = optional_param_array('sort', 0, PARAM_INT);
-    $elementstohide = optional_param_array('elementstohide', '', PARAM_TEXT);
     $elementstoset = optional_param_array('elementstoset', '', PARAM_TEXT);
     $ids = array_keys($names);
     $success = array();
     $failed = array();
     foreach ($ids AS $id) {
         if (empty($names[$id])) {
+            $DB->delete_records('local_experience_c_r', array('ruleid' => $id));
             $DB->delete_records('local_experience_rules', array('id' => $id));
             $success[$id] = true;
         } else {
@@ -65,7 +65,6 @@ if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
                 'id' => $id,
                 'name' => $names[$id],
                 'sort' => $sorts[$id],
-                'elementstohide' => $elementstohide[$id],
                 'elementstoset' => $elementstoset[$id],
             );
             if ($DB->update_record('local_experience_rules', $obj)) {

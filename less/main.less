@@ -1,100 +1,127 @@
 // out: ../style/main.css, sourcemap: false, compress: false
 
-
 body.local-experience-level-0 {
+    form#add_block option {
+        display: inline-block !important;
+    }
     form#add_block {
-        option[value="blog_recent"],
-        option[value="analytics_graphs"],
-        option[value="blog_menu"],
-        option[value="blog_tags"],
-        option[value="catalogue"] {
-            display: none;
+        option {
+            display: none !important;
+        }
+        option[value="calendar_upcoming"],
+        option[value="course_contacts"],
+        option[value="completionstatus"],
+        option[value="calendar_month"],
+        option[value="xp"],
+        option[value="edureportbook"],
+        option[value="navigation"],
+        option[value="recent_activity"],
+        option[value="news_items"],
+        option[value="participants"],
+        option[value="stash"],
+        option[value="html"] {
+            display: unset !important;
         }
     }
-
     form#chooserform {
-        label[for="item_adaptivequiz"],
-        label[for="item_bigbluebutton"],
-        label[for="item_chat"],
-        label[for="item_confman"],
-        label[for="item_data"],
-        label[for="item_dialogue"],
-        label[for="item_lti"],
-        label[for="item_groupselect"],
-        label[for="item_workshop"],
-        label[for="item_geogebra"],
-        label[for="item_choicegroup"],
-        label[for="item_hotpot"],
-        label[for="item_jazzquiz"],
-        label[for="item_mediagallery"],
-        label[for="item_lesson"],
-        label[for="item_scorm"],
-        label[for="item_activequiz"],
-        label[for="item_mootyper"],
-        label[for="item_scheduler"],
-        label[for="item_quizgame"],
-        label[for="item_treasurehunt"],
-        label[for*="type=bookquiz"],
-        label[for*="type=hangman"],
-        label[for*="type=cross"],
-        label[for*="type=snakes"],
-        label[for*="type=cryptex"],
-        label[for*="type=sudoku"],
-        label[for*="type=hiddenpicture"],
-        label[for*="type=millionaire"],
-        label[for="item_studentquiz"],
-        label[for="item_publication"],
-        label[for="item_techproject"],
-        label[for="item_organizer"],
-        label[for="item_tincanlaunch"],
-        label[for="item_survey"],
-        label[for="item_vpl"],
-        label[for="item_wiki"],
-        label[for="item_customcert"],
-        label[for="item_imscp"],
-        label[for="item_lightboxgallery"] {
-            display: none;
+        div.alloptions {
+            label {
+                display: none !important;
+            }
+            .moduletypetitle>label {
+                display: block !important;
+            }
         }
     }
 
+    /* Course view page */
+    &#page-course-view-topics {
+        form#chooserform {
+            label[for="item_choice"],
+            label[for="item_assign"],
+            label[for="item_questionnaire"],
+            label[for="item_bigbluebuttonbn"],
+            label[for="item_checklist"],
+            label[for="item_forum"],
+            label[for="item_glossary"],
+            label[for="item_hvp"],
+            label[for="item_quiz"],
+            label[for="item_book"],
+            label[for="item_resource"],
+            label[for="item_url"],
+            label[for="item_label"],
+            label[for="item_page"],
+            label[for="item_folder"]
+            {
+                display: block !important;
+            }
+        }
+    }
+
+    /* Question edit page */
     &#page-question-edit {
         form#chooserform {
-            label[for="item_qtype_algebra"],
-            label[for="item_qtype_calculatedmulti"],
-            label[for="item_qtype_coderunner"],
-            label[for="item_qtype_ddimageortext"],
+            label[for="item_qtype_multichoice"],
+            label[for="item_qtype_truefalse"],
+            label[for="item_qtype_match"],
+            label[for="item_qtype_shortanswer"],
+            label[for="item_qtype_numerical"],
+            label[for="item_qtype_essay"],
+            label[for="item_qtype_multichoiceset"],
+            label[for="item_qtype_ordering"],
+            label[for="item_qtype_calculatedobjects"],
+            label[for="item_qtype_ddwtos"],
             label[for="item_qtype_ddmarker"],
-            label[for="item_qtype_freehanddrawing"],
-            label[for="item_qtype_multichoiceset"] {
-                display: none;
+            label[for="item_qtype_ddmatch"],
+            label[for="item_qtype_multianswer"],
+            label[for="item_qtype_wordselect"],
+            label[for="item_qtype_description"] {
+                display: block !important;
             }
         }
     }
 
-    &.path-mod-quiz {
-        form[action="modedit"] {
-            /* General */
-            #id_tagshdr,
-            /* test */
-            #fitem_id_graceperiod,
-            #fitem_id_overduehandling,
-            #fitem_id_gradepass,
-            #id_layouthdr,
-            #id_interactionhdr,
-            #id_reviewoptionshdr,
-            #id_display,
-            #id_security,
-            #id_overallfeedbackhdr,
-            #id_tagshdr,
-            /* Forum */
-            #id_subscriptionandtrackinghdr,
-            #id_discussionlocking,
-            #id_blockafterheader,
-            #id_attachmentswordcounthdr {
-                display: none;
+    /* Editing a module */
+    &.path-mod {
+        /* General */
+        form[action="modedit.php"] {
+            #id_tagshdr {
+                display: none !important;
+            }
+        }
+
+        /* Editing a Forum-Module */
+        &.path-mod-forum {
+            form[action="modedit.php"] {
+                #id_subscriptionandtrackinghdr,
+                #id_discussionlocking,
+                #id_blockafterheader,
+                #id_attachmentswordcounthdr {
+                    display: none !important;
+                }
+            }
+        }
+
+        /* Editing a Quiz-Module */
+        &.path-mod-quiz {
+            form[action="modedit.php"] {
+                #fitem_id_graceperiod,
+                #fitem_id_overduehandling,
+                #fitem_id_gradepass,
+                #id_layouthdr,
+                #id_interactionhdr,
+                #id_reviewoptionshdr,
+                #id_display,
+                #id_security,
+                #id_overallfeedbackhdr,
+                #id_tagshdr {
+                    display: none !important;
+                }
             }
         }
     }
+
+
     &#page-question-type-multichoice {
         form[action="question.php"] {
             #fitem_id_generalfeedback,
@@ -115,6 +142,4 @@ body.local-experience-level-0 {
             }
         }
     }
-
-
 }
