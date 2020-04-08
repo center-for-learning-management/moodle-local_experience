@@ -45,7 +45,7 @@ define(
                                         .attr('onclick', 'var c = this; require([\'local_experience/main\'], function(m) { m.switchExperience($(c).prop(\'checked\')); });'),
                                     $('<span>').addClass('slider round'),
                                 ]),
-                            ]),
+                            ])
                         //),
                     );
                     if (level == 1) {
