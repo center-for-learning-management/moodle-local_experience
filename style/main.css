@@ -29,21 +29,21 @@ body.local-experience-level-0 form#chooserform div.alloptions label {
 body.local-experience-level-0 form#chooserform div.alloptions .moduletypetitle > label {
   display: block !important;
 }
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_choice"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_assign"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_questionnaire"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_bigbluebuttonbn"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_checklist"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_forum"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_glossary"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_hvp"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_quiz"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_book"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_resource"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_url"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_label"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_page"],
-body.local-experience-level-0#page-course-view-topics form#chooserform label[for="item_folder"] {
+body.local-experience-level-0.path-course form#chooserform label[for="item_choice"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_assign"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_questionnaire"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_bigbluebuttonbn"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_checklist"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_forum"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_glossary"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_hvp"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_quiz"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_book"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_resource"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_url"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_label"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_page"],
+body.local-experience-level-0.path-course form#chooserform label[for="item_folder"] {
   display: block !important;
 }
 body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_multichoice"],

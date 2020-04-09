@@ -35,19 +35,53 @@ define(
             STR.get_strings([
                     {'key' : 'advanced_options', component: 'local_experience' },
                 ]).done(function(s) {
-                    $(containers).prepend(
-                        //$('<li>').addClass('nav-item').append(
-                            $('<div>').attr('class', 'nav-local-experience-switch').append([
-                                $('<span>').html(s[0] + ' '),
-                                $('<label>').addClass('switch').append([
-                                    $('<input>').attr('type', 'checkbox')
-                                        //.prop('checked', level == 1)
-                                        .attr('onclick', 'var c = this; require([\'local_experience/main\'], function(m) { m.switchExperience($(c).prop(\'checked\')); });'),
-                                    $('<span>').addClass('slider round'),
-                                ]),
-                            ])
-                        //),
-                    );
+                    containers.split("\n").forEach(function(identifier) {
+                        // Set values based on identifier
+                        var params = {};
+                        var x = identifier.split('|');
+                        var PID_IDENTIFIER = 0,
+                            PID_APPEND = 1,
+                            PID_LABEL = 2;
+                        for (var a = 0; a <= 2; a++) {
+                            if (typeof x[a] !== 'undefined') {
+                                params[a] = x[a].trim();
+                                switch (a) {
+                                    case PID_LABEL: params[a] = (x[a].trim() == 'true'); break;
+                                }
+                            } else {
+                                // No value given, set a default value.
+                                params[a] = false;
+                                switch (a) {
+                                    case PID_APPEND: params[a] = 'append'; break;
+                                    case PID_LABEL: params[a] = true; break;
+                                }
+
+                            }
+                        }
+
+                        var sw = $('<div>').attr('class', 'nav-local-experience-switch');
+                        if (params[PID_LABEL] == true) {
+                            sw.append($('<span>').html(s[0] + ' '));
+                        }
+                        sw.append($('<label>').addClass('switch').append([
+                            $('<input>').attr('type', 'checkbox')
+                                //.prop('checked', level == 1)
+                                .attr('onclick', 'var c = this; require([\'local_experience/main\'], function(m) { m.switchExperience($(c).prop(\'checked\')); });'),
+                            $('<span>').addClass('slider round'),
+                        ]));
+                        var container = $(params[PID_IDENTIFIER]);
+                        // Check if we need to wrap our switch based on the container.
+                        if ($(container).is('ul') || $(container).is('ol')) {
+                            sw = $('<li>').append(sw);
+                        }
+                        if (params[PID_APPEND] == 'prepend') {
+                            $(params[PID_IDENTIFIER]).prepend(sw);
+                        } else {
+                            $(params[PID_IDENTIFIER]).append(sw);
+                        }
+
+                    });
+
                     if (level == 1) {
                         // We don't use prop('checked') here, because some html elements may not yet be active!
                         // our modulechoose for example requires us to set the attribute itself!
