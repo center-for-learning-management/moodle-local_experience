@@ -27,9 +27,30 @@ define(
             });
         },
         /**
+         * Detect if anything on this site is/could be modified and color our switches accordingly.
+         */
+        detectModification: function() {
+            var mod = false;
+            // List of identifiers that would be changed.
+            ['#activity-settings-modulesettings',
+             'body.pagelayout-incourse #course-settings-courseadmin',
+             'body#page-question-type-multichoice',
+             'form#add_block',
+             'form#chooserform',
+             'form[action="modedit.php"]'].forEach(function(identifier) {
+                if ($(identifier).length > 0) {
+                    mod = true;
+                }
+            });
+            if (mod) {
+                $('.nav-local-experience-switch .slider').addClass('rulesapplied');
+            }
+        },
+        /**
          * Let's inject a button to switch experience.
          */
         injectButton: function(level, containers) {
+            var MAIN = this;
             if (typeof containers === 'undefined') containers = '#page-wrapper>.navbar>ul:last-child';
             if (this.debug) console.log('local_experience/main:injectButton(level, containers)', level, containers);
             STR.get_strings([
@@ -87,7 +108,7 @@ define(
                         // our modulechoose for example requires us to set the attribute itself!
                         $('.nav-local-experience-switch input').attr('checked', 'checked');
                     }
-
+                    MAIN.detectModification();
                 }
             ).fail(NOTIFICATION.exception);
         },
@@ -96,7 +117,9 @@ define(
          */
         injectText: function() {
             if (this.debug) console.log('local_experience/main:injectText()');
-            var pageids = ['page-question-type-ddwtos', 'page-question-type-multianswer', 'page-question-type-wordselect'];
+            var pageids = ['page-question-type-ddwtos',
+                           'page-question-type-multianswer',
+                           'page-question-type-wordselect'];
             var id = $('body').attr('id');
             if (pageids.indexOf(id) > -1) {
                 AJAX.call([{

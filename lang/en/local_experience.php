@@ -28,7 +28,7 @@ $string['access_denied'] = 'Access denied!';
 $string['add_another_explevel'] = 'Add another experience level';
 $string['advanced_options'] = 'Advanced options';
 $string['attachlevelselectto'] = 'Attach level selector to';
-$string['attachlevelselectto:description'] = 'Specify all containers, where the level attach selector should be added to. Delimit several selectors by a comma. The level-switch will be prepended.';
+$string['attachlevelselectto:description'] = 'Specify all containers line by line, where the level attach selector should be added to. You can specify if the level-switch will be appended or prepended and if a label will be shown.<br /><br /><i>CSS-Selector|prepend or append|true or false';
 
 $string['conditions'] = 'Conditions';
 $string['conditions:add'] = 'Add condition';
@@ -41,8 +41,25 @@ $string['c_r'] = 'Relation conditions <=> rules';
 
 $string['experience:cantrigger'] = 'Can trigger experience';
 
-$string['injecttext:page-question-type-multianswer'] = 'Cloze works as follows ...';
-$string['injecttext:page-question-type-ddwtos'] = 'Add the question to the text editor, using any formatting you wish. Use double square brackets \'[[n]]\' with a number in place of the word you wish the students to find.';
+$string['injecttext:page-question-type-multianswer'] = '<p>Embedded answers (Cloze) questions consist of a passage of text (in Moodle format) that has various answers embedded within it, including multiple choice, short answers and numerical answers.</p>
+<p>The structure of each cloze sub-question is identical:</p>
+<p style="margin-left: 40px;">
+    { start the cloze sub-question with a bracket (AltGr+7)<br />
+    1 define a grade for each cloze by a number (optional). This used for calculation of question grading.<br />
+    :SHORTANSWER: define the type of cloze sub-question. Definition is bounded by \':\'. <br />
+    ~ is a seperator between answer options<br />
+    = marks a correct answer<br />
+    # marks the beginning of an (optional) feedback message<br />
+    } close the cloze sub-question at the end with a bracket (AltGr+0)<br />
+</p>
+<p>Now a very simple example:</p>
+<p style="margin-left: 40px;">{1:SHORTANSWER:=Berlin} is the capital of Germany.</p>
+<a href="https://docs.moodle.org/38/en/Embedded_Answers_(Cloze)_question_type" target="_blank">read more</a>';
+$string['injecttext:page-question-type-ddwtos'] = '<p>Add the question to the text editor, using any formatting you wish. Use double square brackets \'[[n]]\' with a number in place of the word you wish the students to find.</p>
+<a href="https://docs.moodle.org/38/en/Drag_and_drop_into_text_question_type" target="_blank">read more</a>';
+$string['injecttext:page-question-type-wordselect'] = '<p>This question type is designed to ask students to select text according to some criteria. For example "select the verb in the following sentence". Conceptually this is a little like a multiple choice question type (with multiple selectable options). The student responds by clicking on words to select them, and clicking a second time to unselect them.</p>
+<p>It provides an introduction field where words will not be selectable at runtime and a questiontext field. In the question text any words with braces around them will be considered correct. All words can be clicked-on to select.</p>
+<a href="https://docs.moodle.org/38/en/Wordselect_question_type" target="_blank">read more</a>';
 
 $string['pluginname:settings'] = 'UI-experience settings';
 

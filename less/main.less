@@ -28,15 +28,9 @@ body.local-experience-level-0 {
             label {
                 display: none !important;
             }
-            .moduletypetitle>label {
-                display: block !important;
-            }
-        }
-    }
-
-    /* Course view page */
-    &.path-course {
-        form#chooserform {
+            /* Dividers */
+            .moduletypetitle>label,
+            /* Course modules */
             label[for="item_choice"],
             label[for="item_assign"],
             label[for="item_questionnaire"],
@@ -51,16 +45,8 @@ body.local-experience-level-0 {
             label[for="item_url"],
             label[for="item_label"],
             label[for="item_page"],
-            label[for="item_folder"]
-            {
-                display: block !important;
-            }
-        }
-    }
-
-    /* Question edit page */
-    &#page-question-edit {
-        form#chooserform {
+            label[for="item_folder"],
+            /* Question types */
             label[for="item_qtype_multichoice"],
             label[for="item_qtype_truefalse"],
             label[for="item_qtype_match"],
@@ -75,11 +61,13 @@ body.local-experience-level-0 {
             label[for="item_qtype_ddmatch"],
             label[for="item_qtype_multianswer"],
             label[for="item_qtype_wordselect"],
-            label[for="item_qtype_description"] {
+            label[for="item_qtype_description"]
+            {
                 display: block !important;
             }
         }
     }
+
 
     /* Editing a module */
     &.path-mod {
@@ -139,6 +127,35 @@ body.local-experience-level-0 {
             #fitem_id_fraction_4,
             #fitem_id_feedback_4 {
                 display: none;
+            }
+        }
+    }
+
+    #activity-settings-modulesettings {
+        .list-unstyled {
+            a[href*="/admin/roles/"],
+            a[href*="/filter/manage.php"],
+            a[href*="/report/log/"] {
+                display: none;
+            }
+        }
+    }
+
+    #course-settings-courseadmin {
+        .list-unstyled {
+            a {
+                display: none;
+            }
+            a[href*="/course/edit.php"],
+            a[href*="/course/view.php"],
+            a[href*="/enrol/manual/unenrolself.php"],
+            a[href*="/grade/edit/tree/index.php"],
+            a[href*="/backup/backup.php"],
+            a[href*="/backup/restorefile.php"],
+            a[href*="/backup/import.php"],
+            a[href*="/course/delete.php"],
+            a[href*="/admin/tool/recyclebin/index.php"] {
+                display: unset;
             }
         }
     }

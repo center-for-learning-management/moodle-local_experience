@@ -1,6 +1,4 @@
 body.local-experience-level-0 {
-  /* Course view page */
-  /* Question edit page */
   /* Editing a module */
 }
 body.local-experience-level-0 form#add_block option {
@@ -23,44 +21,43 @@ body.local-experience-level-0 form#add_block option[value="stash"],
 body.local-experience-level-0 form#add_block option[value="html"] {
   display: unset !important;
 }
+body.local-experience-level-0 form#chooserform div.alloptions {
+  /* Dividers */
+}
 body.local-experience-level-0 form#chooserform div.alloptions label {
   display: none !important;
 }
-body.local-experience-level-0 form#chooserform div.alloptions .moduletypetitle > label {
-  display: block !important;
-}
-body.local-experience-level-0.path-course form#chooserform label[for="item_choice"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_assign"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_questionnaire"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_bigbluebuttonbn"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_checklist"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_forum"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_glossary"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_hvp"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_quiz"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_book"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_resource"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_url"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_label"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_page"],
-body.local-experience-level-0.path-course form#chooserform label[for="item_folder"] {
-  display: block !important;
-}
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_multichoice"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_truefalse"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_match"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_shortanswer"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_numerical"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_essay"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_multichoiceset"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_ordering"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_calculatedobjects"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_ddwtos"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_ddmarker"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_ddmatch"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_multianswer"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_wordselect"],
-body.local-experience-level-0#page-question-edit form#chooserform label[for="item_qtype_description"] {
+body.local-experience-level-0 form#chooserform div.alloptions .moduletypetitle > label,
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_choice"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_assign"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_questionnaire"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_bigbluebuttonbn"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_checklist"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_forum"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_glossary"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_hvp"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_quiz"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_book"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_resource"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_url"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_label"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_page"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_folder"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_multichoice"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_truefalse"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_match"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_shortanswer"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_numerical"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_essay"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_multichoiceset"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_ordering"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_calculatedobjects"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_ddwtos"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_ddmarker"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_ddmatch"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_multianswer"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_wordselect"],
+body.local-experience-level-0 form#chooserform div.alloptions label[for="item_qtype_description"] {
   display: block !important;
 }
 body.local-experience-level-0.path-mod {
@@ -104,4 +101,23 @@ body.local-experience-level-0#page-question-type-multichoice form[action="questi
 body.local-experience-level-0#page-question-type-multichoice form[action="question.php"] #fitem_id_fraction_4,
 body.local-experience-level-0#page-question-type-multichoice form[action="question.php"] #fitem_id_feedback_4 {
   display: none;
+}
+body.local-experience-level-0 #activity-settings-modulesettings .list-unstyled a[href*="/admin/roles/"],
+body.local-experience-level-0 #activity-settings-modulesettings .list-unstyled a[href*="/filter/manage.php"],
+body.local-experience-level-0 #activity-settings-modulesettings .list-unstyled a[href*="/report/log/"] {
+  display: none;
+}
+body.local-experience-level-0 #course-settings-courseadmin .list-unstyled a {
+  display: none;
+}
+body.local-experience-level-0 #course-settings-courseadmin .list-unstyled a[href*="/course/edit.php"],
+body.local-experience-level-0 #course-settings-courseadmin .list-unstyled a[href*="/course/view.php"],
+body.local-experience-level-0 #course-settings-courseadmin .list-unstyled a[href*="/enrol/manual/unenrolself.php"],
+body.local-experience-level-0 #course-settings-courseadmin .list-unstyled a[href*="/grade/edit/tree/index.php"],
+body.local-experience-level-0 #course-settings-courseadmin .list-unstyled a[href*="/backup/backup.php"],
+body.local-experience-level-0 #course-settings-courseadmin .list-unstyled a[href*="/backup/restorefile.php"],
+body.local-experience-level-0 #course-settings-courseadmin .list-unstyled a[href*="/backup/import.php"],
+body.local-experience-level-0 #course-settings-courseadmin .list-unstyled a[href*="/course/delete.php"],
+body.local-experience-level-0 #course-settings-courseadmin .list-unstyled a[href*="/admin/tool/recyclebin/index.php"] {
+  display: unset;
 }
