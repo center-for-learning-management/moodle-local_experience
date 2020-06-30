@@ -44,6 +44,7 @@ define(
             });
             if (mod) {
                 $('.nav-local-experience-switch .slider').addClass('rulesapplied');
+                $('.nav-local-experience-btn').addClass('rulesapplied');
             }
         },
         /**
@@ -56,7 +57,20 @@ define(
             STR.get_strings([
                     {'key' : 'advanced_options', component: 'local_experience' },
                 ]).done(function(s) {
+                    var navbtn = $('a[data-key="experiencelevel"]').attr('href', '#').addClass('nav-local-experience-btn')
+                        .attr('onclick', 'var c = this; require([\'local_experience/main\'], function(m) { m.switchExperience(!$(c).hasClass(\'experience-advanced\')); });');
+                    if (level == 1) {
+                        navbtn.find('.media-left').html('<i class="fa fa-icon fa-toggle-on"></i>');
+                        navbtn.addClass('experience-advanced');
+                    } else {
+                        navbtn.find('.media-left').html('<i class="fa fa-icon fa-toggle-off"></i>');
+                    }
+                    navbtn.prependTo(navbtn.closest('#nav-drawer'));
+
                     containers.split("\n").forEach(function(identifier) {
+                        if ($(container).length == 0) {
+                            return; // this is like "continue" in forEach-Loop.
+                        }
                         // Set values based on identifier
                         var params = {};
                         var x = identifier.split('|');
@@ -108,6 +122,7 @@ define(
                         // our modulechoose for example requires us to set the attribute itself!
                         $('.nav-local-experience-switch input').attr('checked', 'checked');
                     }
+
                     MAIN.detectModification();
                 }
             ).fail(NOTIFICATION.exception);
@@ -145,8 +160,18 @@ define(
          */
         switchExperience: function(level) {
             console.log('local_experience/main:switchExperience(level)', level);
-            $('.nav-local-experience-switch input').prop('checked', level);
             level = (level) ? 1 : 0;
+            var navbtn = $('.nav-local-experience-btn');
+            if (level == 1) {
+                navbtn.addClass('experience-advanced');
+                navbtn.find('.media-left i').removeClass('fa-toggle-off').addClass('fa-toggle-on');
+            } else {
+                $('.nav-local-experience-btn').removeClass('experience-advanced');
+                navbtn.find('.media-left i').removeClass('fa-toggle-on').addClass('fa-toggle-off');
+            }
+
+            $('.nav-local-experience-switch input').prop('checked', level);
+
             $('body').removeClass('local-experience-level-0').removeClass('local-experience-level-1').addClass('local-experience-level-' + level);
             var MAIN = this;
 
