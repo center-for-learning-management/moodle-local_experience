@@ -58,14 +58,14 @@ define(
                     {'key' : 'advanced_options', component: 'local_experience' },
                 ]).done(function(s) {
                     var navbtn = $('a[data-key="experiencelevel"]').attr('href', '#').addClass('nav-local-experience-btn')
-                        .attr('onclick', 'var c = this; require([\'local_experience/main\'], function(m) { m.switchExperience(!$(c).hasClass(\'experience-advanced\')); });');
+                        .attr('onclick', 'var c = this; require([\'local_experience/main\'], function(m) { m.switchExperience(!$(c).hasClass(\'experience-advanced\')); }); return false;');
                     if (level == 1) {
                         navbtn.find('.media-left').html('<i class="fa fa-icon fa-toggle-on"></i>');
                         navbtn.addClass('experience-advanced');
                     } else {
                         navbtn.find('.media-left').html('<i class="fa fa-icon fa-toggle-off"></i>');
                     }
-                    navbtn.prependTo(navbtn.closest('#nav-drawer'));
+                    navbtn.closest('#nav-drawer').prepend($('<nav class="list-group">').append(navbtn));
 
                     containers.split("\n").forEach(function(identifier) {
                         if ($(container).length == 0) {
