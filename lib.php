@@ -82,7 +82,7 @@ function local_experience_before_standard_html_head() {
 function local_experience_extend_navigation($navigation) {
     global $PAGE;
     if (has_capability('local/experience:cantrigger', $PAGE->context)) {
-        $nodehome = $navigation->get('home');
+        $nodehome = $navigation->add('test', '', navigation_node::NODETYPE_BRANCH, '', 'experiencelevelbranch'); //$navigation->get('home');
         $level = get_user_preferences('local_experience_level', 0);
         $label = get_string('advanced_options', 'local_experience');
         $link = '#';

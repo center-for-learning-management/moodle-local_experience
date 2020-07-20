@@ -57,15 +57,25 @@ define(
             STR.get_strings([
                     {'key' : 'advanced_options', component: 'local_experience' },
                 ]).done(function(s) {
-                    var navbtn = $('a[data-key="experiencelevel"]').attr('href', '#').addClass('nav-local-experience-btn')
-                        .attr('onclick', 'var c = this; require([\'local_experience/main\'], function(m) { m.switchExperience(!$(c).hasClass(\'experience-advanced\')); }); return false;');
+                    var onclick = [
+                        'var c = this;',
+                        'require([\'local_experience/main\'], function(m) {',
+                        '    m.switchExperience(!$(c).hasClass(\'experience-advanced\'));',
+                        '});',
+                        'return false;'
+                    ].join('');
+                    var navbtn = $('a[data-key="experiencelevel"]')
+                        .attr('href', '#')
+                        .addClass('nav-local-experience-btn')
+                        .attr('onclick', onclick)
+                        .css('padding-top', '12px');
                     if (level == 1) {
                         navbtn.find('.media-left').html('<i class="fa fa-icon fa-toggle-on"></i>');
                         navbtn.addClass('experience-advanced');
                     } else {
                         navbtn.find('.media-left').html('<i class="fa fa-icon fa-toggle-off"></i>');
                     }
-                    navbtn.closest('#nav-drawer').prepend($('<nav class="list-group">').append(navbtn));
+                    navbtn.closest('#nav-drawer').prepend($('<nav class="list-group">').append($('<ul>').append(navbtn.closest('li'))));
 
                     containers.split("\n").forEach(function(identifier) {
                         if ($(container).length == 0) {
