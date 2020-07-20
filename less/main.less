@@ -1,4 +1,4 @@
-// out: ../style/main.css, sourcemap: false, compress: false
+// out: ../style/main.css, sourcemap: false, compress: true
 
 body.local-experience-level-0 {
     form#add_block option {
@@ -72,7 +72,20 @@ body.local-experience-level-0 {
     &.path-mod {
         /* General */
         form[action="modedit.php"] {
-            #id_tagshdr {
+            #id_notifications,
+            #id_submissionsettings,
+            #id_tagshdr,
+            #id_availabilityconditionsheader,
+            #id_activitycompletionheader {
+                display: none !important;
+            }
+
+        }
+
+        /* Editing assignment */
+        &.path-mod-assign {
+            #id_notifications,
+            #id_submissionsettings {
                 display: none !important;
             }
         }
