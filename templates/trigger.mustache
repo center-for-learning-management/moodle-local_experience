@@ -17,14 +17,18 @@
 
 <div class="local_experience_wrapper">
     <div class="alert alert-info">
+        <a href="#" onclick="$('.local_experience_wrapper').css('display', 'none'); return false;"
+            style="position: absolute; right: 10px; top: 5px;">
+            <i class="fa fa-icon fa-close"></i>
+        </a>
         <a href="#" data-key="experiencelevel" class="nav-local-experience-btn {{#ison}} experience-advanced {{/ison}}"
             onclick="var c = this; require(['local_experience/main'], function(m) { m.switchExperience(!$(c).hasClass('experience-advanced')); }); return false;">
             <div class="media-left">
                 {{#ison}}
-                    <i class="fa fa-icon fa-toggle-on"></i>
+                    <i class="fa fa-icon fa-toggle-on" style="height: 20px;"></i>
                 {{/ison}}
                 {{^ison}}
-                    <i class="fa fa-icon fa-toggle-off"></i>
+                    <i class="fa fa-icon fa-toggle-off" style="height: 20px;"></i>
                 {{/ison}}
                 {{#str}} advanced_options, local_experience {{/str}}
             </div>
