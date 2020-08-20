@@ -1,5 +1,37 @@
 // out: ../style/switch.css, sourcemap: false, compress: true
 
+.local_experience_wrapper {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    margin-bottom: 0px;
+    margin-left: -300px;
+    width: 600px;
+    z-index: 999;
+    &>div {
+        margin-bottom: 0;
+        padding-bottom: 5px;
+        transition: all 2s linear;
+        .nav-local-experience-btn {
+            text-align: center;
+        }
+    }
+    &>div:not(.rulesapplied) {
+        opacity: 0;
+        max-height: 0px;
+    }
+}
+
+@media (max-width: 800px) {
+    .local_experience_wrapper {
+        margin-left: -150px;
+        width: 300px;
+        .infotext {
+            display: none;
+        }
+    }
+}
+
 .nav-local-experience-btn.rulesapplied .media-left i {
     color: #10507f; /* rgba(253, 18, 18, 0.3); */
 }

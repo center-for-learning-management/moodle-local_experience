@@ -25,6 +25,14 @@ defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->dirroot . '/local/experience/locallib.php');
 
+function local_experience_before_http_headers() {
+    global $PAGE;
+    if (has_capability('local/experience:cantrigger', $PAGE->context)) {
+        $level = get_user_preferences('local_experience_level', 0);
+        $PAGE->add_body_class('local-experience-level-' . $level);
+    }
+}
+
 function local_experience_before_standard_html_head() {
     global $CFG, $DB, $PAGE;
 
@@ -72,14 +80,27 @@ function local_experience_before_standard_html_head() {
             }
         }
         $PAGE->requires->js_call_amd("local_experience/main", "applyRules", array($level, $allrules));
-        $containers = get_config('local_experience', 'attachlevelselectto');
-        $PAGE->requires->js_call_amd("local_experience/main", "injectButton", array($level, $containers));
+        //$containers = get_config('local_experience', 'attachlevelselectto');
+        //$PAGE->requires->js_call_amd("local_experience/main", "injectButton", array($level, $containers));
     }
 
     return "";
 }
 
+function local_experience_before_standard_top_of_body_html() {
+    global $CFG, $DB, $OUTPUT, $PAGE;
+    $html = "";
+    if (has_capability('local/experience:cantrigger', $PAGE->context)) {
+        $level = get_user_preferences('local_experience_level', 0);
+        $html = $OUTPUT->render_from_template('local_experience/trigger', array('ison' => $level));
+        $PAGE->requires->js_call_amd("local_experience/main", "detectModification", array());
+    }
+
+    return $html;
+}
+
 function local_experience_extend_navigation($navigation) {
+    /*
     global $PAGE;
     if (has_capability('local/experience:cantrigger', $PAGE->context)) {
         $nodehome = $navigation->add('test', '', navigation_node::NODETYPE_BRANCH, '', 'experiencelevelbranch'); //$navigation->get('home');
@@ -89,7 +110,7 @@ function local_experience_extend_navigation($navigation) {
         $icon = null;
         $nodecreatecourse = $nodehome->add($label, $link, navigation_node::NODETYPE_LEAF, $label, 'experiencelevel', $icon);
         $nodecreatecourse->showinflatnavigation = true;
-    }
+    }*/
 }
 /**
  * Extend navigation.

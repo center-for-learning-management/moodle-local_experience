@@ -37,7 +37,9 @@ define(
              'body#page-question-type-multichoice',
              'form#add_block',
              'form#chooserform',
-             'form[action="modedit.php"]'].forEach(function(identifier) {
+             'form[action="modedit.php"]',
+             '.bcs-new-course.backup-section',
+             '.bcs-existing-course.backup-section'].forEach(function(identifier) {
                 if ($(identifier).length > 0) {
                     mod = true;
                 }
@@ -45,11 +47,14 @@ define(
             if (mod) {
                 $('.nav-local-experience-switch .slider').addClass('rulesapplied');
                 $('.nav-local-experience-btn').addClass('rulesapplied');
+                $('.local_experience_wrapper>div').addClass('rulesapplied');
             }
         },
         /**
+         * THIS FUNCTION IS OBSOLETE, WHEN BUTTON IS INSERTED VIA lib.php:local_experience_before_standard_top_of_body_html()
          * Let's inject a button to switch experience.
          */
+         /*
         injectButton: function(level, containers) {
             var MAIN = this;
             if (typeof containers === 'undefined') containers = '#page-wrapper>.navbar>ul:last-child';
@@ -75,6 +80,14 @@ define(
                     } else {
                         navbtn.find('.media-left').html('<i class="fa fa-icon fa-toggle-off"></i>');
                     }
+                    var wrapper = $('<div id="local_experience_wrapper">')
+                        .addClass('alert alert-info')
+                        .css('position', 'fixed')
+                        .css('bottom', '0px')
+                        .css('left', '50%')
+                        .css('padding-left', '-50%')
+                        .css('height', '0px');
+
                     navbtn.closest('#nav-drawer').prepend($('<nav class="list-group">').append($('<ul>').append(navbtn.closest('li'))));
 
                     containers.split("\n").forEach(function(identifier) {
@@ -137,6 +150,7 @@ define(
                 }
             ).fail(NOTIFICATION.exception);
         },
+        */
         /**
          * Inject tutorial texts based on page id or other criteria.
          */
@@ -176,11 +190,11 @@ define(
                 navbtn.addClass('experience-advanced');
                 navbtn.find('.media-left i').removeClass('fa-toggle-off').addClass('fa-toggle-on');
             } else {
-                $('.nav-local-experience-btn').removeClass('experience-advanced');
+                navbtn.removeClass('experience-advanced');
                 navbtn.find('.media-left i').removeClass('fa-toggle-on').addClass('fa-toggle-off');
             }
 
-            $('.nav-local-experience-switch input').prop('checked', level);
+            //$('.nav-local-experience-switch input').prop('checked', level);
 
             $('body').removeClass('local-experience-level-0').removeClass('local-experience-level-1').addClass('local-experience-level-' + level);
             var MAIN = this;
