@@ -26,7 +26,7 @@ $string['privacy:metadata'] = 'This plugin does not store any personal data';
 
 $string['access_denied'] = 'Access denied!';
 $string['add_another_explevel'] = 'Add another experience level';
-$string['advanced_options'] = 'Advanced options';
+$string['advanced_options'] = 'Expert mode';
 $string['advanced_options:description'] = 'All functions of this page are displayed in expert mode!';
 $string['attachlevelselectto'] = 'Attach level selector to';
 $string['attachlevelselectto:description'] = 'Specify all containers line by line, where the level attach selector should be added to. You can specify if the level-switch will be appended or prepended and if a label will be shown.<br /><br /><i>CSS-Selector|prepend or append|true or false';

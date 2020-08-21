@@ -25,8 +25,8 @@ $string['pluginname'] = 'UI-Erfahrung';
 $string['privacy:metadata'] = 'Dieses Plugin speichert keine personenbezogenen Daten';
 
 $string['access_denied'] = 'Zugriff nicht gestattet!';
-$string['advanced_options'] = 'Fortgeschrittener Modus';
-$string['advanced_options:description'] = 'Im fortgeschrittenen Modus sehen Sie alle Funktionen der Seite!';
+$string['advanced_options'] = 'Fortgeschrittenen-Modus';
+$string['advanced_options:description'] = 'Im Fortgeschrittenen-Modus sehen Sie alle Funktionen der Seite!';
 $string['attachlevelselectto'] = 'Level-Auswahl hinzufügen zu';
 $string['attachlevelselectto:description'] = 'Geben Sie zeilenweise alle HTML-Container mit CSS-Regeln an, zu denen die Level-Auswahl hinzugefügt werden soll. Sie können mittels Parametern angeben, ob das Steuerelement an den Anfang oder das Ende eingefügt werden soll, bzw. ob ein Textlabel angezeigt wird.<br /><br /><i>CSS-Selektor|prepend oder append|true oder false';
 
