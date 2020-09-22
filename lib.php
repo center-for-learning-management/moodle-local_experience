@@ -25,6 +25,11 @@ defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->dirroot . '/local/experience/locallib.php');
 
+// Keep these functions until we can safely uninstall and reinstall plugin.
+function local_experience_before_http_headers() {}
+function local_experience_before_standard_top_of_body_html()  {}
+
+
 function local_experience_before_standard_html_head() {
     global $CFG, $DB, $PAGE;
 
