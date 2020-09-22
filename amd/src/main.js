@@ -33,7 +33,7 @@ define(
             var mod = false;
             // List of identifiers that would be changed.
             ['#activity-settings-modulesettings',
-             'body.pagelayout-incourse #course-settings-courseadmin',
+             'body #course-settings-courseadmin',
              'body#page-question-type-multichoice',
              'form#add_block',
              'form#chooserform',
