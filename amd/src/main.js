@@ -158,7 +158,8 @@ define(
             if (this.debug) console.log('local_experience/main:injectText()');
             var pageids = ['page-question-type-ddwtos',
                            'page-question-type-multianswer',
-                           'page-question-type-wordselect'];
+                           'page-question-type-wordselect',
+                           'page-mod-bigbluebuttonbn-mod'];
             var id = $('body').attr('id');
             if (pageids.indexOf(id) > -1) {
                 AJAX.call([{
