@@ -61,6 +61,30 @@ $string['injecttext:page-question-type-ddwtos'] = '<p>Add the question to the te
 $string['injecttext:page-question-type-wordselect'] = '<p>This question type is designed to ask students to select text according to some criteria. For example "select the verb in the following sentence". Conceptually this is a little like a multiple choice question type (with multiple selectable options). The student responds by clicking on words to select them, and clicking a second time to unselect them.</p>
 <p>It provides an introduction field where words will not be selectable at runtime and a questiontext field. In the question text any words with braces around them will be considered correct. All words can be clicked-on to select.</p>
 <a href="https://docs.moodle.org/38/en/Wordselect_question_type" target="_blank">read more</a>';
+$string['injecttext:page-mod-bigbluebuttonbn-mod'] = 'The <a href="https://www.lernmanagement.at" target="_blank">Center for Learning Management</a> provides the open source video conferencing software <a href="https://bigbluebutton.org" target="_blank">BigBlueButton</a> in a basic version for up to 1000 simultaneous users. BBB tariffs with higher or guaranteed bandwidth can be obtained from various providers for a fee.';
+$string['injecttext:page-mod-bigbluebuttonbn-mod:readmore'] = '[<a href="{$a->wwwroot}/local/experience/pages/bigbluebutton.php" target="_blank">learn more</a>]';
+$string['injecttext:page-mod-bigbluebuttonbn-mod:longtext'] = '<p>In order to be able to quickly switch to a more powerful, chargeable BBB server in the event of a crisis, we have put together 3 providers as examples. If an external service provider is chosen, a contract must be concluded between the provider and the school. In Eduvidual an alternative BBB server can be entered for each school individually via the management interface. If you have any questions please contact <a href="mailto:rene.schwarzinger@lernmanagement.at?subject=BigBlueButton">rene.schwarzinger@lernmanagement.at</a>!</p>
+
+<p>These offers were compiled in September 2020 as an example. Please contact the providers directly for the current prices and conditions.</p>
+
+<h4>meet-modular</h4>
+<p>Minimum term 3 months<br />
+1 class average a 25 students according to the fair use principle<br />
+Package up to 12 classes: 149 € (per month excl. VAT)<br />
+Package up to 24 classes: 249 €<br />
+Package up to 60 classes: 349 €<br />
+Server location: Germany<br />
+Contact: info@think-modular.com</p>
+
+<h4>OpenFabNet</h4>
+<p>Minimum term 1 month<br />
+Costs: 1€ / per month / simultaneous user according to shared host principle (no VAT)<br />
+Server location: Austria<br />
+Contact: christian.schwarzinger@openfab.org</p>
+
+<h4>Big Blue Meeting</h4>
+<p>shared BBB hosting or managed dedicated BBB hosting<br />
+https://www.bigbluemeeting.com/</p>';
 
 $string['pluginname:settings'] = 'UI-experience settings';
 

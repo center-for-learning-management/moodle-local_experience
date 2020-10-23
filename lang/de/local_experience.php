@@ -51,5 +51,29 @@ $string['injecttext:page-question-type-ddwtos'] = '<p>In diesem Textbereich gebe
 $string['injecttext:page-question-type-wordselect'] = '<p>Dieser Fragentyp wurde entwickelt, damit Lernende Text basierend auf bestimmten Kriterien auswählen können. Beispielsweise "Wähle das Verb im folgenden Satz". Vom Konzept her ist es ähnlich einer Multiple Choice Frage, wobei die Lernenden antworten, indem sie das richtige Wort auswählen. Dazu müssen die Lernenden einfach ein Wort anklicken.</p>
 <p>Es gibt ein Einführungsfeld für Erklärungen, in dem die Worte nicht auswählbar sind, und ein Fragentextfeld, in dem alle Wörter auswählbar sind. Wörter, die durch eckigen Klammern markiert sind, werden als korrekt gezählt.</p>
 <a href="https://docs.moodle.org/38/en/Wordselect_question_type" target="_blank">weiterführende Informationen</a>';
+$string['injecttext:page-mod-bigbluebuttonbn-mod'] = 'Das <a href="https://www.lernmanagement.at" target="_blank">Zentrum für Lernmanagement</a> stellt die Open Source Videokonferenzsoftware <a href="https://bigbluebutton.org" target="_blank">BigBlueButton</a> in einer Basis-Variante für bis zu 1000 gleichzeitige Nutzer/innen zur Verfügung. BBB-Tarife mit höherer bzw. garantierter Bandbreite können Sie kostenpflichtig bei diversen Anbietern in Anspruch nehmen.';
+$string['injecttext:page-mod-bigbluebuttonbn-mod:readmore'] = '[<a href="{$a->wwwroot}/local/experience/pages/bigbluebutton.php" target="_blank">mehr erfahren</a>]';
+$string['injecttext:page-mod-bigbluebuttonbn-mod:longtext'] = '<p>Um im Krisenfall rasch auf einen leistungsstärkeren, kostenpflichtigen BBB-Server wechseln zu können, haben wir 3 Anbieter exemplarisch zusammengetragen. Bei Auswahl eines externen Dienstleisters ist ein Vertrag zwischen Anbieter und Schule zu schließen. In Eduvidual kann über die Management Oberfläche ein alternativer BBB-Server für die eigene Schule eingetragen werden. Bei Fragen können Sie sich an <a href="mailto:rene.schwarzinger@lernmanagement.at?subject=BigBlueButton">rene.schwarzinger@lernmanagement.at</a> wenden!</p>
+
+<p>Diese Angebote wurden im September 2020 als Beispiel zusammengetragen. Die jeweils aktuellen Preise und Konditionen erfragen Sie bitte bei den Anbietern direkt.</p>
+
+<h4>meet-modular</h4>
+<p>Mindestlaufzeit 3 Monate<br />
+1 Klasse durchschnittlich a 25 Schüler nach fair use Prinzip<br />
+Paket bis zu 12 Klassen: 149 € (pro Monat exkl. MwSt.)<br />
+Paket bis zu 24 Klassen: 249 €<br />
+Paket bis zu 60 Klassen: 349 €<br />
+Serverstandort: Deutschland<br />
+Kontakt: info@think-modular.com</p>
+
+<h4>OpenFabNet</h4>
+<p>Mindestlaufzeit 1 Monat<br />
+Kosten: 1€ / pro Monat / gleichzeitigem User nach shared host Prinzip (keine MwSt.)<br />
+Serverstandort: Österreich<br />
+Kontakt: christian.schwarzinger@openfab.org</p>
+
+<h4>Big Blue Meeting</h4>
+<p>shared BBB hosting oder managed dedicated BBB hosting<br />
+https://www.bigbluemeeting.com/</p>';
 
 $string['pluginname:settings'] = 'UI-Erfahrung Einstellungen';

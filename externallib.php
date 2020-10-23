@@ -36,7 +36,7 @@ class local_experience_external extends external_api {
      * Get a tutorial text to inject.
      */
     public static function injecttext($pageid) {
-        global $PAGE;
+        global $CFG, $PAGE;
         $PAGE->set_context(context_system::instance());
         $params = self::validate_parameters(self::injecttext_parameters(), array('pageid' => $pageid));
         $ret = array(
@@ -45,6 +45,12 @@ class local_experience_external extends external_api {
             'text' => '',
         );
         switch ($pageid) {
+            case 'page-mod-bigbluebuttonbn-mod':
+                $ret['prependto'] = 'form[action="modedit.php"]';
+                $params = (object) array('wwwroot' => $CFG->wwwroot);
+                $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience') . ' ' .
+                               get_string('injecttext:' . $pageid . ':readmore', 'local_experience', $params);
+            break;
             case 'page-question-type-ddwtos':
                 $ret['prependto'] = 'form[action="question.php"]';
                 $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience');
