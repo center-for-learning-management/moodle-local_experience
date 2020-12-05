@@ -90,17 +90,18 @@ function local_experience_before_standard_html_head() {
 function local_experience_before_standard_top_of_body_html() {
     global $CFG, $DB, $OUTPUT, $PAGE;
     $html = "";
+    /*
     if (has_capability('local/experience:cantrigger', $PAGE->context)) {
         $level = get_user_preferences('local_experience_level', 0);
         $html = $OUTPUT->render_from_template('local_experience/trigger', array('ison' => $level));
         $PAGE->requires->js_call_amd("local_experience/main", "detectModification", array());
     }
+    */
 
     return $html;
 }
 
 function local_experience_extend_navigation($navigation) {
-    /*
     global $PAGE;
     if (has_capability('local/experience:cantrigger', $PAGE->context)) {
         $nodehome = $navigation->add('test', '', navigation_node::NODETYPE_BRANCH, '', 'experiencelevelbranch'); //$navigation->get('home');
@@ -110,7 +111,9 @@ function local_experience_extend_navigation($navigation) {
         $icon = null;
         $nodecreatecourse = $nodehome->add($label, $link, navigation_node::NODETYPE_LEAF, $label, 'experiencelevel', $icon);
         $nodecreatecourse->showinflatnavigation = true;
-    }*/
+        $level = get_user_preferences('local_experience_level', 0);
+        $PAGE->requires->js_call_amd("local_experience/main", "enablePanelTrigger", array($level));
+    }
 }
 /**
  * Extend navigation.
