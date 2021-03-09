@@ -79,6 +79,35 @@ class local_experience_external extends external_api {
     }
 
 
+    public static function keycode_parameters() {
+        return new external_function_parameters(array(
+            'action' => new external_value(PARAM_ALPHANUM, 'the action'),
+        ));
+    }
+
+    /**
+     * Get a tutorial text to inject.
+     */
+    public static function keycode($action) {
+        global $USER;
+        $params = self::validate_parameters(self::keycode_parameters(), array('action' => $action));
+        switch ($params['action']) {
+            case 'editmode':
+                $USER->editing = ($USER->editing == 1) ? 0 : 1;
+                return 1;
+            break;
+        }
+        return 0;
+    }
+    /**
+     * Return definition.
+     * @return external_value
+     */
+    public static function keycode_returns() {
+        return new external_value(PARAM_INT, 'returns 1 if action was known, 0 if action was unkown, -1 if action failed.');
+    }
+
+
     public static function switch_parameters() {
         return new external_function_parameters(array(
             'level' => new external_value(PARAM_INT, 'the new level'),

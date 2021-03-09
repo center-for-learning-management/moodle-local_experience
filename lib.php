@@ -41,6 +41,9 @@ function local_experience_before_standard_html_head() {
         $PAGE->requires->css('/local/experience/style/main.css');
         $PAGE->requires->css('/local/experience/style/switch.css');
         $PAGE->requires->js_call_amd("local_experience/main", "injectText", array());
+        if ($PAGE->user_allowed_editing()) {
+            $PAGE->requires->js_call_amd("local_experience/main", "captureKeycode", array());
+        }
 
         // We only process rules that set default values when we add new things.
         // Determine if there are any rules for the current page.

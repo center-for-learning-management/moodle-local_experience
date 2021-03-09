@@ -33,6 +33,14 @@ $functions = array(
         'type'        => 'read',
         'ajax'        => 1,
     ),
+    'local_experience_keycode' => array(
+        'classname'   => 'local_experience_external',
+        'methodname'  => 'keycode',
+        'classpath'   => 'local/experience/externallib.php',
+        'description' => 'Performs an action upon keycode press.',
+        'type'        => 'read',
+        'ajax'        => 1,
+    ),
     'local_experience_switch' => array(
         'classname'   => 'local_experience_external',
         'methodname'  => 'switch',

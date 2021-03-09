@@ -27,6 +27,25 @@ define(
             });
         },
         /**
+         * Detect certain keyCodes and do according action.
+         */
+        captureKeycode: function() {
+            document.addEventListener ("keydown", function (e) {
+                // e.ctrlKey, e.altKey, e.shiftKey, e.metaKey
+                if (e.ctrlKey && e.key === "e") {
+                    AJAX.call([{
+                        methodname: 'local_experience_keycode',
+                        args: { 'action': 'editmode' },
+                        done: function(result) {
+                            console.log('Result is ', result);
+                            location.reload();
+                        },
+                        fail: NOTIFICATION.exception
+                    }]);
+                }
+            } );
+        },
+        /**
          * Detect if anything on this site is/could be modified and color our switches accordingly.
          */
         detectModification: function() {
