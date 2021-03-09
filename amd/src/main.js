@@ -37,7 +37,7 @@ define(
                         methodname: 'local_experience_keycode',
                         args: { 'action': 'editmode' },
                         done: function(result) {
-                            console.log('Result is ', result);
+                            //console.log('Result is ', result);
                             location.reload();
                         },
                         fail: NOTIFICATION.exception
