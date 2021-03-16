@@ -32,7 +32,7 @@ define(
         captureKeycode: function() {
             document.addEventListener ("keydown", function (e) {
                 // e.ctrlKey, e.altKey, e.shiftKey, e.metaKey
-                if (e.ctrlKey && e.key === "e") {
+                if (e.ctrlKey && e.altKey && e.key === "e") {
                     AJAX.call([{
                         methodname: 'local_experience_keycode',
                         args: { 'action': 'editmode' },
