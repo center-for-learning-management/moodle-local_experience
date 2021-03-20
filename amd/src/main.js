@@ -31,8 +31,10 @@ define(
          */
         captureKeycode: function() {
             document.addEventListener ("keydown", function (e) {
+                //console.log('pressed any key', e.key, e);
                 // e.ctrlKey, e.altKey, e.shiftKey, e.metaKey
-                if (e.ctrlKey && e.altKey && e.key === "e") {
+                if (e.ctrlKey && e.altKey && e.keyCode == 69) {
+                    console.log('Pressed edit key');
                     AJAX.call([{
                         methodname: 'local_experience_keycode',
                         args: { 'action': 'editmode' },
