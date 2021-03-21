@@ -31,7 +31,7 @@ define(
          */
         captureKeycode: function() {
             document.addEventListener ("keydown", function (e) {
-                //console.log('pressed any key', e.key, e);
+                console.log('pressed any key', e.key, e);
                 // e.ctrlKey, e.altKey, e.shiftKey, e.metaKey
                 if (
                     (e.ctrlKey && e.altKey && e.keyCode == 69)
