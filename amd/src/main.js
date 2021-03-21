@@ -38,6 +38,8 @@ define(
                     ||
                     (e.ctrlKey && e.shiftKey && e.keyCode == 69)
                     ||
+                    (e.altKey && e.shiftKey && e.keyCode == 69)
+                    ||
                     (e.ctrlKey && e.keyCode == 69)) {
                     console.log('Pressed edit key', e);
                     AJAX.call([{
