@@ -11,9 +11,9 @@ define(
             if (MAIN.debug) console.log('local_experience/main:applyRule(level, allrules)', level, allrules);
 
             $('body').removeClass('local-experience-level-0').removeClass('local-experience-level-1').addClass('local-experience-level-' + level);
-            allrules.forEach(function() {
-                if (MAIN.debug) console.log('=> apply Rule', this);
-                elementstoset = this.elementstoset.split("\n");
+            allrules.forEach(function(rule) {
+                if (MAIN.debug) console.log('=> apply Rule', rule);
+                elementstoset = rule.elementstoset.split("\n");split("\n
                 elementstoset.forEach(function(item) {
                     try {
                         var pair = item.split('=');
