@@ -115,6 +115,25 @@ define(
         },
 
         /**
+         * Set the completion date to and completion to manual.
+         * @param daysplus how many days in future should be the default completion date.
+         */
+        setCompletionDefaults: function(daysplus) {
+            console.log('local_experience/main:setCompletionDefaults(daysplus)', daysplus);
+            $('#region-main #id_completion').val(1).change();
+            $('#region-main #id_completionexpected_enabled').prop('checked', true);
+
+            var d = new Date();
+            d.setDate(d.getDate() + daysplus);
+
+            $('#region-main #id_completionexpected_day').val(d.getDate()).change();
+            $('#region-main #id_completionexpected_month').val(d.getMonth()+1).change();
+            $('#region-main #id_completionexpected_year').val(d.getFullYear()).change();
+            $('#region-main #id_completionexpected_hour').val(d.getHours()).change();
+            $('#region-main #id_completionexpected_minute').val(d.getMinutes()).change();
+        },
+
+        /**
          * Switch experience using ajax call.
          * After we got confirmation, reload the page.
          */

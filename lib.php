@@ -36,6 +36,13 @@ function local_experience_before_http_headers() {
 function local_experience_before_standard_html_head() {
     global $CFG, $DB, $PAGE;
 
+    if (strpos($_SERVER["SCRIPT_FILENAME"], '/course/modedit.php') > 0) {
+        $add = optional_param('add', '', PARAM_ALPHANUM);
+        if (!empty($add)) {
+            $PAGE->requires->js_call_amd("local_experience/main", "setCompletionDefaults", array(7));
+        }
+    }
+
     if (has_capability('local/experience:cantrigger', $PAGE->context)) {
         // Show trigger and add basic functionality.
         $PAGE->requires->css('/local/experience/style/main.css');
