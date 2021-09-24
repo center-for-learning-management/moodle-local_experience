@@ -2,7 +2,7 @@ define(
     ['jquery', 'core/ajax', 'core/notification', 'core/str', 'core/templates', 'core/url', 'core/modal_events', 'core/modal_factory'],
     function($, AJAX, NOTIFICATION, STR, TEMPLATES, URL, ModalEvents, ModalFactory) {
     return {
-        debug: 1,
+        debug: 0,
         /**
          * Apply rules to page.
          */
@@ -119,12 +119,12 @@ define(
          * @param daysplus how many days in future should be the default completion date.
          */
         setCompletionDefaults: function(daysplus) {
-            console.log('local_experience/main:setCompletionDefaults(daysplus)', daysplus);
+            if (this.debug) console.log('local_experience/main:setCompletionDefaults(daysplus)', daysplus);
             $('#region-main #id_completion').val(1).change();
             $('#region-main #id_completionexpected_enabled').prop('checked', true);
 
             var d = new Date();
-            d.setDate(d.getDate() + daysplus);
+            d.setDate(d.getDate() + parseInt(daysplus));
 
             $('#region-main #id_completionexpected_day').val(d.getDate()).change();
             $('#region-main #id_completionexpected_month').val(d.getMonth()+1).change();
@@ -138,7 +138,7 @@ define(
          * After we got confirmation, reload the page.
          */
         switchExperience: function(level) {
-            console.log('local_experience/main:switchExperience(level)', level);
+            if (this.debug) console.log('local_experience/main:switchExperience(level)', level);
             level = (level) ? 1 : 0;
             var navbtn = $('.nav-local-experience-btn');
             if (level == 1) {

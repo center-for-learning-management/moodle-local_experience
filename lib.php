@@ -25,6 +25,17 @@ defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->dirroot . '/local/experience/locallib.php');
 
+function local_experience_after_config() {
+    global $CFG;
+    $scripts = array(
+        '/course/dndupload.php'
+    );
+    $script = str_replace($CFG->dirroot, '', $_SERVER["SCRIPT_FILENAME"]);
+    if (in_array($script, $scripts)) {
+        \local_experience\lib_wshelper::buffer();
+    }
+}
+
 function local_experience_before_http_headers() {
     global $PAGE;
     if (has_capability('local/experience:cantrigger', $PAGE->context)) {
@@ -39,7 +50,11 @@ function local_experience_before_standard_html_head() {
     if (strpos($_SERVER["SCRIPT_FILENAME"], '/course/modedit.php') > 0) {
         $add = optional_param('add', '', PARAM_ALPHANUM);
         if (!empty($add)) {
-            $PAGE->requires->js_call_amd("local_experience/main", "setCompletionDefaults", array(7));
+            $enabled = \get_config('local_experience', 'auto_set_completion_details');
+            $plusdays = \get_config('local_experience', 'auto_set_completion_add_days');
+            if (!empty($enabled) && !empty($plusdays)) {
+                $PAGE->requires->js_call_amd("local_experience/main", "setCompletionDefaults", array($plusdays));
+            }
         }
     }
 

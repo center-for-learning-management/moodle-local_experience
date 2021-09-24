@@ -27,9 +27,34 @@ if ($hassiteconfig) {
     $settings = new admin_settingpage( 'local_experience_settings', get_string('pluginname:settings', 'local_experience'));
     $ADMIN->add('localplugins', new admin_category('local_experience', get_string('pluginname', 'local_experience')));
     $ADMIN->add('local_experience', $settings);
-    $settings->add(new admin_setting_configtextarea('local_experience/attachlevelselectto', get_string('attachlevelselectto', 'local_experience'), get_string('attachlevelselectto:description', 'local_experience'), "#page-wrapper>.navbar>ul:last-child|prepend\n#chooserform div.submitbuttons|prepend|false", PARAM_TEXT));
-	//$ADMIN->add('localplugins', $settings);
-    //$settings->add(new admin_setting_configtext('local_experience/varname', get_string('string:varname', 'local_experience'), '', '', PARAM_TEXT));
+
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'local_experience/auto_set_completion_details',
+            get_string('auto_set_completion_details', 'local_experience'),
+            get_string('auto_set_completion_details:description', 'local_experience'),
+            1
+        )
+    );
+    $settings->add(
+        new admin_setting_configtext(
+            'local_experience/auto_set_completion_add_days',
+            get_string('auto_set_completion_add_days', 'local_experience'),
+            get_string('auto_set_completion_add_days:description', 'local_experience'),
+            7,
+            PARAM_INT
+        )
+    );
+    $settings->add(
+        new admin_setting_configtext(
+            'local_experience/auto_set_completion_add_days_dnd',
+            get_string('auto_set_completion_add_days_dnd', 'local_experience'),
+            get_string('auto_set_completion_add_days_dnd:description', 'local_experience'),
+            3,
+            PARAM_INT
+        )
+    );
+
     $ADMIN->add(
         'local_experience',
         new admin_externalpage(
@@ -52,6 +77,16 @@ if ($hassiteconfig) {
             'local_experience_c_r',
             get_string('c_r', 'local_experience'),
             $CFG->wwwroot . '/local/experience/c_r.php'
+        )
+    );
+
+    $settings->add(
+        new admin_setting_configtextarea(
+            'local_experience/attachlevelselectto',
+            get_string('attachlevelselectto', 'local_experience'),
+            get_string('attachlevelselectto:description', 'local_experience'),
+            "#page-wrapper>.navbar>ul:last-child|prepend\n#chooserform div.submitbuttons|prepend|false",
+            PARAM_TEXT
         )
     );
 }

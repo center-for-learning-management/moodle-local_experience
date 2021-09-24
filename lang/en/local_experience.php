@@ -31,6 +31,13 @@ $string['advanced_options:description'] = 'All functions of this page are displa
 $string['attachlevelselectto'] = 'Attach level selector to';
 $string['attachlevelselectto:description'] = 'Specify all containers line by line, where the level attach selector should be added to. You can specify if the level-switch will be appended or prepended and if a label will be shown.<br /><br /><i>CSS-Selector|prepend or append|true or false';
 
+$string['auto_set_completion_details'] = 'Automatically set completion details';
+$string['auto_set_completion_details:description'] = 'If enabled, completion rules will be automatically set when a new resource or activity is created. In addition to this option, days have to configured to be above 0!';
+$string['auto_set_completion_add_days'] = 'Offset in forms';
+$string['auto_set_completion_add_days:description'] = 'Set the expected completion date in forms to x days in the future in forms. Will recommend manual completion.';
+$string['auto_set_completion_add_days_dnd'] = 'Offset for DND Uploads';
+$string['auto_set_completion_add_days_dnd:description'] = 'Set the expected completion date in forms to x days in the future for DND uploads. Will result in an automated completion.';
+
 $string['conditions'] = 'Conditions';
 $string['conditions:add'] = 'Add condition';
 $string['conditions:description'] = 'Here you can specify the conditions when a rule has to be applied.';
