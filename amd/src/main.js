@@ -85,6 +85,29 @@ define(
                 mediaLeft.html('<i class="fa fa-icon fa-toggle-off" style="font-size: 18px;"></i>');
             }
         },
+        injectQuestionTemplate: function(qtype) {
+            if (qtype == 'stack') {
+                var strs = [
+                    'name', 'questionvariables', 'variantselectionseed', 'questiontexteditable',
+                    'defaultmark', 'specificfeedbackeditable', 'penalty', 'generalfeedbackeditable',
+                    'questionnote',
+                ];
+                var getstrs = [];
+                strs.forEach(function(key) {
+                    getstrs.push({'key' : 'injectquestion:' + qtype + ':' + key, 'component': 'local_experience' });
+                });
+                STR.get_strings(getstrs).done(
+                    function(s) {
+                        strs.forEach(function(key,index) {
+                            console.log(key,index);
+                            var target = $('form[action="question.php"] #id_' + key);
+                            console.log('target', target);
+                            $(target).val(s[index]);
+                        });
+                    }
+                ).fail(NOTIFICATION.exception);
+            }
+        },
         /**
          * Inject tutorial texts based on page id or other criteria.
          */
@@ -92,6 +115,7 @@ define(
             if (this.debug) console.log('local_experience/main:injectText()');
             var pageids = ['page-question-type-ddwtos',
                            'page-question-type-multianswer',
+                           'page-question-type-stack',
                            'page-question-type-wordselect',
                            'page-mod-bigbluebuttonbn-mod'];
             var id = $('body').attr('id');
