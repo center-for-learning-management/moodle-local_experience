@@ -49,8 +49,54 @@ $string['c_r'] = 'Relation conditions <=> rules';
 
 $string['experience:cantrigger'] = 'Can trigger experience';
 
-$string['injectquestion:stack:name'] = 'Template MC with Feedback and subpoints';
-$string['injectquestion:stack:questionvariables'] = '
+$string['injectquestion:stack:_ids'] = '0';
+$string['injectquestion:stack:_fields'] = 'ans1type,ans1modelans,ans1mustverify,defaultmark,generalfeedbackeditable,name,penalty,prt1answertest_0,prt1feedbackvariables,prt1sans_0,prt1tans_0,prt1truefeedback_0editable,prt1answertest_1,prt1sans_1,prt1tans_1,prt1truefeedback_1editable,prt1falsefeedback_1editable,prt1truescore_1,prt1falsescore_1,questionnote,questionvariables,questiontexteditable,specificfeedbackeditable,variantsselectionseed';
+
+$string['injectquestion:stack:0:ans1type'] = 'checkbox';
+$string['injectquestion:stack:0:ans1modelans'] = 'ta';
+$string['injectquestion:stack:0:ans1mustverify'] = '0';
+$string['injectquestion:stack:0:defaultmark'] = '1';
+$string['injectquestion:stack:0:generalfeedbackeditable'] = '';
+$string['injectquestion:stack:0:name'] = 'Template MC with Feedback and subpoints';
+$string['injectquestion:stack:0:penalty'] = '0.1';
+$string['injectquestion:stack:0:prt1feedbackvariables'] = '
+    ans2: makelist(if member(i,ans1) then 1 else 0, i,1,5);
+    tans2: makelist(if member(i,tans1) then 1 else 0, i,1,5);
+    counter: 0; list2:[]; for i:1 step 1 thru 5 do if ans2[i]=tans2[i] then counter:counter+1 else (counter:counter,push(i,list2));
+    list2:sort(list2);
+';
+$string['injectquestion:stack:0:prt1answertest_0'] = 'AlgEquiv';
+$string['injectquestion:stack:0:prt1sans_0'] = 'ans1';
+$string['injectquestion:stack:0:prt1tans_0'] = 'tans1';
+$string['injectquestion:stack:0:prt1truefeedback_0editable'] = '
+    <p>Statement 1 {@ta[1][2]@}. {@fb[1]@} <br>
+    Statement 2 {@ta[2][2]@}. {@fb[2]@} <br>
+    Statement 3 {@ta[3][2]@}. {@fb[3]@} <br>
+    Statement 4 {@ta[4][2]@}. {@fb[4]@} <br>
+    Statement 5 {@ta[5][2]@}. <br> </p>
+';
+$string['injectquestion:stack:0:prt1answertest_1'] = 'AlgEquiv';
+$string['injectquestion:stack:0:prt1sans_1'] = 'counter';
+$string['injectquestion:stack:0:prt1tans_1'] = '4';
+$string['injectquestion:stack:0:prt1truefeedback_1editable'] = '
+    <p>Statement 1 {@ta[1][2]@}. {@fb[1]@} <br>
+    Statement 2 {@ta[2][2]@}. {@fb[2]@} <br>
+    Statement 3 {@ta[3][2]@}. {@fb[3]@} <br>
+    Statement 4 {@ta[4][2]@}. {@fb[4]@} <br>
+    Statement 5 {@ta[5][2]@}.</p>
+    <p style="text-align: left;">There is one error in statement {@list2[1]@}. <br> </p>
+';
+$string['injectquestion:stack:0:prt1falsefeedback_1editable'] = '
+    <p style="text-align: left;">Statement 1 {@ta[1][2]@}. {@fb[1]@} <br>
+    Statement 2 {@ta[2][2]@}. {@fb[2]@} <br>
+    Statement 3 {@ta[3][2]@}. {@fb[3]@} <br>
+    Statement 4 {@ta[4][2]@}. {@fb[4]@} <br>
+    Statement 5 {@ta[5][2]@}.</p>
+    <p style="text-align: left;">Unfortunately there is more than one error, in total {@5-counter@} in the statements {@sort(list2)@}!! <br> </p>';
+$string['injectquestion:stack:0:prt1truescore_1'] = '0.5';
+$string['injectquestion:stack:0:prt1falsescore_1'] = '0';
+$string['injectquestion:stack:0:questionnote'] = 'zufall';
+$string['injectquestion:stack:0:questionvariables'] = '
     /*ai stands for ite statement, vi stands for iter bsteht für iter truth value, fbi stands for ites feedback.
     If there ins only one statement, the second entry of txti can be removed, vi can be directly set to true or false! */
     txt1: [ " Statement 1A", " Statement 1B"];
@@ -119,19 +165,18 @@ $string['injectquestion:stack:questionvariables'] = '
     fb: [feedback[k1],feedback[k2],feedback[k3],feedback[k4]]
     tans1: mcq_correct(ta);
 ';
-$string['injectquestion:stack:variantsselectionseed'] = '';
-$string['injectquestion:stack:questiontexteditable'] = '
+$string['injectquestion:stack:0:questiontexteditable'] = '
     <p></p>
     <p>Please check the correct statements:</p>
     <p>[[input:ans1]] [[validation:ans1]]</p>
     <p>{@tans1@}</p>
     <p style="font-size:0.6em;text-align:right;">Created by: (yourname)</p>
 ';
-$string['injectquestion:stack:defaultmark'] = '1';
-$string['injectquestion:stack:specificfeedbackeditable'] = '[[feedback:prt1]]';
-$string['injectquestion:stack:penalty'] = '0.1';
-$string['injectquestion:stack:generalfeedbackeditable'] = '';
-$string['injectquestion:stack:questionnote'] = 'zufall';
+$string['injectquestion:stack:0:specificfeedbackeditable'] = '[[feedback:prt1]]';
+$string['injectquestion:stack:0:variantsselectionseed'] = '';
+
+
+
 
 $string['injecttext:page-question-type-multianswer'] = '<p>Embedded answers (Cloze) questions consist of a passage of text (in Moodle format) that has various answers embedded within it, including multiple choice, short answers and numerical answers.</p>
     <p>The structure of each cloze sub-question is identical:</p>
@@ -154,7 +199,7 @@ $string['injecttext:page-question-type-ddwtos'] = '
     ';
 $string['injecttext:page-question-type-stack'] = '
     <p>Please find more information about the STACK question type at the <a href="https://docs.moodle.org/311/en/STACK_question_type" target="_blank">Moodle Docs</a>.</p>
-    <p>We prepared a template question for you, that you can enable simply by clicking on <a href="#" onclick="require([\'local_experience/main\'], function(M) { M.injectQuestionTemplate(\'stack\') }); return false;" class="btn btn-secondary"><i class="fa fa-plus-circle"></i> insert question template</a></p>
+    <p>We prepared a template question for you, that you can enable simply by clicking on <a href="#" onclick="require([\'local_experience/main\'], function(M) { M.injectQuestionTemplate(\'stack\', 0) }); return false;" class="btn btn-secondary"><i class="fa fa-plus-circle"></i> insert question template</a></p>
     ';
 $string['injecttext:page-question-type-wordselect'] = '
     <p>This question type is designed to ask students to select text according to some criteria. For example "select the verb in the following sentence". Conceptually this is a little like a multiple choice question type (with multiple selectable options). The student responds by clicking on words to select them, and clicking a second time to unselect them.</p>

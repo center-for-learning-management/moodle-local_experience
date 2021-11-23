@@ -39,8 +39,55 @@ $string['auto_set_completion_add_days_dnd:description'] = 'Setze bei Drag&Drop U
 
 $string['experience:cantrigger'] = 'Kann Erfahrungslevel wählen';
 
-$string['injectquestion:stack:name'] = 'Vorlage MC mit Feedback und Teilpunkten';
-$string['injectquestion:stack:questionvariables'] = '
+$string['injectquestion:stack:_ids'] = '0';
+$string['injectquestion:stack:_fields'] = 'ans1type,ans1modelans,ans1mustverify,defaultmark,generalfeedbackeditable,name,penalty,prt1answertest_0,prt1feedbackvariables,prt1sans_0,prt1tans_0,prt1truefeedback_0editable,prt1answertest_1,prt1sans_1,prt1tans_1,prt1truefeedback_1editable,prt1falsefeedback_1editable,prt1truescore_1,prt1falsescore_1,questionnote,questionvariables,questiontexteditable,specificfeedbackeditable,variantsselectionseed';
+
+$string['injectquestion:stack:0:ans1type'] = 'checkbox';
+$string['injectquestion:stack:0:ans1modelans'] = 'ta';
+$string['injectquestion:stack:0:ans1mustverify'] = '0';
+$string['injectquestion:stack:0:defaultmark'] = '1';
+$string['injectquestion:stack:0:generalfeedbackeditable'] = '';
+$string['injectquestion:stack:0:name'] = 'Vorlage MC mit Feedback und Teilpunkten';
+
+$string['injectquestion:stack:0:penalty'] = '0.1';
+$string['injectquestion:stack:0:prt1feedbackvariables'] = '
+    ans2: makelist(if member(i,ans1) then 1 else 0, i,1,5);
+    tans2: makelist(if member(i,tans1) then 1 else 0, i,1,5);
+    counter: 0; list2:[]; for i:1 step 1 thru 5 do if ans2[i]=tans2[i] then counter:counter+1 else (counter:counter,push(i,list2));
+    list2:sort(list2);
+';
+$string['injectquestion:stack:0:prt1answertest_0'] = 'AlgEquiv';
+$string['injectquestion:stack:0:prt1sans_0'] = 'ans1';
+$string['injectquestion:stack:0:prt1tans_0'] = 'tans1';
+$string['injectquestion:stack:0:prt1truefeedback_0editable'] = '
+    <p>Aussage 1 {@ta[1][2]@}. {@fb[1]@} <br>
+    Aussage 2 {@ta[2][2]@}. {@fb[2]@} <br>
+    Aussage 3 {@ta[3][2]@}. {@fb[3]@} <br>
+    Aussage 4 {@ta[4][2]@}. {@fb[4]@} <br>
+    Aussage 5 {@ta[5][2]@}. <br> </p>
+';
+$string['injectquestion:stack:0:prt1answertest_1'] = 'AlgEquiv';
+$string['injectquestion:stack:0:prt1sans_1'] = 'counter';
+$string['injectquestion:stack:0:prt1tans_1'] = '4';
+$string['injectquestion:stack:0:prt1truefeedback_1editable'] = '
+    <p>Aussage 1 {@ta[1][2]@}. {@fb[1]@} <br>
+    Aussage 2 {@ta[2][2]@}. {@fb[2]@} <br>
+    Aussage 3 {@ta[3][2]@}. {@fb[3]@} <br>
+    Aussage 4 {@ta[4][2]@}. {@fb[4]@} <br>
+    Aussage 5 {@ta[5][2]@}.</p>
+    <p style="text-align: left;">Es gibt nur einen Fehler bei Aussage {@list2[1]@}. <br> </p>
+';
+$string['injectquestion:stack:0:prt1falsefeedback_1editable'] = '
+    <p style="text-align: left;">Aussage 1 {@ta[1][2]@}. {@fb[1]@} <br>
+    Aussage 2 {@ta[2][2]@}. {@fb[2]@} <br>
+    Aussage 3 {@ta[3][2]@}. {@fb[3]@} <br>
+    Aussage 4 {@ta[4][2]@}. {@fb[4]@} <br>
+    Aussage 5 {@ta[5][2]@}.</p>
+    <p style="text-align: left;">Es gibt leider mehr als einen Fehler, insgesamt {@5-counter@} bei den Aussagen {@sort(list2)@}!! <br> </p>';
+$string['injectquestion:stack:0:prt1truescore_1'] = '0.5';
+$string['injectquestion:stack:0:prt1falsescore_1'] = '0';
+$string['injectquestion:stack:0:questionnote'] = 'zufall';
+$string['injectquestion:stack:0:questionvariables'] = '
     /*ai steht für ite Aussage, vi steht für iter Wahrheitswert, fbi steht für ites Feedback.
     Bei nur einer Aussage, braucht nur der zweite Eintrag in txti gelöscht werden, vi kann direkt auf true oder false gesetzt werden! */
     txt1: [ " Aussage 1A", " Aussage 1B"];
@@ -109,19 +156,18 @@ $string['injectquestion:stack:questionvariables'] = '
     fb: [feedback[k1],feedback[k2],feedback[k3],feedback[k4]]
     tans1: mcq_correct(ta);
 ';
-$string['injectquestion:stack:variantsselectionseed'] = '';
-$string['injectquestion:stack:questiontexteditable'] = '
+$string['injectquestion:stack:0:questiontexteditable'] = '
     <p></p>
     <p>Wähle die richtigen Aussagen:</p>
     <p>[[input:ans1]] [[validation:ans1]]</p>
     <p>{@tans1@}</p>
     <p style="font-size:0.6em;text-align:right;">Erstellt von: (yourname)</p>
 ';
-$string['injectquestion:stack:defaultmark'] = '1';
-$string['injectquestion:stack:specificfeedbackeditable'] = '[[feedback:prt1]]';
-$string['injectquestion:stack:penalty'] = '0.1';
-$string['injectquestion:stack:generalfeedbackeditable'] = '';
-$string['injectquestion:stack:questionnote'] = 'zufall';
+$string['injectquestion:stack:0:specificfeedbackeditable'] = '[[feedback:prt1]]';
+$string['injectquestion:stack:0:variantsselectionseed'] = '';
+
+
+
 
 $string['injecttext:page-question-type-multianswer'] = '
     <p>Ein Lückentext stellt einen Text in einem speziellen Moodle-Format zur Verfügung, in dem die Teilnehmer/innen verschiedene Fragen beantworten müssen. Die Fragen sind in den Text eingebaut und können vom Typ Multiple-Choice-Frage, Kurzantwort oder numerische Frage sein.</p>
@@ -145,7 +191,7 @@ $string['injecttext:page-question-type-ddwtos'] = '
     ';
 $string['injecttext:page-question-type-stack'] = '
     <p>Mehr Informationen über den STACK Fragetyp finden Sie in der <a href="https://docs.moodle.org/311/en/STACK_question_type" target="_blank">Moodle Dokumentation</a>.</p>
-    <p>Wir haben für Sie zur Hilfestellung eine Vorlage für diesen Fragetyp vorbereitet. <a href="#" onclick="require([\'local_experience/main\'], function(M) { M.injectQuestionTemplate(\'stack\') }); return false;" class="btn btn-secondary"><i class="fa fa-plus-circle"></i> Vorlage einfügen</a></p>
+    <p>Wir haben für Sie zur Hilfestellung eine Vorlage für diesen Fragetyp vorbereitet. <a href="#" onclick="require([\'local_experience/main\'], function(M) { M.injectQuestionTemplate(\'stack\', 0) }); return false;" class="btn btn-secondary"><i class="fa fa-plus-circle"></i> Vorlage einfügen</a></p>
     ';
 $string['injecttext:page-question-type-wordselect'] = '
     <p>Dieser Fragentyp wurde entwickelt, damit Lernende Text basierend auf bestimmten Kriterien auswählen können. Beispielsweise "Wähle das Verb im folgenden Satz". Vom Konzept her ist es ähnlich einer Multiple Choice Frage, wobei die Lernenden antworten, indem sie das richtige Wort auswählen. Dazu müssen die Lernenden einfach ein Wort anklicken.</p>

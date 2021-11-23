@@ -2,7 +2,7 @@ define(
     ['jquery', 'core/ajax', 'core/notification', 'core/str', 'core/templates', 'core/url', 'core/modal_events', 'core/modal_factory'],
     function($, AJAX, NOTIFICATION, STR, TEMPLATES, URL, ModalEvents, ModalFactory) {
     return {
-        debug: 0,
+        debug: false,
         /**
          * Apply rules to page.
          */
@@ -85,25 +85,61 @@ define(
                 mediaLeft.html('<i class="fa fa-icon fa-toggle-off" style="font-size: 18px;"></i>');
             }
         },
-        injectQuestionTemplate: function(qtype) {
+        injectQuestionTemplate: function(qtype, tid) {
+            if (this.debug) console.log('local_experience/main::injectQuestionTemplate(qtype, tid)', qtype, tid);
+            var M = this;
             if (qtype == 'stack') {
-                var strs = [
-                    'name', 'questionvariables', 'variantselectionseed', 'questiontexteditable',
-                    'defaultmark', 'specificfeedbackeditable', 'penalty', 'generalfeedbackeditable',
-                    'questionnote',
+                var metastrs = [
+                    { 'key': 'injectquestion:stack:_ids', 'component': 'local_experience' },
+                    { 'key': 'injectquestion:stack:_fields', 'component': 'local_experience' },
                 ];
-                var getstrs = [];
-                strs.forEach(function(key) {
-                    getstrs.push({'key' : 'injectquestion:' + qtype + ':' + key, 'component': 'local_experience' });
-                });
-                STR.get_strings(getstrs).done(
-                    function(s) {
-                        strs.forEach(function(key,index) {
-                            console.log(key,index);
-                            var target = $('form[action="question.php"] #id_' + key);
-                            console.log('target', target);
-                            $(target).val(s[index]);
+                if (M.debug) console.log('metastrs', metastrs);
+
+                STR.get_strings(metastrs).done(
+                    function(meta_s) {
+                        var ids = $.map(meta_s[0].split(','), Number);
+                        var strs = meta_s[1].split(',');
+
+                        if (M.debug) console.log('valid ids are ', ids);
+
+                        if (ids.indexOf(tid) == -1) {
+                            alert('Invalid template id');
+                            return;
+                        }
+                        var getstrs = [];
+
+                        strs.forEach(function(qkey) {
+                            getstrs.push({'key' : 'injectquestion:stack:' + tid + ':' + qkey, 'component': 'local_experience' });
                         });
+
+                        if (M.debug) console.log('getstrs', getstrs);
+                        STR.get_strings(getstrs).done(
+                            function(s) {
+                                getstrs.forEach(function(keyitem,index) {
+                                    var key = keyitem.key;
+                                    var fkey = strs[index];
+                                    var val = s[index];
+                                    var targid = 'form[action="question.php"] #id_' + fkey;
+                                    var target = $(targid);
+                                    if (target.is("select")) {
+                                        $(targid + ' option[selected]').removeAttr('selected');
+                                        if (M.debug) console.log('set ' + targid + ' option[value="' + val + '"] to selected');
+                                        $(targid + ' option[value="' + val + '"]')
+                                            .attr('selected', 'selected')
+                                            .prop('selected', true);
+                                    } else if (target.is('textarea') || target.is('div')) {
+                                        if (M.debug) console.log('set ' + targid + ' to ', val);
+                                        $(target).html(val);
+                                    } else if (target.is("[type=checkbox]")) {
+                                        if (M.debug) console.log('set ' + targid + ' to ', val);
+                                        $(target).prop('checked', (val == 1));
+                                    } else {
+                                        if (M.debug) console.log('set ' + targid + ' to ', val);
+                                        target.val(val);
+                                    }
+                                });
+                            }
+                        ).fail(NOTIFICATION.exception);
                     }
                 ).fail(NOTIFICATION.exception);
             }
