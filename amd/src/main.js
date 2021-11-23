@@ -129,7 +129,7 @@ define(
                                             .prop('selected', true);
                                     } else if (target.is('textarea') || target.is('div')) {
                                         if (M.debug) console.log('set ' + targid + ' to ', val);
-                                        $(target).html(val);
+                                        $(target).html(val.trim());
                                     } else if (target.is("[type=checkbox]")) {
                                         if (M.debug) console.log('set ' + targid + ' to ', val);
                                         $(target).prop('checked', (val == 1));

@@ -57,7 +57,7 @@ $string['injectquestion:stack:0:ans1modelans'] = 'ta';
 $string['injectquestion:stack:0:ans1mustverify'] = '0';
 $string['injectquestion:stack:0:defaultmark'] = '1';
 $string['injectquestion:stack:0:generalfeedbackeditable'] = '';
-$string['injectquestion:stack:0:name'] = 'Template MC with Feedback and subpoints';
+$string['injectquestion:stack:0:name'] = 'Template MC with feedback and subpoints';
 $string['injectquestion:stack:0:penalty'] = '0.1';
 $string['injectquestion:stack:0:prt1feedbackvariables'] = '
     ans2: makelist(if member(i,ans1) then 1 else 0, i,1,5);
@@ -199,7 +199,7 @@ $string['injecttext:page-question-type-ddwtos'] = '
     ';
 $string['injecttext:page-question-type-stack'] = '
     <p>Please find more information about the STACK question type at the <a href="https://docs.moodle.org/311/en/STACK_question_type" target="_blank">Moodle Docs</a>.</p>
-    <p>We prepared a template question for you, that you can enable simply by clicking on <a href="#" onclick="require([\'local_experience/main\'], function(M) { M.injectQuestionTemplate(\'stack\', 0) }); return false;" class="btn btn-secondary"><i class="fa fa-plus-circle"></i> insert question template</a></p>
+    <p>We prepared a template question for you, that you can enable simply by clicking on <a href="#" onclick="require([\'local_experience/main\'], function(M) { M.injectQuestionTemplate(\'stack\', 0) }); return false;" class="btn btn-secondary"><i class="fa fa-plus-circle"></i> insert template for MC with feedback and subpoints</a></p>
     ';
 $string['injecttext:page-question-type-wordselect'] = '
     <p>This question type is designed to ask students to select text according to some criteria. For example "select the verb in the following sentence". Conceptually this is a little like a multiple choice question type (with multiple selectable options). The student responds by clicking on words to select them, and clicking a second time to unselect them.</p>

@@ -191,7 +191,7 @@ $string['injecttext:page-question-type-ddwtos'] = '
     ';
 $string['injecttext:page-question-type-stack'] = '
     <p>Mehr Informationen über den STACK Fragetyp finden Sie in der <a href="https://docs.moodle.org/311/en/STACK_question_type" target="_blank">Moodle Dokumentation</a>.</p>
-    <p>Wir haben für Sie zur Hilfestellung eine Vorlage für diesen Fragetyp vorbereitet. <a href="#" onclick="require([\'local_experience/main\'], function(M) { M.injectQuestionTemplate(\'stack\', 0) }); return false;" class="btn btn-secondary"><i class="fa fa-plus-circle"></i> Vorlage einfügen</a></p>
+    <p>Wir haben für Sie zur Hilfestellung eine Vorlage für diesen Fragetyp vorbereitet.<br /><a href="#" onclick="require([\'local_experience/main\'], function(M) { M.injectQuestionTemplate(\'stack\', 0) }); return false;" class="btn btn-secondary"><i class="fa fa-plus-circle"></i> Vorlage MC mit Feedback und Teilpunkten einfügen</a></p>
     ';
 $string['injecttext:page-question-type-wordselect'] = '
     <p>Dieser Fragentyp wurde entwickelt, damit Lernende Text basierend auf bestimmten Kriterien auswählen können. Beispielsweise "Wähle das Verb im folgenden Satz". Vom Konzept her ist es ähnlich einer Multiple Choice Frage, wobei die Lernenden antworten, indem sie das richtige Wort auswählen. Dazu müssen die Lernenden einfach ein Wort anklicken.</p>
