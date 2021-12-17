@@ -85,8 +85,16 @@ define(
                 mediaLeft.html('<i class="fa fa-icon fa-toggle-off" style="font-size: 18px;"></i>');
             }
         },
-        injectQuestionTemplate: function(qtype, tid) {
-            if (this.debug) console.log('local_experience/main::injectQuestionTemplate(qtype, tid)', qtype, tid);
+        /**
+         * Inject the template of a particular question.
+         * @param qtype question type
+         * @param tid template id
+         * @param post_exec true if this is the post_exec call (prevents calling it again).
+         */
+        injectQuestionTemplate: function(qtype, tid, post_exec) {
+            tid = parseInt(tid);
+            if (typeof(post_exec) === 'undefined') post_exec = false;
+            if (this.debug) console.log('local_experience/main::injectQuestionTemplate(qtype, tid, post_exec)', qtype, tid, post_exec);
             var M = this;
             if (qtype == 'stack') {
                 var metastrs = [
@@ -115,10 +123,15 @@ define(
                         if (M.debug) console.log('getstrs', getstrs);
                         STR.get_strings(getstrs).done(
                             function(s) {
+                                var post_exec_str = '';
                                 getstrs.forEach(function(keyitem,index) {
                                     var key = keyitem.key;
                                     var fkey = strs[index];
                                     var val = s[index];
+                                    if (fkey == 'post_exec') {
+                                        post_exec_str = val;
+                                        return; // means "continue"
+                                    }
                                     var targid = 'form[action="question.php"] #id_' + fkey;
                                     var target = $(targid);
                                     if (target.is("select")) {
@@ -138,6 +151,9 @@ define(
                                         target.val(val);
                                     }
                                 });
+                                if (!post_exec && post_exec_str != '') {
+                                    eval(post_exec_str);
+                                }
                             }
                         ).fail(NOTIFICATION.exception);
                     }

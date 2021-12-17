@@ -40,16 +40,18 @@ $string['auto_set_completion_add_days_dnd:description'] = 'Setze bei Drag&Drop U
 $string['experience:cantrigger'] = 'Kann Erfahrungslevel wählen';
 
 $string['injectquestion:stack:_ids'] = '0';
-$string['injectquestion:stack:_fields'] = 'ans1type,ans1modelans,ans1mustverify,defaultmark,generalfeedbackeditable,name,penalty,prt1answertest_0,prt1feedbackvariables,prt1sans_0,prt1tans_0,prt1truefeedback_0editable,prt1answertest_1,prt1sans_1,prt1tans_1,prt1truefeedback_1editable,prt1falsefeedback_1editable,prt1truescore_1,prt1falsescore_1,questionnote,questionvariables,questiontexteditable,specificfeedbackeditable,variantsselectionseed';
+$string['injectquestion:stack:_fields'] = 'ans1type,ans1modelans,ans1mustverify,ans1showvalidation,defaultmark,generalfeedbackeditable,name,penalty,post_exec,prt1answertest_0,prt1feedbackvariables,prt1sans_0,prt1tans_0,prt1truefeedback_0editable,prt1answertest_1,prt1sans_1,prt1tans_1,prt1truefeedback_1editable,prt1falsefeedback_1editable,prt1truescore_1,prt1falsescore_1,questionnote,questionvariables,questiontexteditable,specificfeedbackeditable,variantsselectionseed';
 
 $string['injectquestion:stack:0:ans1type'] = 'checkbox';
 $string['injectquestion:stack:0:ans1modelans'] = 'ta';
 $string['injectquestion:stack:0:ans1mustverify'] = '0';
+$string['injectquestion:stack:0:ans1showvalidation'] = '0';
 $string['injectquestion:stack:0:defaultmark'] = '1';
 $string['injectquestion:stack:0:generalfeedbackeditable'] = '';
 $string['injectquestion:stack:0:name'] = 'Vorlage für eine dynamische Multiple Choice Aufgabe';
 
 $string['injectquestion:stack:0:penalty'] = '0.1';
+$string['injectquestion:stack:0:post_exec'] = '$(\'#id_prt1nodeadd\').closest(\'form\').append($(\'<input type="hidden" name="local_experience_injectquestion" value="stack:0" />\'));$(\'#id_prt1nodeadd\').trigger(\'click\');';
 $string['injectquestion:stack:0:prt1feedbackvariables'] = '
 ans2: makelist(if member(i,ans1) then 1 else 0, i,1,5);
 tans2: makelist(if member(i,tans1) then 1 else 0, i,1,5);
@@ -97,6 +99,7 @@ ai steht für ite Aussage, vi steht für iter Wahrheitswert, fbi steht für ites
 - Aussagen können auch mit Formeln in Latex kombiniert werden. Latex startet mit \\( und endet mit \\). Alle Latexformatierungen müssen mit \\ und nicht mit \ geschrieben werden.
 - Es ist auch möglich, Maximavariablen in die Aussagen zu verpacken. Wird eine Maximavariable n mit  einer Zufallszahl belegt, kann der Ausdruck: sconcat(" Österreich hat ",n," Einwohner.") verwendet werden. sconcat baut Strings zusammen.
 - Standardeinstellung ist: bei einem Fehler 50%, ab 2 Fehlern 0%!!
+- nach dem Testen den Eintrag {@tans1@} im Fragetext löschen!!
 */
 
 txt1: [ " Aussage 1A", " Aussage 1B"];

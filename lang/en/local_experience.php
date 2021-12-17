@@ -50,15 +50,17 @@ $string['c_r'] = 'Relation conditions <=> rules';
 $string['experience:cantrigger'] = 'Can trigger experience';
 
 $string['injectquestion:stack:_ids'] = '0';
-$string['injectquestion:stack:_fields'] = 'ans1type,ans1modelans,ans1mustverify,defaultmark,generalfeedbackeditable,name,penalty,prt1answertest_0,prt1feedbackvariables,prt1sans_0,prt1tans_0,prt1truefeedback_0editable,prt1answertest_1,prt1sans_1,prt1tans_1,prt1truefeedback_1editable,prt1falsefeedback_1editable,prt1truescore_1,prt1falsescore_1,questionnote,questionvariables,questiontexteditable,specificfeedbackeditable,variantsselectionseed';
+$string['injectquestion:stack:_fields'] = 'ans1type,ans1modelans,ans1mustverify,ans1showvalidation,defaultmark,generalfeedbackeditable,name,penalty,prt1answertest_0,prt1feedbackvariables,prt1sans_0,prt1tans_0,prt1truefeedback_0editable,prt1answertest_1,prt1sans_1,prt1tans_1,prt1truefeedback_1editable,prt1falsefeedback_1editable,prt1truescore_1,prt1falsescore_1,questionnote,questionvariables,questiontexteditable,specificfeedbackeditable,variantsselectionseed';
 
 $string['injectquestion:stack:0:ans1type'] = 'checkbox';
 $string['injectquestion:stack:0:ans1modelans'] = 'ta';
 $string['injectquestion:stack:0:ans1mustverify'] = '0';
+$string['injectquestion:stack:0:ans1showvalidation'] = '0';
 $string['injectquestion:stack:0:defaultmark'] = '1';
 $string['injectquestion:stack:0:generalfeedbackeditable'] = '';
 $string['injectquestion:stack:0:name'] = 'Template MC with feedback and subpoints';
 $string['injectquestion:stack:0:penalty'] = '0.1';
+$string['injectquestion:stack:0:post_exec'] = '$(\'#id_prt1nodeadd\').closest(\'form\').append($(\'<input type="hidden" name="local_experience_injectquestion" value="stack:0" />\'));$(\'#id_prt1nodeadd\').trigger(\'click\');';
 $string['injectquestion:stack:0:prt1feedbackvariables'] = '
 ans2: makelist(if member(i,ans1) then 1 else 0, i,1,5);
 tans2: makelist(if member(i,tans1) then 1 else 0, i,1,5);
@@ -106,6 +108,7 @@ IMPORTANT:
 - Statements can be combined with formulas from Latex. Latex starts with \\( and ends with \\). All Latexformulas must be escaped with \\ and not \.
 - It is further possible to add Maximavariables to statements. If a Maximavariable n is assigned with a random number, the function: sconcat(" Austria has ",n," citizens.") can be used. sconcat joins Strings.
 - Default setting is: one error 50%, more errors 0%!!
+- Delete entry of {@tans1@} after testing!!
 */
 txt1: [ " Statement 1A", " Statement 1B"];
 n1: rand_with_step(1,length(txt1),1);
