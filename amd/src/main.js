@@ -93,7 +93,7 @@ define(
          */
         injectQuestionTemplate: function(qtype, tid, post_exec) {
             tid = parseInt(tid);
-            if (typeof(post_exec) === 'undefined') post_exec = false;
+            if (typeof(post_exec) === 'undefined') post_exec = 'post_exec_0';
             if (this.debug) console.log('local_experience/main::injectQuestionTemplate(qtype, tid, post_exec)', qtype, tid, post_exec);
             var M = this;
             if (qtype == 'stack') {
@@ -128,8 +128,10 @@ define(
                                     var key = keyitem.key;
                                     var fkey = strs[index];
                                     var val = s[index];
-                                    if (fkey == 'post_exec') {
-                                        post_exec_str = val;
+                                    if (fkey.substring(0, 10) == 'post_exec_') {
+                                        if (fkey == post_exec) {
+                                            post_exec_str = val;
+                                        }
                                         return; // means "continue"
                                     }
                                     var targid = 'form[action="question.php"] #id_' + fkey;
@@ -151,7 +153,7 @@ define(
                                         target.val(val);
                                     }
                                 });
-                                if (!post_exec && post_exec_str != '') {
+                                if (post_exec_str != '') {
                                     eval(post_exec_str);
                                 }
                             }

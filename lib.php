@@ -112,8 +112,8 @@ function local_experience_before_standard_html_head() {
     $injectquestion = optional_param('local_experience_injectquestion', '', PARAM_TEXT);
     if (!empty($injectquestion)) {
         $x = explode(':', $injectquestion);
-        if (count($x) == 2) {
-            $PAGE->requires->js_call_amd("local_experience/main", "injectQuestionTemplate", array($x[0], $x[1], true));
+        if (count($x) == 3 && get_string_manager()->string_exists("injectquestion:$injectquestion", 'local_experience')) {
+            $PAGE->requires->js_call_amd("local_experience/main", "injectQuestionTemplate", array($x[0], $x[1], $x[2]));
         }
     }
 
