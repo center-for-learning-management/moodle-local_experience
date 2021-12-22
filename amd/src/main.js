@@ -87,9 +87,9 @@ define(
         },
         /**
          * Inject the template of a particular question.
-         * @param qtype question type
-         * @param tid template id
-         * @param post_exec true if this is the post_exec call (prevents calling it again).
+         * @param qtype question type.
+         * @param tid template id.
+         * @param post_exec lang string that contains javascript to be executed.
          */
         injectQuestionTemplate: function(qtype, tid, post_exec) {
             tid = parseInt(tid);
