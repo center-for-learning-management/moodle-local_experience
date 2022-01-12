@@ -39,6 +39,9 @@ $string['auto_set_completion_add_days_dnd:description'] = 'Setze bei Drag&Drop U
 
 $string['experience:cantrigger'] = 'Kann Erfahrungslevel wählen';
 
+$string['injectquestion:pleasewait'] = 'Die Vorlage wird geladen, bitte warten ...';
+$string['injectquestion:pleasewait:subtext'] = 'Möglicherweise wird die Seite mehrmals neu geladen, um alle Einstellungen zu übernehmen.';
+
 $string['injectquestion:stack:_ids'] = '0';
 $string['injectquestion:stack:_fields'] = 'ans1type,ans1modelans,ans1mustverify,ans1showvalidation,defaultmark,generalfeedbackeditable,name,penalty,prt1answertest_0,prt1feedbackvariables,prt1sans_0,prt1tans_0,prt1truefeedback_0editable,prt1answertest_1,prt1sans_1,prt1tans_1,prt1truefeedback_1editable,prt1falsefeedback_1editable,prt1truescore_1,prt1falsescore_1,questionnote,questionvariables,questiontexteditable,specificfeedbackeditable,variantsselectionseed,post_exec_0,post_exec_1';
 

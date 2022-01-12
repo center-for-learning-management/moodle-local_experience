@@ -45,7 +45,9 @@ function local_experience_before_http_headers() {
 }
 
 function local_experience_before_standard_html_head() {
-    global $CFG, $DB, $PAGE;
+    global $CFG, $DB, $PAGE, $OUTPUT;
+
+    $html = '';
 
     if (strpos($_SERVER["SCRIPT_FILENAME"], '/course/modedit.php') > 0) {
         $add = optional_param('add', '', PARAM_ALPHANUM);
@@ -113,11 +115,12 @@ function local_experience_before_standard_html_head() {
     if (!empty($injectquestion)) {
         $x = explode(':', $injectquestion);
         if (count($x) == 3 && get_string_manager()->string_exists("injectquestion:$injectquestion", 'local_experience')) {
+            $html .= $OUTPUT->render_from_template('local_experience/overlay', []);
             $PAGE->requires->js_call_amd("local_experience/main", "injectQuestionTemplate", array($x[0], $x[1], $x[2]));
         }
     }
 
-    return "";
+    return $html;
 }
 
 function local_experience_before_standard_top_of_body_html() {

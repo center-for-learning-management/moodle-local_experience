@@ -1,6 +1,6 @@
 define(
-    ['jquery', 'core/ajax', 'core/notification', 'core/str', 'core/templates', 'core/url', 'core/modal_events', 'core/modal_factory'],
-    function($, AJAX, NOTIFICATION, STR, TEMPLATES, URL, ModalEvents, ModalFactory) {
+    ['jquery', 'core/ajax', 'core/config', 'core/notification', 'core/str', 'core/templates', 'core/url', 'core/modal_events', 'core/modal_factory'],
+    function($, AJAX, CFG, NOTIFICATION, STR, TEMPLATES, URL, ModalEvents, ModalFactory) {
     return {
         debug: false,
         /**
@@ -86,6 +86,23 @@ define(
             }
         },
         /**
+         * Add an overlay to prevent user interaction.
+         */
+        injectOverlayAdd: function() {
+            if ($('#local_experience_injectquestionoverlay').length > 0) return;
+
+            TEMPLATES.render('local_experience/overlay', {})
+                .done(function(html, js) {
+                    TEMPLATES.appendNodeContents('body', html, js);
+                }).fail(NOTIFICATION.exception);
+        },
+        /**
+         * Remove the overlay that prevents user interaction.
+         */
+        injectOverlayRemove: function() {
+            $('#local_experience_injectquestion_overlay').remove();
+        },
+        /**
          * Inject the template of a particular question.
          * @param qtype question type.
          * @param tid template id.
@@ -97,6 +114,7 @@ define(
             if (this.debug) console.log('local_experience/main::injectQuestionTemplate(qtype, tid, post_exec)', qtype, tid, post_exec);
             var M = this;
             if (qtype == 'stack') {
+                M.injectOverlayAdd();
                 var metastrs = [
                     { 'key': 'injectquestion:stack:_ids', 'component': 'local_experience' },
                     { 'key': 'injectquestion:stack:_fields', 'component': 'local_experience' },
@@ -155,6 +173,8 @@ define(
                                 });
                                 if (post_exec_str != '') {
                                     eval(post_exec_str);
+                                } else {
+                                    M.injectOverlayRemove();
                                 }
                             }
                         ).fail(NOTIFICATION.exception);
