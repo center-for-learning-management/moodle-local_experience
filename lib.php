@@ -114,7 +114,7 @@ function local_experience_before_standard_html_head() {
     $injectquestion = optional_param('local_experience_injectquestion', '', PARAM_TEXT);
     if (!empty($injectquestion)) {
         $x = explode(':', $injectquestion);
-        if (count($x) == 3 && get_string_manager()->string_exists("injectquestion:$injectquestion", 'local_experience')) {
+        if (count($x) == 3) {
             $html .= $OUTPUT->render_from_template('local_experience/overlay', []);
             $PAGE->requires->js_call_amd("local_experience/main", "injectQuestionTemplate", array($x[0], $x[1], $x[2]));
         }

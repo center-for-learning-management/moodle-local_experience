@@ -2,7 +2,7 @@ define(
     ['jquery', 'core/ajax', 'core/config', 'core/notification', 'core/str', 'core/templates', 'core/url', 'core/modal_events', 'core/modal_factory'],
     function($, AJAX, CFG, NOTIFICATION, STR, TEMPLATES, URL, ModalEvents, ModalFactory) {
     return {
-        debug: false,
+        debug: true,
         /**
          * Apply rules to page.
          */
@@ -89,7 +89,7 @@ define(
          * Add an overlay to prevent user interaction.
          */
         injectOverlayAdd: function() {
-            if ($('#local_experience_injectquestionoverlay').length > 0) return;
+            if ($('#local_experience_injectquestion_overlay').length > 0) return;
 
             TEMPLATES.render('local_experience/overlay', {})
                 .done(function(html, js) {
@@ -114,6 +114,11 @@ define(
             if (this.debug) console.log('local_experience/main::injectQuestionTemplate(qtype, tid, post_exec)', qtype, tid, post_exec);
             var M = this;
             if (qtype == 'stack') {
+                var x = post_exec.split('_');
+                var post_exec_id = parseInt(x[x.length-1]);
+                $('#id_prt1nodeadd').closest('form').append(
+                    $('<input type="hidden" name="local_experience_injectquestion" value="stack:' + tid + ':post_exec_' + (post_exec_id + 1) + '" />')
+                );
                 M.injectOverlayAdd();
                 var metastrs = [
                     { 'key': 'injectquestion:stack:_ids', 'component': 'local_experience' },
