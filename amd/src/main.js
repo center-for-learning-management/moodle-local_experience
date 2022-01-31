@@ -2,7 +2,7 @@ define(
     ['jquery', 'core/ajax', 'core/config', 'core/notification', 'core/str', 'core/templates', 'core/url', 'core/modal_events', 'core/modal_factory'],
     function($, AJAX, CFG, NOTIFICATION, STR, TEMPLATES, URL, ModalEvents, ModalFactory) {
     return {
-        debug: true,
+        debug: false,
         /**
          * Apply rules to page.
          */
