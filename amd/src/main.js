@@ -175,6 +175,12 @@ define(
                                         if (M.debug) console.log('set ' + targid + ' to ', val);
                                         target.val(val);
                                     }
+
+                                    if (target.is("[role=textbox]")) {
+                                        var subtargid = targid.substring(0, targid.length - 'editable'.length);
+                                        console.log('Setting subtargid ', subtargid);
+                                        $(subtargid).html(val.trim());
+                                    }
                                 });
                                 if (post_exec_str != '') {
                                     eval(post_exec_str);
