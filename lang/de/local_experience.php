@@ -55,7 +55,7 @@ $string['injectquestion:stack:0:name'] = 'Vorlage für eine dynamische Multiple 
 
 $string['injectquestion:stack:0:penalty'] = '0.1';
 $string['injectquestion:stack:0:post_exec_0'] = '$(\'#id_prt1nodeadd\').trigger(\'click\');';
-$string['injectquestion:stack:0:post_exec_1'] = '$(\'#id_prt1falsenextnode_0\').val(1); $(\'#id_updatebutton\').click();';
+$string['injectquestion:stack:0:post_exec_1'] = '$(\'#id_prt1falsenextnode_0\').val(1); $(\'#id_verify\').click();';
 $string['injectquestion:stack:0:prt1feedbackvariables'] = '
 ans2: makelist(if member(i,ans1) then 1 else 0, i,1,5);
 tans2: makelist(if member(i,tans1) then 1 else 0, i,1,5);
