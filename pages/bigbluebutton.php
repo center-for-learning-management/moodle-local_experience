@@ -33,7 +33,7 @@ $PAGE->set_heading('Big Blue Button');
 $PAGE->set_title('Big Blue Button');
 
 echo $OUTPUT->header();
-$params = (object) array(
+$params = (object)array(
     'wwwroot' => $CFG->wwwroot,
 );
 echo '<p>' . get_string('injecttext:page-mod-bigbluebuttonbn-mod', 'local_experience', $params) . '</p>';

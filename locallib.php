@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die;
 class lib {
     public static function addrule() {
         global $DB;
-        $rule = (object) array(
+        $rule = (object)array(
             'name' => '',
             'sort' => 99,
             'elementstohide' => '',
@@ -37,9 +37,10 @@ class lib {
         $rule->id = $DB->insert_record('local_experience_rules', $rule);
         return $rule;
     }
+
     public static function addcondition() {
         global $DB;
-        $condition = (object) array(
+        $condition = (object)array(
             'name' => '',
             'patternscriptnames' => '',
             'patternparameters' => '',

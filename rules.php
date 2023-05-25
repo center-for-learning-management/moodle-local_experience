@@ -55,7 +55,7 @@ if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
     $ids = array_keys($names);
     $success = array();
     $failed = array();
-    foreach ($ids AS $id) {
+    foreach ($ids as $id) {
         if (empty($names[$id])) {
             $DB->delete_records('local_experience_c_r', array('ruleid' => $id));
             $DB->delete_records('local_experience_rules', array('id' => $id));
@@ -77,7 +77,7 @@ if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
     // @todo show messages.
     echo $OUTPUT->render_from_template('local_experience/alert', array(
         'content' => 'ok',
-        'type' => 'success'
+        'type' => 'success',
     ));
 }
 
