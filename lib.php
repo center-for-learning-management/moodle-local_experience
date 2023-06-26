@@ -121,6 +121,14 @@ function local_experience_before_standard_html_head() {
         }
     }
 
+    $html .= $OUTPUT->render_from_template('local_experience/html_head', [
+        'experience_switch' => [
+            'cantrigger' => has_capability('local/experience:cantrigger', $PAGE->context),
+            'checked' => get_user_preferences('local_experience_level', 0) == 1,
+        ],
+    ]);
+
+
     return $html;
 }
 
@@ -138,6 +146,7 @@ function local_experience_before_standard_top_of_body_html() {
     return $html;
 }
 
+/*
 function local_experience_extend_navigation($navigation) {
     global $PAGE;
     if (has_capability('local/experience:cantrigger', $PAGE->context)) {
@@ -152,6 +161,7 @@ function local_experience_extend_navigation($navigation) {
         $PAGE->requires->js_call_amd("local_experience/main", "enablePanelTrigger", array($level));
     }
 }
+*/
 
 /**
  * Extend navigation.

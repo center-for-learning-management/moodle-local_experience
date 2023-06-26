@@ -1,0 +1,37 @@
+<script>
+        {{#js}}
+        require(['jquery', 'local_experience/main'], function ($, local_experience) {
+            {{#experience_switch.cantrigger}}
+                var $button = $(
+                    // '<form action="http://localhost/eduvidual-src-t4/editmode.php" method="post" class="d-flex align-items-center editmode-switch-form">' +
+                    '<div class="d-flex align-items-center editmode-switch-form">' +
+                    '<div class="input-group">' +
+                    '<label class="mr-2 mb-0 " for="{{uniqid}}-editingswitch">' +
+                    '{{#str}} advanced_options, local_experience {{/str}}' +
+                    '</label>' +
+                    '<div class="custom-control custom-switch">' +
+                    '<input type="checkbox" name="setmode" class="custom-control-input" id="{{uniqid}}-editingswitch" {{#experience_switch.checked}}checked{{/experience_switch.checked}}>' +
+                    '<span class="custom-control-label">&nbsp;</span>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+                    // '</form>'
+                );
+
+                $button.find(':checkbox').click(function(){
+                    local_experience.switchExperience($(this).is(':checked'));
+                });
+
+                if ($('#usernavigation .editmode-switch-form').length) {
+                    // insert before "edit mode" button
+                    $button.css('margin-right', '15px');
+                    $button.insertBefore('#usernavigation .editmode-switch-form');
+                } else {
+                    // or insert at the end of the navigation
+                    $button.appendTo('#usernavigation');
+                }
+
+            {{/experience_switch.cantrigger}}
+        });
+        {{/js}}
+</script>
