@@ -121,12 +121,12 @@ function local_experience_before_standard_html_head() {
         }
     }
 
-    $html .= $OUTPUT->render_from_template('local_experience/html_head', [
-        'experience_switch' => [
-            'cantrigger' => has_capability('local/experience:cantrigger', $PAGE->context),
-            'checked' => get_user_preferences('local_experience_level', 0) == 1,
-        ],
-    ]);
+    // $html .= $OUTPUT->render_from_template('local_experience/html_head', [
+    //     'experience_switch' => [
+    //         'cantrigger' => has_capability('local/experience:cantrigger', $PAGE->context),
+    //         'checked' => get_user_preferences('local_experience_level', 0) == 1,
+    //     ],
+    // ]);
 
 
     return $html;
