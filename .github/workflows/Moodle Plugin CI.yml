@@ -136,7 +136,7 @@ jobs:
         run: |
           curl -sS https://raw.githubusercontent.com/center-for-learning-management/moodle-psalm-plugin/main/psalm-plugin.xml -o ci/psalm-plugin.xml
           curl -sS https://raw.githubusercontent.com/center-for-learning-management/moodle-psalm-plugin/main/issueHandlers.xml -o ci/issueHandlers.xml
-          psalm --config=psalm-plugin.xml --no-diff --show-info=true $(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/
+          psalm --config=ci/psalm-plugin.xml --no-diff --show-info=true $(echo ${GITHUB_REPOSITORY}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/
           
       - name: Get changed files
         if: ${{ !cancelled() }}
