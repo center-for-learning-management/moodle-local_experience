@@ -88,7 +88,7 @@ jobs:
         if: ${{ !cancelled() }}
         run: | 
           moodle-plugin-ci phpcbf
-          rsync -avP --exclude '*' --include '*.php' . ./plugins
+          rsync -avP ${{ env.GITHUB_WORKSPACE }} ${{ env.GITHUB_WORKSPACE }}/plugins
 
       - name: Moodle PHPDoc Checker
         if: ${{ !cancelled() }}
@@ -105,10 +105,6 @@ jobs:
       - name: Mustache Lint
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci mustache
-
-      - name: Grunt
-        if: ${{ !cancelled() }}
-        run: moodle-plugin-ci grunt --max-lint-warnings 0
 
       - name: Grunt
         if: ${{ !cancelled() }}
