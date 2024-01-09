@@ -120,6 +120,8 @@ jobs:
         if: ${{ !cancelled() }}
         id: changed-files
         uses: tj-actions/changed-files@v41
+        with:
+          path: plugin
 
       - name: Create Pull Request
         if: |
