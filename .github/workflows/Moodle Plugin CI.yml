@@ -117,11 +117,18 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci grunt --max-lint-warnings 0
 
+      - name: Use Node.js 16.14.0 for grunt
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.0
+
       - name: PHP Lint --fix
         if: ${{ !cancelled() }}
         run: | 
           echo ">  find ${{ github.workspace }} -name Gruntfile.js"
           find ${{ github.workspace }} -name Gruntfile.js
+          echo ">  find ${{ github.workspace }} -name grunt"
+          find ${{ github.workspace }} -name grunt        
           echo ">  grunt --gruntfile ${{ github.workspace }}/moodle/Gruntfile.js eslint --fix ${{ github.workspace }}/plugin/"
           grunt --gruntfile ${{ github.workspace }}/moodle/Gruntfile.js eslint --fix ${{ github.workspace }}/plugin/
 
