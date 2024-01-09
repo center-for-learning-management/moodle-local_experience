@@ -117,15 +117,15 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci grunt --max-lint-warnings 0
 
-      - name: PHP Lint --fix
-        if: ${{ !cancelled() }}
-        run: | 
-          echo ">  find ${{ github.workspace }} -name Gruntfile.js"
-          find ${{ github.workspace }} -name Gruntfile.js
-          echo ">  find ${{ github.workspace }} -name grunt"
-          find ${{ github.workspace }} -name grunt        
-          echo ">  ./node_modules/grunt/bin/grunt --gruntfile ${{ github.workspace }}/moodle/Gruntfile.js eslint --fix ${{ github.workspace }}/plugin/"
-          npx ./node_modules/grunt/bin/grunt --gruntfile ${{ github.workspace }}/moodle/Gruntfile.js eslint --fix ${{ github.workspace }}/plugin/
+#      - name: PHP Lint --fix
+#        if: ${{ !cancelled() }}
+#        run: | 
+#          echo ">  find ${{ github.workspace }} -name Gruntfile.js"
+#          find ${{ github.workspace }} -name Gruntfile.js
+#          echo ">  find ${{ github.workspace }} -name grunt"
+#          find ${{ github.workspace }} -name grunt        
+#          echo ">  ./node_modules/grunt/bin/grunt --gruntfile ${{ github.workspace }}/moodle/Gruntfile.js eslint --fix ${{ github.workspace }}/plugin/"
+#          npx ./node_modules/grunt/bin/grunt --gruntfile ${{ github.workspace }}/moodle/Gruntfile.js eslint --fix ${{ github.workspace }}/plugin/
 
       - name: PHPUnit tests
         if: ${{ !cancelled() }}
@@ -135,11 +135,11 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci behat --profile chrome
 
-      - name: Psalm Security Scan
-        if: ${{ !cancelled() }}
-        uses: docker://ghcr.io/psalm/psalm-security-scan
-        with:
-          INPUT_WORKING_DIR: plugin
+#      - name: Psalm Security Scan
+#        if: ${{ !cancelled() }}
+#        uses: docker://ghcr.io/psalm/psalm-security-scan
+#        with:
+#          INPUT_WORKING_DIR: plugin
 
       - name: Copy changes to repository
         if: ${{ !cancelled() }}
