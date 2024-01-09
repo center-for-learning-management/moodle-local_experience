@@ -53,10 +53,12 @@ jobs:
       - name: Initialise moodle-plugin-ci
         run: |
           composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
-          composer require --dev klebann/moodle-psalm-plugin
+          composer config repositories.repo-name vcs https://github.com/center-for-learning-management/moodle-psalm-plugin
+          composer require --dev center-for-learning-management/moodle-psalm-plugin
           echo $(cd ci/bin; pwd) >> $GITHUB_PATH
           echo $(cd ci/vendor/bin; pwd) >> $GITHUB_PATH
           sudo locale-gen en_AU.UTF-8
+          
           ./vendor/bin/psalm-plugin enable klebann/moodle-psalm-plugin
           echo "NVM_DIR=$HOME/.nvm" >> $GITHUB_ENV
 
@@ -90,8 +92,8 @@ jobs:
         if: ${{ !cancelled() }}
         run: | 
           moodle-plugin-ci phpcbf
-          echo "Copying beautified and fixed files from ${{ github.workspace }}/moodle/$(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//|tr _ /) to ${{ github.workspace }}/plugin"
-          rsync -avP ${{ github.workspace }}/moodle/$(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//|tr _ /). ${{ github.workspace }}/plugin/.
+          echo "Copying beautified and fixed files from ${{ github.workspace }}/moodle/$(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/. to ${{ github.workspace }}/plugin/."
+          rsync -avP ${{ github.workspace }}/moodle/$(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/. ${{ github.workspace }}/plugin/.
 
       - name: Moodle PHPDoc Checker
         if: ${{ !cancelled() }}
@@ -121,6 +123,13 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci behat --profile chrome
 
+      - name: Run Psalm
+        if: ${{ !cancelled() }}
+        run: |
+          curl -sS https://raw.githubusercontent.com/center-for-learning-management/moodle-psalm-plugin/main/psalm-plugin.xml -o psalm-plugin.xml
+          curl -sS https://raw.githubusercontent.com/center-for-learning-management/moodle-psalm-plugin/main/issueHandlers.xml -o issueHandlers.xml
+          ./vendor/bin/psalm --config=psalm-plugin.xml --no-diff --show-info=true $(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/
+          
       - name: Get changed files
         if: ${{ !cancelled() }}
         id: changed-files
