@@ -31,7 +31,7 @@ require('../../config.php');
 require_once(__DIR__ . '/locallib.php');
 
 require_login();
-$PAGE->set_url(new \moodle_url('/local/experience/conditions.php', array()));
+$PAGE->set_url(new \moodle_url('/local/experience/conditions.php', []));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_heading(get_string('pluginname', 'local_experience'));
 $PAGE->set_title(get_string('pluginname', 'local_experience'));
@@ -39,11 +39,11 @@ $PAGE->requires->css('/local/experience/main.css');
 
 echo $OUTPUT->header();
 if (!is_siteadmin()) {
-    echo $OUTPUT->render_from_template('local_experience/alert', array(
+    echo $OUTPUT->render_from_template('local_experience/alert', [
         'type' => 'danger',
         'content' => get_string('access_denied', 'local_experience'),
-        'url' => new \moodle_url('/my', array()),
-    ));
+        'url' => new \moodle_url('/my', []),
+    ]);
     echo $OUTPUT->footer();
     die();
 }
@@ -53,20 +53,20 @@ if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
     $patternscriptnames = optional_param_array('patternscriptnames', '', PARAM_TEXT);
     $patternparameters = optional_param_array('patternparameters', '', PARAM_TEXT);
     $ids = array_keys($names);
-    $success = array();
-    $failed = array();
+    $success = [];
+    $failed = [];
     foreach ($ids as $id) {
         if (empty($names[$id])) {
-            $DB->delete_records('local_experience_c_r', array('conditionid' => $id));
-            $DB->delete_records('local_experience_conditions', array('id' => $id));
+            $DB->delete_records('local_experience_c_r', ['conditionid' => $id]);
+            $DB->delete_records('local_experience_conditions', ['id' => $id]);
             $success[$id] = true;
         } else {
-            $obj = (object)array(
+            $obj = (object)[
                 'id' => $id,
                 'name' => $names[$id],
                 'patternscriptnames' => $patternscriptnames[$id],
                 'patternparameters' => $patternparameters[$id],
-            );
+            ];
             if ($DB->update_record('local_experience_conditions', $obj)) {
                 $success[$id] = true;
             } else {
@@ -75,16 +75,16 @@ if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
         }
     }
     // @todo show messages.
-    echo $OUTPUT->render_from_template('local_experience/alert', array(
+    echo $OUTPUT->render_from_template('local_experience/alert', [
         'content' => 'ok',
         'type' => 'success',
-    ));
+    ]);
 }
 
 if (!empty(optional_param('addcondition', '', PARAM_ALPHANUM))) {
     lib::addcondition();
 }
 
-$conditions = array_values($DB->get_records('local_experience_conditions', array(), 'name ASC'));
-echo $OUTPUT->render_from_template('local_experience/conditions', array('conditions' => $conditions, 'wwwroot' => $CFG->wwwroot));
+$conditions = array_values($DB->get_records('local_experience_conditions', [], 'name ASC'));
+echo $OUTPUT->render_from_template('local_experience/conditions', ['conditions' => $conditions, 'wwwroot' => $CFG->wwwroot]);
 echo $OUTPUT->footer();
