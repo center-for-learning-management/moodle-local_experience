@@ -120,8 +120,8 @@ jobs:
       - name: PHP Lint --fix
         if: ${{ !cancelled() }}
         run: | 
-          echo ">  grunt eslint --fix ${{ github.workspace }}/plugin/"
-          grunt eslint --fix ${{ github.workspace }}/plugin/
+          echo ">  grunt --gruntfile ${{ github.workspace }}/Gruntfile.js eslint --fix ${{ github.workspace }}/plugin/"
+          grunt --gruntfile ${{ github.workspace }}/Gruntfile.js eslint --fix ${{ github.workspace }}/plugin/
 
       - name: PHPUnit tests
         if: ${{ !cancelled() }}
