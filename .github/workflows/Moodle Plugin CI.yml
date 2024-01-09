@@ -119,7 +119,7 @@ jobs:
       - name: Get changed files
         if: ${{ !cancelled() }}
         id: changed-files
-        uses: tj-actions/changed-files
+        uses: tj-actions/changed-files@v41
 
       - name: Create Pull Request
         if: |
