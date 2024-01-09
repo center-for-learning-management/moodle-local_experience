@@ -86,7 +86,9 @@ jobs:
 
       - name: Moodle Code Beautifier and Fixer
         if: ${{ !cancelled() }}
-        run: moodle-plugin-ci phpcbf
+        run: | 
+          moodle-plugin-ci phpcbf
+          rsync -avP --exclude '*' --include '*.php' . ./plugins
 
       - name: Moodle PHPDoc Checker
         if: ${{ !cancelled() }}
@@ -106,7 +108,11 @@ jobs:
 
       - name: Grunt
         if: ${{ !cancelled() }}
-        run: moodle-plugin-ci grunt --max-lint-warnings 0 --fix
+        run: moodle-plugin-ci grunt --max-lint-warnings 0
+
+      - name: Grunt
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci grunt --max-lint-warnings 0
 
       - name: PHPUnit tests
         if: ${{ !cancelled() }}
