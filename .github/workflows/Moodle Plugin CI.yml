@@ -53,9 +53,11 @@ jobs:
       - name: Initialise moodle-plugin-ci
         run: |
           composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
-          pushd ci 
+          pushd ci >/dev/null
+            echo "> composer config repositories.repo-name vcs https://github.com/center-for-learning-management/moodle-psalm-plugin"
             composer config repositories.repo-name vcs https://github.com/center-for-learning-management/moodle-psalm-plugin
-            composer require --dev center-for-learning-management/moodle-psalm-plugin
+            echo "> composer require --dev center-for-learning-management/moodle-psalm-plugin dev-main@dev"
+            composer require --dev center-for-learning-management/moodle-psalm-plugin dev-main@dev
           popd
           echo $(cd ci/bin; pwd) >> $GITHUB_PATH
           echo $(cd ci/vendor/bin; pwd) >> $GITHUB_PATH
