@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) {
-    $settings = new admin_settingpage( 'local_experience_settings', get_string('pluginname:settings', 'local_experience'));
+    $settings = new admin_settingpage('local_experience_settings', get_string('pluginname:settings', 'local_experience'));
     $ADMIN->add('localplugins', new admin_category('local_experience', get_string('pluginname', 'local_experience')));
     $ADMIN->add('local_experience', $settings);
 

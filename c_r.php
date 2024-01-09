@@ -54,9 +54,10 @@ if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
     $success = array();
     $failed = array();
     $DB->delete_records('local_experience_c_r', array());
-    foreach ($ids AS $id) {
+    foreach ($ids as $id) {
         $pair = explode('_', $id);
-        if (count($pair) != 2) continue;
+        if (count($pair) != 2)
+            continue;
         if (empty($c_rs[$id])) {
             $DB->delete_records('local_experience_c_r', array('conditionid' => $pair[0], 'ruleid' => $pair[1]));
             $success[$id] = true;
@@ -75,7 +76,7 @@ if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
     // @todo show messages.
     echo $OUTPUT->render_from_template('local_experience/alert', array(
         'content' => 'ok',
-        'type' => 'success'
+        'type' => 'success',
     ));
 }
 
@@ -84,9 +85,9 @@ $conditions = array_values($DB->get_records('local_experience_conditions', array
 $rules = array_values($DB->get_records('local_experience_rules', array(), 'name ASC, sort ASC'));
 $c_r = array_keys($DB->get_records_sql("SELECT CONCAT(conditionid,'_',ruleid) FROM  {local_experience_c_r}", array()));
 
-foreach ($conditions AS &$condition) {
+foreach ($conditions as &$condition) {
     $condition->rules = json_decode(json_encode($rules)); // do a cloning
-    foreach ($condition->rules AS &$crule) {
+    foreach ($condition->rules as &$crule) {
         $crule->key = $condition->id . '_' . $crule->id;
         $crule->ischecked = in_array($crule->key, $c_r);
     }

@@ -28,7 +28,7 @@ require_once($CFG->dirroot . '/local/experience/locallib.php');
 function local_experience_after_config() {
     global $CFG;
     $scripts = array(
-        '/course/dndupload.php'
+        '/course/dndupload.php',
     );
     $script = str_replace($CFG->dirroot, '', $_SERVER["SCRIPT_FILENAME"]);
     if (in_array($script, $scripts)) {
@@ -79,10 +79,10 @@ function local_experience_before_standard_html_head() {
                         OR patternscriptnames='*'";
         $conditions = $DB->get_records_sql($sql, array($scriptname));
         $applyconditions = array();
-        foreach ($conditions AS $condition) {
+        foreach ($conditions as $condition) {
             $params = explode('&', $condition->patternparameters);
             $isok = true;
-            foreach ($params AS $param) {
+            foreach ($params as $param) {
                 $pair = explode('=', $param);
                 if (count($pair) == 2 && optional_param($pair[0], '', PARAM_RAW) != $pair[1]) {
                     $isok = false;
@@ -103,7 +103,7 @@ function local_experience_before_standard_html_head() {
                             AND cr.ruleid=r.id
                         ORDER BY r.sort ASC";
             $rules = $DB->get_records_sql($sql, array());
-            foreach ($rules AS $rule) {
+            foreach ($rules as $rule) {
                 $allrules[] = $rule;
             }
         }
@@ -120,6 +120,14 @@ function local_experience_before_standard_html_head() {
             $PAGE->requires->js_call_amd("local_experience/main", "injectQuestionTemplate", array($x[0], $x[1], $x[2]));
         }
     }
+
+    // $html .= $OUTPUT->render_from_template('local_experience/html_head', [
+    //     'experience_switch' => [
+    //         'cantrigger' => has_capability('local/experience:cantrigger', $PAGE->context),
+    //         'checked' => get_user_preferences('local_experience_level', 0) == 1,
+    //     ],
+    // ]);
+
 
     return $html;
 }
@@ -138,6 +146,7 @@ function local_experience_before_standard_top_of_body_html() {
     return $html;
 }
 
+/*
 function local_experience_extend_navigation($navigation) {
     global $PAGE;
     if (has_capability('local/experience:cantrigger', $PAGE->context)) {
@@ -152,6 +161,8 @@ function local_experience_extend_navigation($navigation) {
         $PAGE->requires->js_call_amd("local_experience/main", "enablePanelTrigger", array($level));
     }
 }
+*/
+
 /**
  * Extend navigation.
  */

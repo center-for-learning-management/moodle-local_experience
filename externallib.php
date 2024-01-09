@@ -47,29 +47,30 @@ class local_experience_external extends external_api {
         switch ($pageid) {
             case 'page-mod-bigbluebuttonbn-mod':
                 $ret['prependto'] = 'form[action="modedit.php"]';
-                $params = (object) array('wwwroot' => $CFG->wwwroot);
+                $params = (object)array('wwwroot' => $CFG->wwwroot);
                 $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience') . ' ' .
-                               get_string('injecttext:' . $pageid . ':readmore', 'local_experience', $params);
-            break;
+                    get_string('injecttext:' . $pageid . ':readmore', 'local_experience', $params);
+                break;
             case 'page-question-type-ddwtos':
                 $ret['prependto'] = 'form[action="question.php"]';
                 $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience');
-            break;
+                break;
             case 'page-question-type-multianswer':
                 $ret['prependto'] = 'form[action="question.php"]';
                 $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience');
-            break;
+                break;
             case 'page-question-type-stack':
                 $ret['prependto'] = 'form[action="question.php"]';
                 $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience');
-            break;
+                break;
             case 'page-question-type-wordselect':
                 $ret['prependto'] = 'form[action="question.php"]';
                 $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience');
-            break;
+                break;
         }
         return $ret;
     }
+
     /**
      * Return definition.
      * @return external_value
@@ -99,10 +100,11 @@ class local_experience_external extends external_api {
             case 'editmode':
                 $USER->editing = ($USER->editing == 1) ? 0 : 1;
                 return 1;
-            break;
+                break;
         }
         return 0;
     }
+
     /**
      * Return definition.
      * @return external_value
@@ -128,6 +130,7 @@ class local_experience_external extends external_api {
         set_user_preference('local_experience_level', $params['level']);
         return 1;
     }
+
     /**
      * Return definition.
      * @return external_value

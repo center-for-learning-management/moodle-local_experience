@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die;
 class lib_wshelper {
     public static $navbar_nodes = array();
     private static $debug = false;
+
     /**
      * Recognizes the result of a certain script and registers an output buffer for it.
      */
@@ -36,14 +37,17 @@ class lib_wshelper {
         self::$debug = ($CFG->debug == 32767); // Developer debugging
         $func = str_replace('__', '_', 'buffer_' . str_replace('/', '_', str_replace('.php', '', str_replace($CFG->dirroot, '', $_SERVER["SCRIPT_FILENAME"]))));
         if (method_exists(__CLASS__, $func)) {
-            if (self::$debug) error_log('Buffer function ' . $func . ' called');
+            if (self::$debug)
+                error_log('Buffer function ' . $func . ' called');
             ob_start();
             register_shutdown_function('\local_experience\lib_wshelper::buffer_modify');
         } else {
-            if (self::$debug) error_log('Buffer function ' . $func . ' not found');
+            if (self::$debug)
+                error_log('Buffer function ' . $func . ' not found');
             return false;
         }
     }
+
     /**
      * Determines the appropriate handler-method for this output buffer.
      */
@@ -53,6 +57,7 @@ class lib_wshelper {
         $func = str_replace('__', '_', 'buffer_' . str_replace('/', '_', str_replace('.php', '', str_replace($CFG->dirroot, '', $_SERVER["SCRIPT_FILENAME"]))));
         call_user_func('self::' . $func, $buffer);
     }
+
     public static function buffer_course_dndupload($buffer) {
         global $DB;
 
@@ -62,14 +67,14 @@ class lib_wshelper {
             die($buffer);
         }
 
-        $courseid   = optional_param('course', '', PARAM_INT);
-        $section    = optional_param('section', '', PARAM_INT);
-        $type       = optional_param('type', '', PARAM_TEXT);
+        $courseid = optional_param('course', '', PARAM_INT);
+        $section = optional_param('section', '', PARAM_INT);
+        $type = optional_param('type', '', PARAM_TEXT);
         $modulename = optional_param('module', '', PARAM_PLUGIN);
 
         if (!empty($courseid) && ($modulename == 'resource' || $modulename == 'label')) {
             error_log("course $courseid section $section type $type modulename $modulename");
-            $_section = array_values($DB->get_records('course_sections', [ 'course' => $courseid, 'section' => $section ]));
+            $_section = array_values($DB->get_records('course_sections', ['course' => $courseid, 'section' => $section]));
             error_log(print_r($_section, 1));
             if (count($_section) > 0) {
                 $sectionid = $_section[0]->id;
@@ -80,20 +85,20 @@ class lib_wshelper {
                             WHERE course = ?
                                 AND section = ?
                             ORDER BY id DESC LIMIT 0,1';
-                $mod = $DB->get_record_sql($sql, [ $courseid, $sectionid ]);
-                $DB->set_field('course_modules', 'completion', 2, [ 'id' => $mod->id ]);
-                $DB->set_field('course_modules', 'completionview', 1, [ 'id' => $mod->id ]);
-                $DB->set_field('course_modules', 'completionexpected', strtotime("+$dnddays days"), [ 'id' => $mod->id ]);
+                $mod = $DB->get_record_sql($sql, [$courseid, $sectionid]);
+                $DB->set_field('course_modules', 'completion', 2, ['id' => $mod->id]);
+                $DB->set_field('course_modules', 'completionview', 1, ['id' => $mod->id]);
+                $DB->set_field('course_modules', 'completionexpected', strtotime("+$dnddays days"), ['id' => $mod->id]);
 
                 error_log('mod ' . $mod->id);
 
                 $strfrom = get_string('completion-alt-manual-enabled', 'core_completion');
                 $strfrom = substr($strfrom, 0, strpos($strfrom, ':'));
-                $strto   = get_string('completion-alt-auto-enabled', 'core_completion');
+                $strto = get_string('completion-alt-auto-enabled', 'core_completion');
                 $strto = substr($strto, 0, strpos($strto, ':'));
                 error_log("replace $strfrom to $strto");
-                $buffer  = str_replace($strfrom, $strto, $buffer);
-                $buffer  = str_replace('completion-manual-enabled', 'completion-auto-enabled', $buffer);
+                $buffer = str_replace($strfrom, $strto, $buffer);
+                $buffer = str_replace('completion-manual-enabled', 'completion-auto-enabled', $buffer);
             }
         }
 

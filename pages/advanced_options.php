@@ -27,15 +27,33 @@
 
 require('../../../config.php');
 require_login();
-$PAGE->set_url(new \moodle_url('/local/experience/pages/bigbluebutton.php', array()));
-$PAGE->set_context(\context_system::instance());
-$PAGE->set_heading('Big Blue Button');
-$PAGE->set_title('Big Blue Button');
+$PAGE->set_url(new \moodle_url('/local/experience/pages/advanced_options.php', array()));
+$PAGE->set_context(context_system::instance());
+$PAGE->set_title(get_string('advanced_options', 'local_experience'));
+$PAGE->set_heading(get_string('advanced_options', 'local_experience'));
+//$PAGE->set_cacheable(false);
+
+$is_on = get_user_preferences('local_experience_level', 0) == 1;
+
+$set = optional_param('set', 0, PARAM_INT);
+if (!empty($set)) {
+    set_user_preference('local_experience_level', $set > 0 ? 1 : 0);
+
+    redirect($PAGE->url);
+}
 
 echo $OUTPUT->header();
-$params = (object)array(
-    'wwwroot' => $CFG->wwwroot,
-);
-echo '<p>' . get_string('injecttext:page-mod-bigbluebuttonbn-mod', 'local_experience', $params) . '</p>';
-echo get_string('injecttext:page-mod-bigbluebuttonbn-mod:longtext', 'local_experience', $params);
+
+?>
+    <h3><?php echo get_string('advanced_options:description', 'local_experience') ?></h3>
+
+    <div style="text-align: center;">
+        <a href="<?php echo new moodle_url($PAGE->url, ['set' => $is_on ? '-1' : '1']); ?>" class="btn btn-secondary">
+            <i class="fa-solid fa-toggle-on"></i>
+            <span><?php echo get_string('advanced_options', 'local_experience') . ': ' . get_string($is_on ? 'on' : 'off', 'mnet'); ?></span>
+        </a>
+    </div>
+    </div>
+<?php
+
 echo $OUTPUT->footer();
