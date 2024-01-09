@@ -78,6 +78,12 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phplint
 
+      - name: PHP Lint --fix
+        if: ${{ !cancelled() }}
+        run: | 
+          echo ">  eslint --fix ${{ github.workspace }}/moodle/$(echo ${GITHUB_REPOSITORY}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/"
+          eslint --fix ${{ github.workspace }}/moodle/$(echo ${GITHUB_REPOSITORY}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/
+
       - name: PHP Copy/Paste Detector
         continue-on-error: true # This step will show errors but will not fail
         if: ${{ !cancelled() }}
