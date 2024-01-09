@@ -96,12 +96,12 @@ jobs:
         if: ${{ !cancelled() }}
         run: | 
           moodle-plugin-ci phpcbf
-          echo env.GITHUB_REPOSITORY == ${{ env.GITHUB_REPOSITORY }}
-          echo repository == $(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2)
-          echo moodle_plugin_name == $(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//)
-          echo moodle_plugin_path == $(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//||tr _ /)
-          echo "Copying beautified and fixed files from ${{ github.workspace }}/moodle/$(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/. to ${{ github.workspace }}/plugin/."
-          # rsync -avP ${{ github.workspace }}/moodle/$(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/. ${{ github.workspace }}/plugin/.
+          echo github_repository == ${github.respository}
+          echo repository == $(echo ${github.respository}|cut -d/ -f2)
+          echo moodle_plugin_name == $(echo ${github.respository}|cut -d/ -f2|sed s/^moodle-//)
+          echo moodle_plugin_path == $(echo ${github.respository}|cut -d/ -f2|sed s/^moodle-//||tr _ /)
+          echo "Copying beautified and fixed files from ${{ github.workspace }}/moodle/$(echo ${github.respository}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/. to ${{ github.workspace }}/plugin/."
+          rsync -avP ${{ github.workspace }}/moodle/$(echo ${github.respository}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/. ${{ github.workspace }}/plugin/.
 
       - name: Moodle PHPDoc Checker
         if: ${{ !cancelled() }}
