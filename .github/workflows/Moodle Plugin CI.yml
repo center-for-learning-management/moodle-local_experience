@@ -88,7 +88,8 @@ jobs:
         if: ${{ !cancelled() }}
         run: | 
           moodle-plugin-ci phpcbf
-          rsync -avP ${{ env.GITHUB_WORKSPACE }} ${{ env.GITHUB_WORKSPACE }}/plugins
+          echo "Copying files from ${{ github.workspace }} to ${{ github.workspace }}/plugins"
+          rsync -avP ${{ github.workspace }} ${{ github.workspace }}/plugins
 
       - name: Moodle PHPDoc Checker
         if: ${{ !cancelled() }}
