@@ -53,13 +53,11 @@ jobs:
       - name: Initialise moodle-plugin-ci
         run: |
           composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
-          composer config repositories.repo-name vcs https://github.com/center-for-learning-management/moodle-psalm-plugin
-          composer require --dev center-for-learning-management/moodle-psalm-plugin
+          pushd ci && composer config repositories.repo-name vcs https://github.com/center-for-learning-management/moodle-psalm-plugin && popd
+          pushd ci && composer require --dev center-for-learning-management/moodle-psalm-plugin && popd
           echo $(cd ci/bin; pwd) >> $GITHUB_PATH
           echo $(cd ci/vendor/bin; pwd) >> $GITHUB_PATH
           sudo locale-gen en_AU.UTF-8
-          
-          ./vendor/bin/psalm-plugin enable klebann/moodle-psalm-plugin
           echo "NVM_DIR=$HOME/.nvm" >> $GITHUB_ENV
 
       - name: Install moodle-plugin-ci
@@ -126,9 +124,9 @@ jobs:
       - name: Run Psalm
         if: ${{ !cancelled() }}
         run: |
-          curl -sS https://raw.githubusercontent.com/center-for-learning-management/moodle-psalm-plugin/main/psalm-plugin.xml -o psalm-plugin.xml
-          curl -sS https://raw.githubusercontent.com/center-for-learning-management/moodle-psalm-plugin/main/issueHandlers.xml -o issueHandlers.xml
-          ./vendor/bin/psalm --config=psalm-plugin.xml --no-diff --show-info=true $(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/
+          curl -sS https://raw.githubusercontent.com/center-for-learning-management/moodle-psalm-plugin/main/psalm-plugin.xml -o ci/psalm-plugin.xml
+          curl -sS https://raw.githubusercontent.com/center-for-learning-management/moodle-psalm-plugin/main/issueHandlers.xml -o ci/issueHandlers.xml
+          psalm --config=psalm-plugin.xml --no-diff --show-info=true $(echo ${{ env.GITHUB_REPOSITORY }}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/
           
       - name: Get changed files
         if: ${{ !cancelled() }}
