@@ -51,6 +51,8 @@ jobs:
           coverage: none
 
       - name: Initialise moodle-plugin-ci
+        env:
+          COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{secrets.COMPOSER_AUTH}}"} }'
         run: |
           composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
           pushd ci >/dev/null
