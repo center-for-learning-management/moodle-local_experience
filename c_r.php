@@ -31,7 +31,7 @@ require('../../config.php');
 require_once(__DIR__ . '/locallib.php');
 
 require_login();
-$PAGE->set_url(new \moodle_url('/local/experience/c_r.php', array()));
+$PAGE->set_url(new \moodle_url('/local/experience/c_r.php', []));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_heading(get_string('pluginname', 'local_experience'));
 $PAGE->set_title(get_string('pluginname', 'local_experience'));
@@ -39,33 +39,34 @@ $PAGE->requires->css('/local/experience/main.css');
 
 echo $OUTPUT->header();
 if (!is_siteadmin()) {
-    echo $OUTPUT->render_from_template('local_experience/alert', array(
+    echo $OUTPUT->render_from_template('local_experience/alert', [
         'type' => 'danger',
         'content' => get_string('access_denied', 'local_experience'),
-        'url' => new \moodle_url('/my', array()),
-    ));
+        'url' => new \moodle_url('/my', []),
+    ]);
     echo $OUTPUT->footer();
     die();
 }
 
 if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
-    $c_rs = optional_param_array('c_r', false, PARAM_BOOL);
-    $ids = array_keys($c_rs);
-    $success = array();
-    $failed = array();
-    $DB->delete_records('local_experience_c_r', array());
+    $crs = optional_param_array('c_r', false, PARAM_BOOL);
+    $ids = array_keys($crs);
+    $success = [];
+    $failed = [];
+    $DB->delete_records('local_experience_c_r', []);
     foreach ($ids as $id) {
         $pair = explode('_', $id);
-        if (count($pair) != 2)
+        if (count($pair) != 2) {
             continue;
-        if (empty($c_rs[$id])) {
-            $DB->delete_records('local_experience_c_r', array('conditionid' => $pair[0], 'ruleid' => $pair[1]));
+        }
+        if (empty($crs[$id])) {
+            $DB->delete_records('local_experience_c_r', ['conditionid' => $pair[0], 'ruleid' => $pair[1]]);
             $success[$id] = true;
         } else {
-            $obj = (object)array(
+            $obj = (object)[
                 'conditionid' => $pair[0],
                 'ruleid' => $pair[1],
-            );
+            ];
             if ($DB->execute("INSERT IGNORE {local_experience_c_r} (conditionid,ruleid) VALUES (?,?)", $pair)) {
                 $success[$id] = true;
             } else {
@@ -74,24 +75,24 @@ if (!empty(optional_param('store', '', PARAM_ALPHANUM))) {
         }
     }
     // @todo show messages.
-    echo $OUTPUT->render_from_template('local_experience/alert', array(
+    echo $OUTPUT->render_from_template('local_experience/alert', [
         'content' => 'ok',
         'type' => 'success',
-    ));
+    ]);
 }
 
 
-$conditions = array_values($DB->get_records('local_experience_conditions', array(), 'name ASC'));
-$rules = array_values($DB->get_records('local_experience_rules', array(), 'name ASC, sort ASC'));
-$c_r = array_keys($DB->get_records_sql("SELECT CONCAT(conditionid,'_',ruleid) FROM  {local_experience_c_r}", array()));
+$conditions = array_values($DB->get_records('local_experience_conditions', [], 'name ASC'));
+$rules = array_values($DB->get_records('local_experience_rules', [], 'name ASC, sort ASC'));
+$cr = array_keys($DB->get_records_sql("SELECT CONCAT(conditionid,'_',ruleid) FROM  {local_experience_c_r}", []));
 
 foreach ($conditions as &$condition) {
     $condition->rules = json_decode(json_encode($rules)); // do a cloning
     foreach ($condition->rules as &$crule) {
         $crule->key = $condition->id . '_' . $crule->id;
-        $crule->ischecked = in_array($crule->key, $c_r);
+        $crule->ischecked = in_array($crule->key, $cr);
     }
 }
 
-echo $OUTPUT->render_from_template('local_experience/c_r', array('conditions' => $conditions, 'rules' => $rules, 'wwwroot' => $CFG->wwwroot));
+echo $OUTPUT->render_from_template('local_experience/c_r', ['conditions' => $conditions, 'rules' => $rules, 'wwwroot' => $CFG->wwwroot]);
 echo $OUTPUT->footer();

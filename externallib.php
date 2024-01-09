@@ -27,9 +27,9 @@ require_once($CFG->libdir . "/externallib.php");
 
 class local_experience_external extends external_api {
     public static function injecttext_parameters() {
-        return new external_function_parameters(array(
+        return new external_function_parameters([
             'pageid' => new external_value(PARAM_TEXT, 'the page id'),
-        ));
+        ]);
     }
 
     /**
@@ -38,16 +38,16 @@ class local_experience_external extends external_api {
     public static function injecttext($pageid) {
         global $CFG, $PAGE;
         $PAGE->set_context(context_system::instance());
-        $params = self::validate_parameters(self::injecttext_parameters(), array('pageid' => $pageid));
-        $ret = array(
+        $params = self::validate_parameters(self::injecttext_parameters(), ['pageid' => $pageid]);
+        $ret = [
             'appendto' => '',
             'prependto' => '',
             'text' => '',
-        );
+        ];
         switch ($pageid) {
             case 'page-mod-bigbluebuttonbn-mod':
                 $ret['prependto'] = 'form[action="modedit.php"]';
-                $params = (object)array('wwwroot' => $CFG->wwwroot);
+                $params = (object)['wwwroot' => $CFG->wwwroot];
                 $ret['text'] = get_string('injecttext:' . $pageid, 'local_experience') . ' ' .
                     get_string('injecttext:' . $pageid . ':readmore', 'local_experience', $params);
                 break;
@@ -76,18 +76,18 @@ class local_experience_external extends external_api {
      * @return external_value
      */
     public static function injecttext_returns() {
-        return new external_single_structure(array(
+        return new external_single_structure([
             'appendto' => new external_value(PARAM_TEXT, 'element(s) to append text to'),
             'prependto' => new external_value(PARAM_TEXT, 'element(s) to prepend text to'),
             'text' => new external_value(PARAM_RAW, 'the text'), // may contain HTML
-        ));
+        ]);
     }
 
 
     public static function keycode_parameters() {
-        return new external_function_parameters(array(
+        return new external_function_parameters([
             'action' => new external_value(PARAM_ALPHANUM, 'the action'),
-        ));
+        ]);
     }
 
     /**
@@ -95,7 +95,7 @@ class local_experience_external extends external_api {
      */
     public static function keycode($action) {
         global $USER;
-        $params = self::validate_parameters(self::keycode_parameters(), array('action' => $action));
+        $params = self::validate_parameters(self::keycode_parameters(), ['action' => $action]);
         switch ($params['action']) {
             case 'editmode':
                 $USER->editing = ($USER->editing == 1) ? 0 : 1;
@@ -115,9 +115,9 @@ class local_experience_external extends external_api {
 
 
     public static function switch_parameters() {
-        return new external_function_parameters(array(
+        return new external_function_parameters([
             'level' => new external_value(PARAM_INT, 'the new level'),
-        ));
+        ]);
     }
 
     /**
@@ -126,7 +126,7 @@ class local_experience_external extends external_api {
     public static function switch($level) {
         global $PAGE;
         $PAGE->set_context(context_system::instance());
-        $params = self::validate_parameters(self::switch_parameters(), array('level' => $level));
+        $params = self::validate_parameters(self::switch_parameters(), ['level' => $level]);
         set_user_preference('local_experience_level', $params['level']);
         return 1;
     }

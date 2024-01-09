@@ -27,9 +27,9 @@ require_once($CFG->dirroot . '/local/experience/locallib.php');
 
 function local_experience_after_config() {
     global $CFG;
-    $scripts = array(
+    $scripts = [
         '/course/dndupload.php',
-    );
+    ];
     $script = str_replace($CFG->dirroot, '', $_SERVER["SCRIPT_FILENAME"]);
     if (in_array($script, $scripts)) {
         \local_experience\lib_wshelper::buffer();
@@ -55,19 +55,19 @@ function local_experience_before_standard_html_head() {
             $enabled = \get_config('local_experience', 'auto_set_completion_details');
             $plusdays = \get_config('local_experience', 'auto_set_completion_add_days');
             if (!empty($enabled) && !empty($plusdays)) {
-                $PAGE->requires->js_call_amd("local_experience/main", "setCompletionDefaults", array($plusdays));
+                $PAGE->requires->js_call_amd("local_experience/main", "setCompletionDefaults", [$plusdays]);
             }
         }
     }
 
     $PAGE->requires->css('/local/experience/style/main.css');
     $PAGE->requires->css('/local/experience/style/switch.css');
-    $PAGE->requires->js_call_amd("local_experience/main", "injectText", array());
+    $PAGE->requires->js_call_amd("local_experience/main", "injectText", []);
 
     if (has_capability('local/experience:cantrigger', $PAGE->context)) {
         // Show trigger and add basic functionality.
         if ($PAGE->user_allowed_editing()) {
-            $PAGE->requires->js_call_amd("local_experience/main", "captureKeycode", array());
+            $PAGE->requires->js_call_amd("local_experience/main", "captureKeycode", []);
         }
 
         // We only process rules that set default values when we add new things.
@@ -77,8 +77,8 @@ function local_experience_before_standard_html_head() {
                     FROM {local_experience_conditions}
                     WHERE patternscriptnames LIKE ?
                         OR patternscriptnames='*'";
-        $conditions = $DB->get_records_sql($sql, array($scriptname));
-        $applyconditions = array();
+        $conditions = $DB->get_records_sql($sql, [$scriptname]);
+        $applyconditions = [];
         foreach ($conditions as $condition) {
             $params = explode('&', $condition->patternparameters);
             $isok = true;
@@ -95,21 +95,21 @@ function local_experience_before_standard_html_head() {
 
         // Set all rules according to our level.
         $level = get_user_preferences('local_experience_level', 0);
-        $allrules = array();
+        $allrules = [];
         if (count($applyconditions) > 0) {
             $sql = "SELECT r.id,r.*
                         FROM {local_experience_rules} r, {local_experience_c_r} cr
                         WHERE cr.conditionid IN (" . implode(',', $applyconditions) . ")
                             AND cr.ruleid=r.id
                         ORDER BY r.sort ASC";
-            $rules = $DB->get_records_sql($sql, array());
+            $rules = $DB->get_records_sql($sql, []);
             foreach ($rules as $rule) {
                 $allrules[] = $rule;
             }
         }
-        $PAGE->requires->js_call_amd("local_experience/main", "applyRules", array($level, $allrules));
-        //$containers = get_config('local_experience', 'attachlevelselectto');
-        //$PAGE->requires->js_call_amd("local_experience/main", "injectButton", array($level, $containers));
+        $PAGE->requires->js_call_amd("local_experience/main", "applyRules", [$level, $allrules]);
+        // $containers = get_config('local_experience', 'attachlevelselectto');
+        // $PAGE->requires->js_call_amd("local_experience/main", "injectButton", array($level, $containers));
     }
 
     $injectquestion = optional_param('local_experience_injectquestion', '', PARAM_TEXT);
@@ -117,17 +117,16 @@ function local_experience_before_standard_html_head() {
         $x = explode(':', $injectquestion);
         if (count($x) == 3) {
             $html .= $OUTPUT->render_from_template('local_experience/overlay', []);
-            $PAGE->requires->js_call_amd("local_experience/main", "injectQuestionTemplate", array($x[0], $x[1], $x[2]));
+            $PAGE->requires->js_call_amd("local_experience/main", "injectQuestionTemplate", [$x[0], $x[1], $x[2]]);
         }
     }
 
     // $html .= $OUTPUT->render_from_template('local_experience/html_head', [
-    //     'experience_switch' => [
-    //         'cantrigger' => has_capability('local/experience:cantrigger', $PAGE->context),
-    //         'checked' => get_user_preferences('local_experience_level', 0) == 1,
-    //     ],
+    // 'experience_switch' => [
+    // 'cantrigger' => has_capability('local/experience:cantrigger', $PAGE->context),
+    // 'checked' => get_user_preferences('local_experience_level', 0) == 1,
+    // ],
     // ]);
-
 
     return $html;
 }
