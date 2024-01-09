@@ -120,6 +120,8 @@ jobs:
       - name: PHP Lint --fix
         if: ${{ !cancelled() }}
         run: | 
+          echo ">  find . -name Gruntfile.js"
+          find . -name Gruntfile.js
           echo ">  grunt --gruntfile ${{ github.workspace }}/Gruntfile.js eslint --fix ${{ github.workspace }}/plugin/"
           grunt --gruntfile ${{ github.workspace }}/Gruntfile.js eslint --fix ${{ github.workspace }}/plugin/
 
