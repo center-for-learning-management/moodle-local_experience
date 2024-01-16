@@ -23,10 +23,10 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$capabilities = array(
-    'local/experience:cantrigger' => array(
+$capabilities = [
+    'local/experience:cantrigger' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(),
-    ),
-);
+        'archetypes' => [],
+    ],
+];

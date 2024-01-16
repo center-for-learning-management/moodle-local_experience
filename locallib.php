@@ -28,23 +28,23 @@ defined('MOODLE_INTERNAL') || die;
 class lib {
     public static function addrule() {
         global $DB;
-        $rule = (object)array(
+        $rule = (object)[
             'name' => '',
             'sort' => 99,
             'elementstohide' => '',
             'elementstoset' => '',
-        );
+        ];
         $rule->id = $DB->insert_record('local_experience_rules', $rule);
         return $rule;
     }
 
     public static function addcondition() {
         global $DB;
-        $condition = (object)array(
+        $condition = (object)[
             'name' => '',
             'patternscriptnames' => '',
             'patternparameters' => '',
-        );
+        ];
         $condition->id = $DB->insert_record('local_experience_conditions', $condition);
         return $condition;
     }
