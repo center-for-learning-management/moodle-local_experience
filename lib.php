@@ -16,16 +16,14 @@
 
 /**
  * @package    local_experience
- * @copyright  2020 Zentrum für Lernmanagement (www.lernmanagement.at)
- * @author    Robert Schrenk
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  2018 Digital Education Society (http://www.dibig.at)
+ * @author     Robert Schrenk
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2024121101;
-$plugin->requires = 2014051200;
-$plugin->component = 'local_experience';
-$plugin->release = '1.0 (Build: 2021030900)';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->dependencies = array();
+// can be removed in moodle 4.5
+function local_experience_after_config() {
+    \local_experience\hook_callbacks::after_config();
+}
