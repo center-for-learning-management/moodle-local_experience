@@ -16,14 +16,27 @@
 
 /**
  * @package    local_experience
- * @copyright  2018 Digital Education Society (http://www.dibig.at)
+ * @copyright  2020 Center for Learning Management (http://www.lernmanagement.at)
  * @author     Robert Schrenk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-// can be removed in moodle 4.5
-function local_experience_after_config() {
-    \local_experience\hook_callbacks::after_config();
-}
+$callbacks = [
+    [
+        'hook' => \core\hook\after_config::class,
+        'callback' => [\local_experience\hook_callbacks::class, 'after_config'],
+        'priority' => 500,
+    ],
+    [
+        'hook' => \core\hook\output\before_http_headers::class,
+        'callback' => [\local_experience\hook_callbacks::class, 'before_http_headers'],
+        'priority' => 500,
+    ],
+    [
+        'hook' => \core\hook\output\before_standard_head_html_generation::class,
+        'callback' => [\local_experience\hook_callbacks::class, 'before_standard_head_html_generation'],
+        'priority' => 500,
+    ],
+];
