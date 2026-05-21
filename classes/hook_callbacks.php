@@ -37,15 +37,6 @@ class hook_callbacks {
         }
     }
 
-    public static function before_http_headers() {
-        global $PAGE;
-
-        if (has_capability('local/experience:cantrigger', $PAGE->context)) {
-            $level = get_user_preferences('local_experience_level', 0);
-            $PAGE->add_body_class('local-experience-level-' . $level);
-        }
-    }
-
     public static function before_standard_head_html_generation(\core\hook\output\before_standard_head_html_generation $hook): void {
         global $CFG, $DB, $PAGE, $OUTPUT;
 
@@ -62,56 +53,10 @@ class hook_callbacks {
             }
         }
 
-        $PAGE->requires->css('/local/experience/style/main.css');
-        $PAGE->requires->css('/local/experience/style/switch.css');
         $PAGE->requires->js_call_amd("local_experience/main", "injectText", array());
 
-        if (has_capability('local/experience:cantrigger', $PAGE->context)) {
-            // Show trigger and add basic functionality.
-            if ($PAGE->user_allowed_editing()) {
-                $PAGE->requires->js_call_amd("local_experience/main", "captureKeycode", array());
-            }
-
-            // We only process rules that set default values when we add new things.
-            // Determine if there are any rules for the current page.
-            $scriptname = str_replace($CFG->dirroot, "", $_SERVER["SCRIPT_FILENAME"]);
-            $sql = "SELECT *
-                    FROM {local_experience_conditions}
-                    WHERE patternscriptnames LIKE ?
-                        OR patternscriptnames='*'";
-            $conditions = $DB->get_records_sql($sql, array($scriptname));
-            $applyconditions = array();
-            foreach ($conditions as $condition) {
-                $params = explode('&', $condition->patternparameters);
-                $isok = true;
-                foreach ($params as $param) {
-                    $pair = explode('=', $param);
-                    if (count($pair) == 2 && optional_param($pair[0], '', PARAM_RAW) != $pair[1]) {
-                        $isok = false;
-                    }
-                }
-                if ($isok) {
-                    $applyconditions[] = $condition->id;
-                }
-            }
-
-            // Set all rules according to our level.
-            $level = get_user_preferences('local_experience_level', 0);
-            $allrules = array();
-            if (count($applyconditions) > 0) {
-                $sql = "SELECT r.id,r.*
-                        FROM {local_experience_rules} r, {local_experience_c_r} cr
-                        WHERE cr.conditionid IN (" . implode(',', $applyconditions) . ")
-                            AND cr.ruleid=r.id
-                        ORDER BY r.sort ASC";
-                $rules = $DB->get_records_sql($sql, array());
-                foreach ($rules as $rule) {
-                    $allrules[] = $rule;
-                }
-            }
-            $PAGE->requires->js_call_amd("local_experience/main", "applyRules", array($level, $allrules));
-            //$containers = get_config('local_experience', 'attachlevelselectto');
-            //$PAGE->requires->js_call_amd("local_experience/main", "injectButton", array($level, $containers));
+        if ($PAGE->user_allowed_editing()) {
+            $PAGE->requires->js_call_amd("local_experience/main", "captureKeycode", array());
         }
 
         $injectquestion = optional_param('local_experience_injectquestion', '', PARAM_TEXT);

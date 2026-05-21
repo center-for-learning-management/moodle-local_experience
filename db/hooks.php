@@ -30,11 +30,6 @@ $callbacks = [
         'priority' => 500,
     ],
     [
-        'hook' => \core\hook\output\before_http_headers::class,
-        'callback' => [\local_experience\hook_callbacks::class, 'before_http_headers'],
-        'priority' => 500,
-    ],
-    [
         'hook' => \core\hook\output\before_standard_head_html_generation::class,
         'callback' => [\local_experience\hook_callbacks::class, 'before_standard_head_html_generation'],
         'priority' => 500,

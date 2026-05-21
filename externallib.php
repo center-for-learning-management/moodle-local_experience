@@ -112,30 +112,4 @@ class local_experience_external extends external_api {
     public static function keycode_returns() {
         return new external_value(PARAM_INT, 'returns 1 if action was known, 0 if action was unkown, -1 if action failed.');
     }
-
-
-    public static function switch_parameters() {
-        return new external_function_parameters(array(
-            'level' => new external_value(PARAM_INT, 'the new level'),
-        ));
-    }
-
-    /**
-     * Switch users's experience level.
-     */
-    public static function switch($level) {
-        global $PAGE;
-        $PAGE->set_context(context_system::instance());
-        $params = self::validate_parameters(self::switch_parameters(), array('level' => $level));
-        set_user_preference('local_experience_level', $params['level']);
-        return 1;
-    }
-
-    /**
-     * Return definition.
-     * @return external_value
-     */
-    public static function switch_returns() {
-        return new external_value(PARAM_INT, 'Return 1 if we stored the new preference');
-    }
 }

@@ -41,12 +41,4 @@ $functions = array(
         'type' => 'read',
         'ajax' => 1,
     ),
-    'local_experience_switch' => array(
-        'classname' => 'local_experience_external',
-        'methodname' => 'switch',
-        'classpath' => 'local/experience/externallib.php',
-        'description' => 'Switch the users experience level.',
-        'type' => 'write',
-        'ajax' => 1,
-    ),
 );
