@@ -1,3 +1,4 @@
+/* eslint-disable */
 define(
     ['jquery', 'core/ajax', 'core/notification', 'core/str', 'core/templates'],
     function($, AJAX, NOTIFICATION, STR, TEMPLATES) {
@@ -96,6 +97,30 @@ define(
                                         }
                                         return; // means "continue"
                                     }
+
+                                    // Fields of editors are addressed with the suffix "editable", because that
+                                    // was the id of the contenteditable node of the atto editor. Such a node
+                                    // does not exist in tinymce, and even in atto it is only available after
+                                    // the editor has been initialized. As the template is also injected during
+                                    // page load (each post_exec step reloads the page), the editor may not be
+                                    // ready yet - therefore we always write the value into the underlying
+                                    // textarea, which is what gets submitted, and only additionally push it
+                                    // into an editor that is already running.
+                                    if (fkey.substring(fkey.length - 'editable'.length) == 'editable') {
+                                        var editorid = 'id_' + fkey.substring(0, fkey.length - 'editable'.length);
+                                        if (M.debug) console.log('set editor ' + editorid + ' to ', val);
+                                        $('form[action="question.php"] #' + editorid).val(val.trim());
+                                        // Atto.
+                                        $('form[action="question.php"] #' + editorid + 'editable').html(val.trim());
+                                        // Tinymce.
+                                        var tinyeditor = (typeof window.tinyMCE !== 'undefined')
+                                            ? window.tinyMCE.get(editorid) : null;
+                                        if (tinyeditor && tinyeditor.initialized) {
+                                            tinyeditor.setContent(val.trim());
+                                        }
+                                        return; // means "continue"
+                                    }
+
                                     var targid = 'form[action="question.php"] #id_' + fkey;
                                     var target = $(targid);
                                     if (target.is("select")) {
@@ -113,12 +138,6 @@ define(
                                     } else {
                                         if (M.debug) console.log('set ' + targid + ' to ', val);
                                         target.val(val);
-                                    }
-
-                                    if (target.is("[role=textbox]")) {
-                                        var subtargid = targid.substring(0, targid.length - 'editable'.length);
-                                        console.log('Setting subtargid ', subtargid);
-                                        $(subtargid).html(val.trim());
                                     }
                                 });
                                 if (post_exec_str != '') {
