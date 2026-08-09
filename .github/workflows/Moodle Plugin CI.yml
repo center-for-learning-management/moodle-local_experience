@@ -36,6 +36,7 @@ jobs:
         php: ['8.1', '8.2', '8.3']
         moodle-branch: ['MOODLE_502_STABLE']
         database: [mariadb]
+        extensions: []
 
     steps:
       - name: Check out repository code
@@ -127,7 +128,7 @@ jobs:
         if: ${{ failure() && steps.behat.outcome == 'failure' }}
         uses: actions/upload-artifact@v7
         with:
-          name: Behat Faildump (${{ join(matrix.*, ', ') }})
+          name: Behat Faildump
           path: ${{ github.workspace }}/moodledata/behat_dump
           retention-days: 7
           if-no-files-found: ignore
