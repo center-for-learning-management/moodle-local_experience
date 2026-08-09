@@ -59,13 +59,13 @@ jobs:
           COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{secrets.github_token}}"} }'
         run: |
           composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
-          echo $(cd ci/bin; pwd) >> $GITHUB_PATH
-          echo $(cd ci/vendor/bin; pwd) >> $GITHUB_PATH
+          echo "$(cd ci/bin; pwd)" >> "$GITHUB_PATH"
+          echo "$(cd ci/vendor/bin; pwd)" >> "$GITHUB_PATH"
           sudo locale-gen en_AU.UTF-8
-          echo "NVM_DIR=$HOME/.nvm" >> $GITHUB_ENV
+          echo "NVM_DIR=$HOME/.nvm" >> "$GITHUB_ENV"
 
       - name: Install moodle-plugin-ci
-        run: moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1
+        run: moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1 # DevSkim: ignore DS162092
         env:
           DB: ${{ matrix.database }}
           MOODLE_BRANCH: ${{ matrix.moodle-branch }}
@@ -172,13 +172,13 @@ jobs:
           COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{secrets.github_token}}"} }'
         run: |
           composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
-          echo $(cd ci/bin; pwd) >> $GITHUB_PATH
-          echo $(cd ci/vendor/bin; pwd) >> $GITHUB_PATH
+          echo "$(cd ci/bin; pwd)" >> "$GITHUB_PATH"
+          echo "$(cd ci/vendor/bin; pwd)" >> "$GITHUB_PATH"
           sudo locale-gen en_AU.UTF-8
-          echo "NVM_DIR=$HOME/.nvm" >> $GITHUB_ENV
+          echo "NVM_DIR=$HOME/.nvm" >> "$GITHUB_ENV"
 
       - name: Install moodle-plugin-ci
-        run: moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1
+        run: moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1 # DevSkim: ignore DS162092
         env:
           DB: mariadb
           MOODLE_BRANCH: MOODLE_502_STABLE
@@ -195,8 +195,8 @@ jobs:
       # Copy the fixed files from the Moodle installation back to the plugin folder
       - name: Copy changes to repository
         run: |
-          echo "Copying changed files from ${{ github.workspace }}/moodle/public/$(echo ${GITHUB_REPOSITORY}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/. to ${{ github.workspace }}/plugin/."
-          rsync -av ${{ github.workspace }}/moodle/public/$(echo ${GITHUB_REPOSITORY}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/. ${{ github.workspace }}/plugin/. --exclude='.git'
+          echo "Copying changed files from ${{ github.workspace }}/moodle/public/$(echo "${GITHUB_REPOSITORY}" | cut -d/ -f2 | sed 's/^moodle-//' | tr _ /)/. to ${{ github.workspace }}/plugin/."
+          rsync -av "${{ github.workspace }}/moodle/public/$(echo "${GITHUB_REPOSITORY}" | cut -d/ -f2 | sed 's/^moodle-//' | tr _ /)/." "${{ github.workspace }}/plugin/." --exclude='.git'
 
       # Detect if any files were modified by the fixers
       - name: Check for changes
@@ -205,9 +205,9 @@ jobs:
           cd plugin
           git add -A
           if git diff --cached --quiet; then
-            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "changes=false" >> "$GITHUB_OUTPUT"
           else
-            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "changes=true" >> "$GITHUB_OUTPUT"
             git diff --cached --name-only > ../changed_files.txt
             echo "Modified files:"
             cat ../changed_files.txt
@@ -217,14 +217,16 @@ jobs:
       - name: Prepare PR body
         if: ${{ !cancelled() && steps.check.outputs.changes == 'true' }}
         run: |
-          echo "PR_BODY<<EOF" >> $GITHUB_ENV
-          echo "Moodle CI Fixes" >> $GITHUB_ENV
-          echo "" >> $GITHUB_ENV
-          echo "The following files were modified by the CI process:" >> $GITHUB_ENV
-          echo '```' >> $GITHUB_ENV
-          cat changed_files.txt >> $GITHUB_ENV
-          echo '```' >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          {
+            echo "PR_BODY<<EOF"
+            echo "Moodle CI Fixes"
+            echo ""
+            echo "The following files were modified by the CI process:"
+            echo '```'
+            cat changed_files.txt
+            echo '```'
+            echo "EOF"
+          } >> "$GITHUB_ENV"
 
       # Create pull request only if changes exist
       - name: Create Pull Request
