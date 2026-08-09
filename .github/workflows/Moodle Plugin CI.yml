@@ -259,11 +259,12 @@ jobs:
         with:
           working_dir: plugin
 
-      - name: Upload SARIF results
+      - name: Upload Psalm SARIF results
         if: ${{ !cancelled() }}
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: plugin/results.sarif
+          category: psalm
 
       # Psalm's scan config/output aren't plugin source - strip them out of
       # the plugin working tree so create-pull-request doesn't pick them up.
@@ -272,6 +273,20 @@ jobs:
         run: |
           cd plugin
           rm -f composer.json composer.lock results.sarif
+
+      - name: DevSkim Security Scan
+        if: ${{ !cancelled() }}
+        uses: microsoft/DevSkim-Action@v1
+        with:
+          directory-to-scan: plugin
+          output-filename: devskim-results.sarif
+      # Create pull request only if changes exist
+      - name: Upload DevSkim SARIF results
+        if: ${{ !cancelled() }}
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: devskim-results.sarif
+          category: devskim
 
       # Create pull request only if changes exist
       - name: Create Pull Request
