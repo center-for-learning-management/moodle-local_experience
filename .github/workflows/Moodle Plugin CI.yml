@@ -96,7 +96,7 @@ jobs:
         run: moodle-plugin-ci phpcbf
 
       - name: Moodle Code Checker
-        continue-on-error: true   # Don't fail the job – we still want to capture fixes
+        continue-on-error: true
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpcs --max-warnings 0
 
@@ -185,21 +185,18 @@ jobs:
           echo '```' >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-      # Generate a minimal Psalm config so the security scan can find the source
+      # Create a minimal composer.json so Psalm can autodiscover the source
       - name: Prepare Psalm config
         if: ${{ !cancelled() }}
         run: |
           cd plugin
-          cat > psalm.xml <<'EOF'
-          <?xml version="1.0"?>
-          <psalm>
-            <projectFiles>
-              <directory name="." />
-              <ignoreFiles>
-                <directory name="vendor" />
-              </ignoreFiles>
-            </projectFiles>
-          </psalm>
+          cat > composer.json <<'EOF'
+          {
+              "name": "local/experience",
+              "autoload": {
+                  "classmap": ["."]
+              }
+          }
           EOF
 
       - name: Psalm Security Scan
