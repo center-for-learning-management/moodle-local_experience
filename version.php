@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Version details for local_experience.
+ *
  * @package    local_experience
  * @copyright  2020 Zentrum für Lernmanagement (www.lernmanagement.at)
  * @author    Robert Schrenk
