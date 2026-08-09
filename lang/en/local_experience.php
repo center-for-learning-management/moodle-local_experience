@@ -21,41 +21,44 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'UI-experience';
-$string['privacy:metadata'] = 'This plugin does not store any personal data';
-
-$string['auto_set_completion_details'] = 'Automatically set completion details';
-$string['auto_set_completion_details:description'] = 'If enabled, completion rules will be automatically set when a new resource or activity is created. In addition to this option, days have to configured to be above 0!';
 $string['auto_set_completion_add_days'] = 'Offset in forms';
 $string['auto_set_completion_add_days:description'] = 'Set the expected completion date in forms to x days in the future in forms. Will recommend manual completion.';
 $string['auto_set_completion_add_days_dnd'] = 'Offset for DND Uploads';
 $string['auto_set_completion_add_days_dnd:description'] = 'Set the expected completion date in forms to x days in the future for DND uploads. Will result in an automated completion.';
-
+$string['auto_set_completion_details'] = 'Automatically set completion details';
+$string['auto_set_completion_details:description'] = 'If enabled, completion rules will be automatically set when a new resource or activity is created. In addition to this option, days have to configured to be above 0!';
 $string['injectquestion:pleasewait'] = 'Loading the template, please wait ...';
 $string['injectquestion:pleasewait:subtext'] = 'Eventually the page is loaded several times to load all settings.';
-
-$string['injectquestion:stack:_ids'] = '0';
-$string['injectquestion:stack:_fields'] = 'ans1type,ans1modelans,ans1mustverify,ans1showvalidation,defaultmark,generalfeedbackeditable,name,penalty,prt1answertest_0,prt1feedbackvariables,prt1sans_0,prt1tans_0,prt1truefeedback_0editable,prt1answertest_1,prt1sans_1,prt1tans_1,prt1truefeedback_1editable,prt1falsefeedback_1editable,prt1truescore_1,prt1falsescore_1,questionnote,questionvariables,questiontexteditable,specificfeedbackeditable,variantsselectionseed,post_exec_0,post_exec_1';
-
-$string['injectquestion:stack:0:ans1type'] = 'checkbox';
 $string['injectquestion:stack:0:ans1modelans'] = 'ta';
 $string['injectquestion:stack:0:ans1mustverify'] = '0';
 $string['injectquestion:stack:0:ans1showvalidation'] = '0';
+$string['injectquestion:stack:0:ans1type'] = 'checkbox';
 $string['injectquestion:stack:0:defaultmark'] = '1';
 $string['injectquestion:stack:0:generalfeedbackeditable'] = '';
 $string['injectquestion:stack:0:name'] = 'Template MC with feedback and subpoints';
 $string['injectquestion:stack:0:penalty'] = '0.1';
 $string['injectquestion:stack:0:post_exec_0'] = '$(\'#id_prt1nodeadd\').trigger(\'click\');';
 $string['injectquestion:stack:0:post_exec_1'] = '$(\'#id_prt1falsenextnode_0\').val(1); $(\'#id_verify\').click();';
+$string['injectquestion:stack:0:prt1answertest_0'] = 'AlgEquiv';
+$string['injectquestion:stack:0:prt1answertest_1'] = 'AlgEquiv';
+$string['injectquestion:stack:0:prt1falsefeedback_1editable'] = '
+<p style="text-align: left;">Statement 1 {@ta[1][2]@}. {@fb[1]@} <br>
+Statement 2 {@ta[2][2]@}. {@fb[2]@} <br>
+Statement 3 {@ta[3][2]@}. {@fb[3]@} <br>
+Statement 4 {@ta[4][2]@}. {@fb[4]@} <br>
+Statement 5 {@ta[5][2]@}.</p>
+<p style="text-align: left;">Unfortunately there is more than one error, in total {@5-counter@} in the statements {@sort(list2)@}!! <br> </p>';
+$string['injectquestion:stack:0:prt1falsescore_1'] = '0';
 $string['injectquestion:stack:0:prt1feedbackvariables'] = '
 ans2: makelist(if member(i,ans1) then 1 else 0, i,1,5);
 tans2: makelist(if member(i,tans1) then 1 else 0, i,1,5);
 counter: 0; list2:[]; for i:1 step 1 thru 5 do if ans2[i]=tans2[i] then counter:counter+1 else (counter:counter,push(i,list2));
 list2:sort(list2);
 ';
-$string['injectquestion:stack:0:prt1answertest_0'] = 'AlgEquiv';
 $string['injectquestion:stack:0:prt1sans_0'] = 'ans1';
+$string['injectquestion:stack:0:prt1sans_1'] = 'counter';
 $string['injectquestion:stack:0:prt1tans_0'] = 'tans1';
+$string['injectquestion:stack:0:prt1tans_1'] = '4';
 $string['injectquestion:stack:0:prt1truefeedback_0editable'] = '
 <p>Statement 1 {@ta[1][2]@}. {@fb[1]@} <br>
 Statement 2 {@ta[2][2]@}. {@fb[2]@} <br>
@@ -63,9 +66,6 @@ Statement 3 {@ta[3][2]@}. {@fb[3]@} <br>
 Statement 4 {@ta[4][2]@}. {@fb[4]@} <br>
 Statement 5 {@ta[5][2]@}. <br> </p>
 ';
-$string['injectquestion:stack:0:prt1answertest_1'] = 'AlgEquiv';
-$string['injectquestion:stack:0:prt1sans_1'] = 'counter';
-$string['injectquestion:stack:0:prt1tans_1'] = '4';
 $string['injectquestion:stack:0:prt1truefeedback_1editable'] = '
 <p>Statement 1 {@ta[1][2]@}. {@fb[1]@} <br>
 Statement 2 {@ta[2][2]@}. {@fb[2]@} <br>
@@ -74,16 +74,15 @@ Statement 4 {@ta[4][2]@}. {@fb[4]@} <br>
 Statement 5 {@ta[5][2]@}.</p>
 <p style="text-align: left;">There is one error in statement {@list2[1]@}. <br> </p>
 ';
-$string['injectquestion:stack:0:prt1falsefeedback_1editable'] = '
-<p style="text-align: left;">Statement 1 {@ta[1][2]@}. {@fb[1]@} <br>
-Statement 2 {@ta[2][2]@}. {@fb[2]@} <br>
-Statement 3 {@ta[3][2]@}. {@fb[3]@} <br>
-Statement 4 {@ta[4][2]@}. {@fb[4]@} <br>
-Statement 5 {@ta[5][2]@}.</p>
-<p style="text-align: left;">Unfortunately there is more than one error, in total {@5-counter@} in the statements {@sort(list2)@}!! <br> </p>';
 $string['injectquestion:stack:0:prt1truescore_1'] = '0.5';
-$string['injectquestion:stack:0:prt1falsescore_1'] = '0';
 $string['injectquestion:stack:0:questionnote'] = 'zufall';
+$string['injectquestion:stack:0:questiontexteditable'] = '
+<p></p>
+<p>Please check the correct statements:</p>
+<p>[[input:ans1]] [[validation:ans1]]</p>
+<p>{@tans1@}</p>
+<p style="font-size:0.6em;text-align:right;">Created by: (yourname)</p>
+';
 $string['injectquestion:stack:0:questionvariables'] = '
 /*
 ai stands for ite statement, vi stands for iter bsteht für iter truth value, fbi stands for ites feedback.
@@ -159,47 +158,11 @@ ta: [[1,solutions[k1],sconcat(" 1: ",aussagen[k1])],[2,solutions[k2],sconcat(" 2
 fb: [feedback[k1],feedback[k2],feedback[k3],feedback[k4]]
 tans1: mcq_correct(ta);
 ';
-$string['injectquestion:stack:0:questiontexteditable'] = '
-<p></p>
-<p>Please check the correct statements:</p>
-<p>[[input:ans1]] [[validation:ans1]]</p>
-<p>{@tans1@}</p>
-<p style="font-size:0.6em;text-align:right;">Created by: (yourname)</p>
-';
 $string['injectquestion:stack:0:specificfeedbackeditable'] = '[[feedback:prt1]]';
 $string['injectquestion:stack:0:variantsselectionseed'] = '';
-
-
-$string['injecttext:page-question-type-multianswer'] = '<p>Embedded answers (Cloze) questions consist of a passage of text (in Moodle format) that has various answers embedded within it, including multiple choice, short answers and numerical answers.</p>
-<p>The structure of each cloze sub-question is identical:</p>
-<p style="margin-left: 40px;">
-    { start the cloze sub-question with a bracket (AltGr+7)<br />
-    1 define a grade for each cloze by a number (optional). This used for calculation of question grading.<br />
-    :SHORTANSWER: define the type of cloze sub-question. Definition is bounded by \':\'. <br />
-    ~ is a seperator between answer options<br />
-    = marks a correct answer<br />
-    # marks the beginning of an (optional) feedback message<br />
-    } close the cloze sub-question at the end with a bracket (AltGr+0)<br />
-</p>
-<p>Now a very simple example:</p>
-<p style="margin-left: 40px;">{1:SHORTANSWER:=Berlin} is the capital of Germany.</p>
-<a href="https://docs.moodle.org/38/en/Embedded_Answers_(Cloze)_question_type" target="_blank">read more</a>
-';
-$string['injecttext:page-question-type-ddwtos'] = '
-<p>Add the question to the text editor, using any formatting you wish. Use double square brackets \'[[n]]\' with a number in place of the word you wish the students to find.</p>
-<a href="https://docs.moodle.org/38/en/Drag_and_drop_into_text_question_type" target="_blank">read more</a>
-';
-$string['injecttext:page-question-type-stack'] = '
-<p>Please find more information about the STACK question type at the <a href="https://docs.moodle.org/311/en/STACK_question_type" target="_blank">Moodle Docs</a>.</p>
-<p>We prepared a template question for you, that you can enable simply by clicking on <a href="#" onclick="require([\'local_experience/main\'], function(M) { M.injectQuestionTemplate(\'stack\', 0) }); return false;" class="btn btn-secondary"><i class="fa fa-plus-circle"></i> insert template for MC with feedback and subpoints</a></p>
-';
-$string['injecttext:page-question-type-wordselect'] = '
-<p>This question type is designed to ask students to select text according to some criteria. For example "select the verb in the following sentence". Conceptually this is a little like a multiple choice question type (with multiple selectable options). The student responds by clicking on words to select them, and clicking a second time to unselect them.</p>
-<p>It provides an introduction field where words will not be selectable at runtime and a questiontext field. In the question text any words with braces around them will be considered correct. All words can be clicked-on to select.</p>
-<a href="https://docs.moodle.org/38/en/Wordselect_question_type" target="_blank">read more</a>
-';
+$string['injectquestion:stack:_fields'] = 'ans1type,ans1modelans,ans1mustverify,ans1showvalidation,defaultmark,generalfeedbackeditable,name,penalty,prt1answertest_0,prt1feedbackvariables,prt1sans_0,prt1tans_0,prt1truefeedback_0editable,prt1answertest_1,prt1sans_1,prt1tans_1,prt1truefeedback_1editable,prt1falsefeedback_1editable,prt1truescore_1,prt1falsescore_1,questionnote,questionvariables,questiontexteditable,specificfeedbackeditable,variantsselectionseed,post_exec_0,post_exec_1';
+$string['injectquestion:stack:_ids'] = '0';
 $string['injecttext:page-mod-bigbluebuttonbn-mod'] = 'The <a href="https://www.lernmanagement.at" target="_blank">Center for Learning Management</a> provides the open source video conferencing software <a href="https://bigbluebutton.org" target="_blank">BigBlueButton</a> in a basic version for up to 1000 simultaneous users. BBB tariffs with higher or guaranteed bandwidth can be obtained from various providers for a fee.';
-$string['injecttext:page-mod-bigbluebuttonbn-mod:readmore'] = '[<a href="{$a->wwwroot}/local/experience/pages/bigbluebutton.php" target="_blank">learn more</a>]';
 $string['injecttext:page-mod-bigbluebuttonbn-mod:longtext'] = '<p>In order to be able to quickly switch to a more powerful, chargeable BBB server in the event of a crisis, we have put together 3 providers as examples. If an external service provider is chosen, a contract must be concluded between the provider and the school. In Eduvidual an alternative BBB server can be entered for each school individually via the management interface. If you have any questions please contact <a href="mailto:rene.schwarzinger@lernmanagement.at?subject=BigBlueButton">rene.schwarzinger@lernmanagement.at</a>!</p>
 
 <p>These offers were compiled in September 2020 as an example. Please contact the providers directly for the current prices and conditions.</p>
@@ -222,5 +185,35 @@ Contact: christian.schwarzinger@openfab.org</p>
 <h4>Big Blue Meeting</h4>
 <p>shared BBB hosting or managed dedicated BBB hosting<br />
 https://www.bigbluemeeting.com/</p>';
-
+$string['injecttext:page-mod-bigbluebuttonbn-mod:readmore'] = '[<a href="{$a->wwwroot}/local/experience/pages/bigbluebutton.php" target="_blank">learn more</a>]';
+$string['injecttext:page-question-type-ddwtos'] = '
+<p>Add the question to the text editor, using any formatting you wish. Use double square brackets \'[[n]]\' with a number in place of the word you wish the students to find.</p>
+<a href="https://docs.moodle.org/38/en/Drag_and_drop_into_text_question_type" target="_blank">read more</a>
+';
+$string['injecttext:page-question-type-multianswer'] = '<p>Embedded answers (Cloze) questions consist of a passage of text (in Moodle format) that has various answers embedded within it, including multiple choice, short answers and numerical answers.</p>
+<p>The structure of each cloze sub-question is identical:</p>
+<p style="margin-left: 40px;">
+    { start the cloze sub-question with a bracket (AltGr+7)<br />
+    1 define a grade for each cloze by a number (optional). This used for calculation of question grading.<br />
+    :SHORTANSWER: define the type of cloze sub-question. Definition is bounded by \':\'. <br />
+    ~ is a seperator between answer options<br />
+    = marks a correct answer<br />
+    # marks the beginning of an (optional) feedback message<br />
+    } close the cloze sub-question at the end with a bracket (AltGr+0)<br />
+</p>
+<p>Now a very simple example:</p>
+<p style="margin-left: 40px;">{1:SHORTANSWER:=Berlin} is the capital of Germany.</p>
+<a href="https://docs.moodle.org/38/en/Embedded_Answers_(Cloze)_question_type" target="_blank">read more</a>
+';
+$string['injecttext:page-question-type-stack'] = '
+<p>Please find more information about the STACK question type at the <a href="https://docs.moodle.org/311/en/STACK_question_type" target="_blank">Moodle Docs</a>.</p>
+<p>We prepared a template question for you, that you can enable simply by clicking on <a href="#" onclick="require([\'local_experience/main\'], function(M) { M.injectQuestionTemplate(\'stack\', 0) }); return false;" class="btn btn-secondary"><i class="fa fa-plus-circle"></i> insert template for MC with feedback and subpoints</a></p>
+';
+$string['injecttext:page-question-type-wordselect'] = '
+<p>This question type is designed to ask students to select text according to some criteria. For example "select the verb in the following sentence". Conceptually this is a little like a multiple choice question type (with multiple selectable options). The student responds by clicking on words to select them, and clicking a second time to unselect them.</p>
+<p>It provides an introduction field where words will not be selectable at runtime and a questiontext field. In the question text any words with braces around them will be considered correct. All words can be clicked-on to select.</p>
+<a href="https://docs.moodle.org/38/en/Wordselect_question_type" target="_blank">read more</a>
+';
+$string['pluginname'] = 'UI-experience';
 $string['pluginname:settings'] = 'UI-experience settings';
+$string['privacy:metadata'] = 'This plugin does not store any personal data';
