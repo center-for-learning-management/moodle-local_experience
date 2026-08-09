@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/experience/db" VERSION="20260521" COMMENT="XMLDB file for Moodle local/experience"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
->
-  <TABLES>
-  </TABLES>
-</XMLDB>
