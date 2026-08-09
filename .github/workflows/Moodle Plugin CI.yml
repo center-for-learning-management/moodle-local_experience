@@ -85,80 +85,9 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpmd
 
-      - name: Enable PHPCS annotations
-        if: ${{ !cancelled() }}
-        run: |
-          cat > "${RUNNER_TEMP}/moodle-phpcs-matcher.json" <<'EOF'
-          {
-            "problemMatcher": [
-              {
-                "owner": "moodle-phpcs",
-                "pattern": [
-                  {
-                    "regexp": "^FILE:\\s+(.+)$",
-                    "file": 1
-                  },
-                  {
-                    "regexp": "^\\s*(\\d+)\\s*\\|\\s*(ERROR|WARNING)\\s*\\|\\s*(?:\\[.\\]\\s*)?(.+)$",
-                    "line": 1,
-                    "severity": 2,
-                    "message": 3,
-                    "loop": true
-                  }
-                ]
-              }
-            ]
-          }
-          EOF
-          echo "::add-matcher::${RUNNER_TEMP}/moodle-phpcs-matcher.json"
-
-      - name: Enable PHPCS annotations
-        if: ${{ !cancelled() }}
-        run: |
-          cat > "${RUNNER_TEMP}/moodle-phpcs-matcher.json" <<'EOF'
-          {
-            "problemMatcher": [
-              {
-                "owner": "moodle-phpcs",
-                "pattern": [
-                  {
-                    "regexp": "^FILE:\\s+(.+)$",
-                    "file": 1
-                  },
-                  {
-                    "regexp": "^-+$"
-                  },
-                  {
-                    "regexp": "^FOUND .+$"
-                  },
-                  {
-                    "regexp": "^-+$"
-                  },
-                  {
-                    "regexp": "^\\s*(\\d+)\\s*\\|\\s*(ERROR|WARNING)\\s*\\|\\s*(.+)$",
-                    "line": 1,
-                    "severity": 2,
-                    "message": 3,
-                    "loop": true
-                  }
-                ]
-              }
-            ]
-          }
-          EOF
-          echo "::add-matcher::${RUNNER_TEMP}/moodle-phpcs-matcher.json"
-
       - name: Moodle Code Checker
         if: ${{ !cancelled() }}
-        run: moodle-plugin-ci phpcs --max-warnings 0
-
-      - name: Disable PHPCS annotations
-        if: always()
-        run: echo "::remove-matcher owner=moodle-phpcs::"
-
-      - name: Disable PHPCS annotations
-        if: always()
-        run: echo "::remove-matcher owner=moodle-phpcs::"
+        run: moodle-plugin-ci phpcs
 
       - name: Moodle PHPDoc Checker
         continue-on-error: true
@@ -307,3 +236,7 @@ jobs:
           body: ${{ env.PR_BODY }}
           branch: moodle-ci-fixes
           path: plugin
+
+      - name: Fail workflow if tests failed
+        if: ${{ needs.test.result == 'failure' }}
+        run: exit 1
