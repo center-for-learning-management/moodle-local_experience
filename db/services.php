@@ -1,3 +1,4 @@
+<?php
 /**
  * @package    local_experience
  * @copyright  2020 Center for Learning Management (http://www.lernmanagement.at)
