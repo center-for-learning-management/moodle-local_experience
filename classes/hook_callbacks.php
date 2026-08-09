@@ -28,9 +28,9 @@ defined('MOODLE_INTERNAL') || die;
 class hook_callbacks {
     public static function after_config() {
         global $CFG;
-        $scripts = array(
+        $scripts = [
             '/course/dndupload.php',
-        );
+        ];
         $script = str_replace($CFG->dirroot, '', $_SERVER["SCRIPT_FILENAME"]);
         if (in_array($script, $scripts)) {
             \local_experience\lib_wshelper::buffer();
@@ -48,15 +48,15 @@ class hook_callbacks {
                 $enabled = \get_config('local_experience', 'auto_set_completion_details');
                 $plusdays = \get_config('local_experience', 'auto_set_completion_add_days');
                 if (!empty($enabled) && !empty($plusdays)) {
-                    $PAGE->requires->js_call_amd("local_experience/main", "setCompletionDefaults", array($plusdays));
+                    $PAGE->requires->js_call_amd("local_experience/main", "setCompletionDefaults", [$plusdays]);
                 }
             }
         }
 
-        $PAGE->requires->js_call_amd("local_experience/main", "injectText", array());
+        $PAGE->requires->js_call_amd("local_experience/main", "injectText", []);
 
         if ($PAGE->user_allowed_editing()) {
-            $PAGE->requires->js_call_amd("local_experience/main", "captureKeycode", array());
+            $PAGE->requires->js_call_amd("local_experience/main", "captureKeycode", []);
         }
 
         $injectquestion = optional_param('local_experience_injectquestion', '', PARAM_TEXT);
@@ -64,7 +64,7 @@ class hook_callbacks {
             $x = explode(':', $injectquestion);
             if (count($x) == 3) {
                 $html .= $OUTPUT->render_from_template('local_experience/overlay', []);
-                $PAGE->requires->js_call_amd("local_experience/main", "injectQuestionTemplate", array($x[0], $x[1], $x[2]));
+                $PAGE->requires->js_call_amd("local_experience/main", "injectQuestionTemplate", [$x[0], $x[1], $x[2]]);
             }
         }
 
