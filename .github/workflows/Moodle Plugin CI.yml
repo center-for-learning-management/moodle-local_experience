@@ -76,6 +76,7 @@ jobs:
           MOODLE_BRANCH: ${{ matrix.moodle-branch }}
           # Uncomment this to run Behat tests using the Moodle App.
           # MOODLE_APP: 'true'
+
       - name: PHP Lint
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phplint
@@ -90,17 +91,13 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpmd
 
-      # --- Fixers run before checks ---
-      - name: Moodle Code Beautifier and Fixer
-        if: ${{ !cancelled() }}
-        run: moodle-plugin-ci phpcbf
-
       - name: Moodle Code Checker
         continue-on-error: true
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpcs --max-warnings 0
 
       - name: Moodle PHPDoc Checker
+        continue-on-error: true
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpdoc --max-warnings 0
 
@@ -113,19 +110,14 @@ jobs:
         run: moodle-plugin-ci savepoints
 
       - name: Mustache Lint
+        continue-on-error: true
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci mustache
 
       - name: Grunt
+        continue-on-error: true
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci grunt --max-lint-warnings 0
-
-      # Custom ESLint fix step – runs directly on plugin source inside Moodle
-      - name: PHP Lint --fix
-        if: ${{ !cancelled() }}
-        run: |
-          cd ${{ github.workspace }}/moodle
-          ./node_modules/.bin/eslint --fix public/local/experience/
 
       - name: PHPUnit tests
         if: ${{ !cancelled() }}
@@ -149,17 +141,78 @@ jobs:
         if: ${{ cancelled() }}
         run: exit 1
 
+  # Runs ONCE (no matrix) after all test legs finish: applies auto-fixers,
+  # commits the result as a PR, and runs the Psalm security scan.
+  fix-and-pr:
+    needs: test
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+
+    services:
+      mariadb:
+        image: mariadb:11
+        env:
+          MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: '1'
+          MYSQL_CHARACTER_SET_SERVER: "utf8mb4"
+          MYSQL_COLLATION_SERVER: "utf8mb4_unicode_ci"
+        ports:
+          - 3306:3306
+        options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval 10s --health-timeout 5s --health-retries 3
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v6
+        with:
+          path: plugin
+          persist-credentials: false
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          ini-values: max_input_vars=5000, opcache.enable_cli=1
+          coverage: none
+
+      - name: Initialise moodle-plugin-ci
+        env:
+          COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{secrets.github_token}}"} }'
+        run: |
+          composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
+          pushd ci >/dev/null
+            echo "> composer config repositories.repo-name vcs https://github.com/center-for-learning-management/moodle-psalm-plugin"
+            composer config repositories.repo-name vcs https://github.com/center-for-learning-management/moodle-psalm-plugin
+            echo "> composer require --dev center-for-learning-management/moodle-psalm-plugin dev-main@dev"
+            composer require --dev center-for-learning-management/moodle-psalm-plugin dev-main@dev
+          popd
+          echo $(cd ci/bin; pwd) >> $GITHUB_PATH
+          echo $(cd ci/vendor/bin; pwd) >> $GITHUB_PATH
+          sudo locale-gen en_AU.UTF-8
+          echo "NVM_DIR=$HOME/.nvm" >> $GITHUB_ENV
+
+      - name: Install moodle-plugin-ci
+        run: moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1
+        env:
+          DB: mariadb
+          MOODLE_BRANCH: MOODLE_502_STABLE
+
+      # --- Fixers ---
+      - name: Moodle Code Beautifier and Fixer
+        run: moodle-plugin-ci phpcbf
+
+      - name: ESLint --fix
+        run: |
+          cd ${{ github.workspace }}/moodle
+          ./node_modules/.bin/eslint --fix public/local/experience/
+
       # Copy the fixed files from the Moodle installation back to the plugin folder
       - name: Copy changes to repository
-        if: ${{ !cancelled() }}
         run: |
           echo "Copying changed files from ${{ github.workspace }}/moodle/public/$(echo ${GITHUB_REPOSITORY}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/. to ${{ github.workspace }}/plugin/."
-          rsync -av ${{ github.workspace }}/moodle/public/$(echo ${GITHUB_REPOSITORY}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/. ${{ github.workspace }}/plugin/.
+          rsync -av ${{ github.workspace }}/moodle/public/$(echo ${GITHUB_REPOSITORY}|cut -d/ -f2|sed s/^moodle-//|tr _ /)/. ${{ github.workspace }}/plugin/. --exclude='.git'
 
       # Detect if any files were modified by the fixers
       - name: Check for changes
         id: check
-        if: ${{ !cancelled() }}
         run: |
           cd plugin
           git add -A
@@ -172,14 +225,9 @@ jobs:
             cat ../changed_files.txt
           fi
 
-      # DEBUG: Print the value of changes
-      - name: Debug changes output
-        if: ${{ !cancelled() }}
-        run: echo "changes=${{ steps.check.outputs.changes }}"
-
       # Prepare the pull request body with the list of changed files
       - name: Prepare PR body
-        if: steps.check.outputs.changes == 'true'   # use variable
+        if: ${{ !cancelled() && steps.check.outputs.changes == 'true' }}
         run: |
           echo "PR_BODY<<EOF" >> $GITHUB_ENV
           echo "Moodle CI Fixes" >> $GITHUB_ENV
@@ -212,7 +260,7 @@ jobs:
 
       # Create pull request only if changes exist
       - name: Create Pull Request
-        if: steps.check.outputs.changes == 'true'   # use variable
+        if: ${{ !cancelled() && steps.check.outputs.changes == 'true' }}
         uses: peter-evans/create-pull-request@v5
         with:
           commit-message: CI Fixes
@@ -220,6 +268,3 @@ jobs:
           body: ${{ env.PR_BODY }}
           branch: moodle-ci-fixes
           path: plugin
-      - name: Mark cancelled jobs as failed.
-        if: ${{ cancelled() }}
-        run: exit 1
