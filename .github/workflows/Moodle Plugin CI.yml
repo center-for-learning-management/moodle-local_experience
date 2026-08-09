@@ -1,5 +1,5 @@
 name: Moodle Plugin CI
-on: [push, pull_request]
+on: [push]
 
 permissions:
   contents: write          # required to create a branch and PR
@@ -85,10 +85,41 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpmd
 
+      - name: Enable PHPCS annotations
+        if: ${{ !cancelled() }}
+        run: |
+          cat > "${RUNNER_TEMP}/moodle-phpcs-matcher.json" <<'EOF'
+          {
+            "problemMatcher": [
+              {
+                "owner": "moodle-phpcs",
+                "pattern": [
+                  {
+                    "regexp": "^FILE:\\s+(.+)$",
+                    "file": 1
+                  },
+                  {
+                    "regexp": "^\\s*(\\d+)\\s*\\|\\s*(ERROR|WARNING)\\s*\\|\\s*(?:\\[.\\]\\s*)?(.+)$",
+                    "line": 1,
+                    "severity": 2,
+                    "message": 3,
+                    "loop": true
+                  }
+                ]
+              }
+            ]
+          }
+          EOF
+          echo "::add-matcher::${RUNNER_TEMP}/moodle-phpcs-matcher.json"
+
       - name: Moodle Code Checker
         continue-on-error: true
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpcs --max-warnings 0
+
+      - name: Disable PHPCS annotations
+        if: always()
+        run: echo "::remove-matcher owner=moodle-phpcs::"
 
       - name: Moodle PHPDoc Checker
         continue-on-error: true
