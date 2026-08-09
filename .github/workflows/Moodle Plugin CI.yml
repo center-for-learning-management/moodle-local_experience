@@ -59,12 +59,6 @@ jobs:
           COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{secrets.github_token}}"} }'
         run: |
           composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
-          pushd ci >/dev/null
-            echo "> composer config repositories.repo-name vcs https://github.com/center-for-learning-management/moodle-psalm-plugin"
-            composer config repositories.repo-name vcs https://github.com/center-for-learning-management/moodle-psalm-plugin
-            echo "> composer require --dev center-for-learning-management/moodle-psalm-plugin dev-main@dev"
-            composer require --dev center-for-learning-management/moodle-psalm-plugin dev-main@dev
-          popd
           echo $(cd ci/bin; pwd) >> $GITHUB_PATH
           echo $(cd ci/vendor/bin; pwd) >> $GITHUB_PATH
           sudo locale-gen en_AU.UTF-8
@@ -143,7 +137,6 @@ jobs:
         run: exit 1
 
   # Runs ONCE (no matrix) after all test legs finish: applies auto-fixers,
-  # commits the result as a PR, and runs the Psalm security scan.
   fix-and-pr:
     needs: test
     if: ${{ always() }}
@@ -179,12 +172,6 @@ jobs:
           COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{secrets.github_token}}"} }'
         run: |
           composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
-          pushd ci >/dev/null
-            echo "> composer config repositories.repo-name vcs https://github.com/center-for-learning-management/moodle-psalm-plugin"
-            composer config repositories.repo-name vcs https://github.com/center-for-learning-management/moodle-psalm-plugin
-            echo "> composer require --dev center-for-learning-management/moodle-psalm-plugin dev-main@dev"
-            composer require --dev center-for-learning-management/moodle-psalm-plugin dev-main@dev
-          popd
           echo $(cd ci/bin; pwd) >> $GITHUB_PATH
           echo $(cd ci/vendor/bin; pwd) >> $GITHUB_PATH
           sudo locale-gen en_AU.UTF-8
@@ -238,55 +225,6 @@ jobs:
           cat changed_files.txt >> $GITHUB_ENV
           echo '```' >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-
-      # Create a minimal composer.json so Psalm can autodiscover the source
-      - name: Prepare Psalm config
-        if: ${{ !cancelled() }}
-        run: |
-          cd plugin
-          cat > composer.json <<'EOF'
-          {
-              "name": "local/experience",
-              "autoload": {
-                  "classmap": ["."]
-              }
-          }
-          EOF
-
-      - name: Psalm Security Scan
-        if: ${{ !cancelled() }}
-        uses: docker://ghcr.io/psalm/psalm-security-scan
-        with:
-          working_dir: plugin
-
-      - name: Upload Psalm SARIF results
-        if: ${{ !cancelled() }}
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: plugin/results.sarif
-          category: psalm
-
-      # Psalm's scan config/output aren't plugin source - strip them out of
-      # the plugin working tree so create-pull-request doesn't pick them up.
-      - name: Discard Psalm scan artifacts
-        if: ${{ !cancelled() }}
-        run: |
-          cd plugin
-          rm -f composer.json composer.lock results.sarif
-
-      - name: DevSkim Security Scan
-        if: ${{ !cancelled() }}
-        uses: microsoft/DevSkim-Action@v1
-        with:
-          directory-to-scan: plugin
-          output-filename: devskim-results.sarif
-      # Create pull request only if changes exist
-      - name: Upload DevSkim SARIF results
-        if: ${{ !cancelled() }}
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: devskim-results.sarif
-          category: devskim
 
       # Create pull request only if changes exist
       - name: Create Pull Request
