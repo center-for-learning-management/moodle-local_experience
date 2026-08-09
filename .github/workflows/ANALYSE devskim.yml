@@ -8,10 +8,6 @@ name: DevSkim
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-  schedule:
-    - cron: '19 7 * * 5'
 
 jobs:
   lint:
