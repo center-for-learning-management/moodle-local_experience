@@ -24,20 +24,12 @@
 $string['pluginname'] = 'UI-Erfahrung';
 $string['privacy:metadata'] = 'Dieses Plugin speichert keine personenbezogenen Daten';
 
-$string['access_denied'] = 'Zugriff nicht gestattet!';
-$string['advanced_options'] = 'Fortgeschrittenen-Modus';
-$string['advanced_options:description'] = 'Im Fortgeschrittenen-Modus sehen Sie alle Funktionen der Seite!';
-$string['attachlevelselectto'] = 'Level-Auswahl hinzufügen zu';
-$string['attachlevelselectto:description'] = 'Geben Sie zeilenweise alle HTML-Container mit CSS-Regeln an, zu denen die Level-Auswahl hinzugefügt werden soll. Sie können mittels Parametern angeben, ob das Steuerelement an den Anfang oder das Ende eingefügt werden soll, bzw. ob ein Textlabel angezeigt wird.<br /><br /><i>CSS-Selektor|prepend oder append|true oder false';
-
 $string['auto_set_completion_details'] = 'Setze Daten für Abschlussverfolgung';
 $string['auto_set_completion_details:description'] = 'Wenn aktiviert, werden Regeln zur Abschlussverfolgung automatisch für neue Ressourcen/Aktivitäten und Dateiuploads gesetzt. Zusätzlich zu dieser Option müssen die konfigurierten Ziel-Tage über 0 sein!';
 $string['auto_set_completion_add_days'] = 'Ziel-Tage in Formularen';
 $string['auto_set_completion_add_days:description'] = 'Setze in Formularen das erwartete Abschlussdatum in x Tagen in der Zukunft. Es wird eine manuelle Abschlussverfolgung im Formular vorgeschlagen.';
 $string['auto_set_completion_add_days_dnd'] = 'Ziel-Tage DND Uploads';
 $string['auto_set_completion_add_days_dnd:description'] = 'Setze bei Drag&Drop Uploads das erwartete Abschlussdatum in x Tagen in der Zukunft. Es wird eine automatische Abschlussverfolgung eingestellt.';
-
-$string['experience:cantrigger'] = 'Kann Erfahrungslevel wählen';
 
 $string['injectquestion:pleasewait'] = 'Die Vorlage wird geladen, bitte warten ...';
 $string['injectquestion:pleasewait:subtext'] = 'Möglicherweise wird die Seite mehrmals neu geladen, um alle Einstellungen zu übernehmen.';

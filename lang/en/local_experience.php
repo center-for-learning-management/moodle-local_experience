@@ -24,30 +24,12 @@
 $string['pluginname'] = 'UI-experience';
 $string['privacy:metadata'] = 'This plugin does not store any personal data';
 
-$string['access_denied'] = 'Access denied!';
-$string['add_another_explevel'] = 'Add another experience level';
-$string['advanced_options'] = 'Expert mode';
-$string['advanced_options:description'] = 'All functions of this page are displayed in expert mode!';
-$string['attachlevelselectto'] = 'Attach level selector to';
-$string['attachlevelselectto:description'] = 'Specify all containers line by line, where the level attach selector should be added to. You can specify if the level-switch will be appended or prepended and if a label will be shown.<br /><br /><i>CSS-Selector|prepend or append|true or false';
-
 $string['auto_set_completion_details'] = 'Automatically set completion details';
 $string['auto_set_completion_details:description'] = 'If enabled, completion rules will be automatically set when a new resource or activity is created. In addition to this option, days have to configured to be above 0!';
 $string['auto_set_completion_add_days'] = 'Offset in forms';
 $string['auto_set_completion_add_days:description'] = 'Set the expected completion date in forms to x days in the future in forms. Will recommend manual completion.';
 $string['auto_set_completion_add_days_dnd'] = 'Offset for DND Uploads';
 $string['auto_set_completion_add_days_dnd:description'] = 'Set the expected completion date in forms to x days in the future for DND uploads. Will result in an automated completion.';
-
-$string['conditions'] = 'Conditions';
-$string['conditions:add'] = 'Add condition';
-$string['conditions:description'] = 'Here you can specify the conditions when a rule has to be applied.';
-$string['conditions:removenotice'] = 'Remove a line by setting "name" to an empty value.';
-$string['conditions:patternparameters'] = 'Parameter patterns';
-$string['conditions:patternscriptnames'] = 'Scriptname patterns';
-
-$string['c_r'] = 'Relation conditions <=> rules';
-
-$string['experience:cantrigger'] = 'Can trigger experience';
 
 $string['injectquestion:pleasewait'] = 'Loading the template, please wait ...';
 $string['injectquestion:pleasewait:subtext'] = 'Eventually the page is loaded several times to load all settings.';
@@ -242,10 +224,3 @@ Contact: christian.schwarzinger@openfab.org</p>
 https://www.bigbluemeeting.com/</p>';
 
 $string['pluginname:settings'] = 'UI-experience settings';
-
-$string['rules'] = 'Rules';
-$string['rules:add'] = 'Add rule';
-$string['rules:description'] = 'Here you can specify how the forms should be modified for the beginner level. Enter the type of activity/resource. Name all elements that should be hidden line by line. Do the same for default values, but use the syntax my_css_selector1=my_default_value1\n my_css_selector2=my_default_value2 and so on.';
-$string['rules:elementstohide'] = 'Hide Elements with the following selectors';
-$string['rules:elementstoset'] = 'Set form fields to the following values';
-$string['rules:removenotice'] = 'Remove a line by setting "name" to an empty value.';

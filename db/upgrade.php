@@ -27,5 +27,13 @@ function xmldb_local_experience_upgrade($oldversion) {
     global $DB;
     $dbman = $DB->get_manager();
 
+    if ($oldversion < 2026052100) {
+        // Note: the obsolete tables local_experience_conditions, local_experience_rules
+        // and local_experience_c_r are kept for now (only removed from install.xml).
+        $DB->delete_records('user_preferences', ['name' => 'local_experience_level']);
+
+        upgrade_plugin_savepoint(true, 2026052100, 'local', 'experience');
+    }
+
     return true;
 }

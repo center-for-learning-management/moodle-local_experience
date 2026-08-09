@@ -54,39 +54,4 @@ if ($hassiteconfig) {
             PARAM_INT
         )
     );
-
-    $ADMIN->add(
-        'local_experience',
-        new admin_externalpage(
-            'local_experience_conditions',
-            get_string('conditions', 'local_experience'),
-            $CFG->wwwroot . '/local/experience/conditions.php'
-        )
-    );
-    $ADMIN->add(
-        'local_experience',
-        new admin_externalpage(
-            'local_experience_rules',
-            get_string('rules', 'local_experience'),
-            $CFG->wwwroot . '/local/experience/rules.php'
-        )
-    );
-    $ADMIN->add(
-        'local_experience',
-        new admin_externalpage(
-            'local_experience_c_r',
-            get_string('c_r', 'local_experience'),
-            $CFG->wwwroot . '/local/experience/c_r.php'
-        )
-    );
-
-    $settings->add(
-        new admin_setting_configtextarea(
-            'local_experience/attachlevelselectto',
-            get_string('attachlevelselectto', 'local_experience'),
-            get_string('attachlevelselectto:description', 'local_experience'),
-            "#page-wrapper>.navbar>ul:last-child|prepend\n#chooserform div.submitbuttons|prepend|false",
-            PARAM_TEXT
-        )
-    );
 }

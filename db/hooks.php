@@ -23,4 +23,15 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$capabilities = array();
+$callbacks = [
+    [
+        'hook' => \core\hook\after_config::class,
+        'callback' => [\local_experience\hook_callbacks::class, 'after_config'],
+        'priority' => 500,
+    ],
+    [
+        'hook' => \core\hook\output\before_standard_head_html_generation::class,
+        'callback' => [\local_experience\hook_callbacks::class, 'before_standard_head_html_generation'],
+        'priority' => 500,
+    ],
+];
