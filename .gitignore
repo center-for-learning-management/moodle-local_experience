@@ -3,3 +3,4 @@ composer.*
 node_modules
 vendor
 .DS_Store
+/results.sarif
