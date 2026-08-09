@@ -231,7 +231,7 @@ jobs:
       # Create pull request only if changes exist
       - name: Create Pull Request
         if: ${{ !cancelled() && steps.check.outputs.changes == 'true' }}
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: CI Fixes
           title: Moodle CI Fixes
