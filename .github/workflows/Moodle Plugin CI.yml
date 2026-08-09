@@ -120,7 +120,7 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci grunt --max-lint-warnings 0
 
-      # Custom ESLint fix step â€“ runs directly on plugin source inside Moodle
+      # Custom ESLint fix step – runs directly on plugin source inside Moodle
       - name: PHP Lint --fix
         if: ${{ !cancelled() }}
         run: |
@@ -179,7 +179,7 @@ jobs:
 
       # Prepare the pull request body with the list of changed files
       - name: Prepare PR body
-        if: hashFiles('changed_files.txt') != ''
+        if: steps.check.outputs.changes == 'true'   # use variable
         run: |
           echo "PR_BODY<<EOF" >> $GITHUB_ENV
           echo "Moodle CI Fixes" >> $GITHUB_ENV
@@ -212,7 +212,7 @@ jobs:
 
       # Create pull request only if changes exist
       - name: Create Pull Request
-        if: hashFiles('changed_files.txt') != ''
+        if: steps.check.outputs.changes == 'true'   # use variable
         uses: peter-evans/create-pull-request@v5
         with:
           commit-message: CI Fixes
@@ -220,7 +220,6 @@ jobs:
           body: ${{ env.PR_BODY }}
           branch: moodle-ci-fixes
           path: plugin
-
       - name: Mark cancelled jobs as failed.
         if: ${{ cancelled() }}
         run: exit 1
