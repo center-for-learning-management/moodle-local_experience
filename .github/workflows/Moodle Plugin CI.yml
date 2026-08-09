@@ -2,7 +2,8 @@ name: Moodle Plugin CI
 on: [push, pull_request]
 
 permissions:
-  contents: read
+  contents: write          # Needed to create a branch and PR
+  pull-requests: write     # Needed to create a PR
 
 jobs:
   test:
@@ -75,6 +76,7 @@ jobs:
           MOODLE_BRANCH: ${{ matrix.moodle-branch }}
           # Uncomment this to run Behat tests using the Moodle App.
           # MOODLE_APP: 'true'
+
       - name: PHP Lint
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phplint
@@ -171,6 +173,11 @@ jobs:
             cat ../changed_files.txt
           fi
 
+      # DEBUG: Print the value of changes
+      - name: Debug changes output
+        if: ${{ !cancelled() }}
+        run: echo "changes=${{ steps.check.outputs.changes }}"
+
       # Prepare the pull request body with the list of changed files
       - name: Prepare PR body
         if: steps.check.outputs.changes == 'true'
@@ -202,7 +209,7 @@ jobs:
         if: ${{ !cancelled() }}
         uses: docker://ghcr.io/psalm/psalm-security-scan
         with:
-          working_dir: plugin   # <-- corrected input name
+          working_dir: plugin
 
       # Create pull request only if changes exist
       - name: Create Pull Request
