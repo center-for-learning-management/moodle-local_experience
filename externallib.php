@@ -34,6 +34,9 @@ class local_experience_external extends external_api {
 
     /**
      * Get a tutorial text to inject.
+     *
+     * @param string $pageid the page id
+     * @return array the text to inject
      */
     public static function injecttext($pageid) {
         global $CFG, $PAGE;
@@ -91,7 +94,10 @@ class local_experience_external extends external_api {
     }
 
     /**
-     * Get a tutorial text to inject.
+     * Toggle or query a user setting identified by a keycode action.
+     *
+     * @param string $action the action
+     * @return int returns 1 if action was known, 0 if action was unkown, -1 if action failed.
      */
     public static function keycode($action) {
         global $USER;
