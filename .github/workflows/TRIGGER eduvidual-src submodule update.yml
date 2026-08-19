@@ -12,7 +12,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Trigger bip-src submodule_update
+      - name: Trigger eduvidual-src submodule_update
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.BOT_GITHUB_ACTION_PAT }}
