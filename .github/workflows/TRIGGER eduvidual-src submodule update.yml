@@ -12,10 +12,10 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Trigger eduvidual-src submodule_update
+      - name: Trigger eduvidual-src submodule pointer update
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.BOT_GITHUB_ACTION_PAT }}
           repository: center-for-learning-management/eduvidual-src
-          event-type: submodule-update-${{ github.ref_name }}
+          event-type: submodule-pointer-update
           client-payload: '{"source_repo": "${{ github.repository }}", "triggered_by": "${{ github.actor }}", "triggered_sha": "${{ github.sha }}", "repository_url": "${{ github.repositoryUrl }}", "workflow" : "${{ github.workflow }}", "triggered_branch": "${{ github.ref_name }}"}'
