@@ -28,4 +28,4 @@ $plugin->requires = 2014051200;
 $plugin->component = 'local_experience';
 $plugin->release = '1.0 (Build: 2021030900)';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->dependencies = array();
+$plugin->dependencies = [];

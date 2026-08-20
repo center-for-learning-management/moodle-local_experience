@@ -26,7 +26,7 @@ namespace local_experience;
 defined('MOODLE_INTERNAL') || die;
 
 class lib_wshelper {
-    public static $navbar_nodes = array();
+    public static $navbar_nodes = [];
     private static $debug = false;
 
     /**
@@ -37,13 +37,15 @@ class lib_wshelper {
         self::$debug = ($CFG->debug == 32767); // Developer debugging
         $func = str_replace('__', '_', 'buffer_' . str_replace('/', '_', str_replace('.php', '', str_replace($CFG->dirroot, '', $_SERVER["SCRIPT_FILENAME"]))));
         if (method_exists(__CLASS__, $func)) {
-            if (self::$debug)
+            if (self::$debug) {
                 error_log('Buffer function ' . $func . ' called');
+            }
             ob_start();
             register_shutdown_function('\local_experience\lib_wshelper::buffer_modify');
         } else {
-            if (self::$debug)
+            if (self::$debug) {
                 error_log('Buffer function ' . $func . ' not found');
+            }
             return false;
         }
     }
