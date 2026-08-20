@@ -27,15 +27,15 @@
 
 require('../../../config.php');
 require_login();
-$PAGE->set_url(new \moodle_url('/local/experience/pages/bigbluebutton.php', array()));
+$PAGE->set_url(new \moodle_url('/local/experience/pages/bigbluebutton.php', []));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_heading('Big Blue Button');
 $PAGE->set_title('Big Blue Button');
 
 echo $OUTPUT->header();
-$params = (object)array(
+$params = (object)[
     'wwwroot' => $CFG->wwwroot,
-);
+];
 echo '<p>' . get_string('injecttext:page-mod-bigbluebuttonbn-mod', 'local_experience', $params) . '</p>';
 echo get_string('injecttext:page-mod-bigbluebuttonbn-mod:longtext', 'local_experience', $params);
 echo $OUTPUT->footer();

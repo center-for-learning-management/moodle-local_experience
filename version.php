@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Version details for local_experience.
+ *
  * @package    local_experience
  * @copyright  2020 Zentrum für Lernmanagement (www.lernmanagement.at)
  * @author    Robert Schrenk
@@ -28,4 +30,4 @@ $plugin->requires = 2014051200;
 $plugin->component = 'local_experience';
 $plugin->release = '1.0 (Build: 2021030900)';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->dependencies = array();
+$plugin->dependencies = [];
