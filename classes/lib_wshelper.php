@@ -27,23 +27,19 @@ defined('MOODLE_INTERNAL') || die;
 
 class lib_wshelper {
     public static $navbar_nodes = array();
-    private static $debug = false;
 
     /**
      * Recognizes the result of a certain script and registers an output buffer for it.
      */
     public static function buffer() {
         global $CFG;
-        self::$debug = ($CFG->debug == 32767); // Developer debugging
         $func = str_replace('__', '_', 'buffer_' . str_replace('/', '_', str_replace('.php', '', str_replace($CFG->dirroot, '', $_SERVER["SCRIPT_FILENAME"]))));
         if (method_exists(__CLASS__, $func)) {
-            if (self::$debug)
-                error_log('Buffer function ' . $func . ' called');
+            debugging('Buffer function ' . $func . ' called', DEBUG_DEVELOPER);
             ob_start();
             register_shutdown_function('\local_experience\lib_wshelper::buffer_modify');
         } else {
-            if (self::$debug)
-                error_log('Buffer function ' . $func . ' not found');
+            debugging('Buffer function ' . $func . ' not found', DEBUG_DEVELOPER);
             return false;
         }
     }
@@ -73,12 +69,12 @@ class lib_wshelper {
         $modulename = optional_param('module', '', PARAM_PLUGIN);
 
         if (!empty($courseid) && ($modulename == 'resource' || $modulename == 'label')) {
-            error_log("course $courseid section $section type $type modulename $modulename");
+            debugging("course $courseid section $section type $type modulename $modulename", DEBUG_DEVELOPER);
             $_section = array_values($DB->get_records('course_sections', ['course' => $courseid, 'section' => $section]));
-            error_log(print_r($_section, 1));
+            debugging(print_r($_section, 1), DEBUG_DEVELOPER);
             if (count($_section) > 0) {
                 $sectionid = $_section[0]->id;
-                error_log('section ' . $sectionid);
+                debugging('section ' . $sectionid, DEBUG_DEVELOPER);
 
                 $sql = 'SELECT id
                             FROM {course_modules}
@@ -90,13 +86,13 @@ class lib_wshelper {
                 $DB->set_field('course_modules', 'completionview', 1, ['id' => $mod->id]);
                 $DB->set_field('course_modules', 'completionexpected', strtotime("+$dnddays days"), ['id' => $mod->id]);
 
-                error_log('mod ' . $mod->id);
+                debugging('mod ' . $mod->id, DEBUG_DEVELOPER);
 
                 $strfrom = get_string('completion-alt-manual-enabled', 'core_completion');
                 $strfrom = substr($strfrom, 0, strpos($strfrom, ':'));
                 $strto = get_string('completion-alt-auto-enabled', 'core_completion');
                 $strto = substr($strto, 0, strpos($strto, ':'));
-                error_log("replace $strfrom to $strto");
+                debugging("replace $strfrom to $strto", DEBUG_DEVELOPER);
                 $buffer = str_replace($strfrom, $strto, $buffer);
                 $buffer = str_replace('completion-manual-enabled', 'completion-auto-enabled', $buffer);
             }
