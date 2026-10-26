@@ -159,8 +159,7 @@ define(
             var pageids = ['page-question-type-ddwtos',
                            'page-question-type-multianswer',
                            'page-question-type-stack',
-                           'page-question-type-wordselect',
-                           'page-mod-bigbluebuttonbn-mod'];
+                           'page-question-type-wordselect'];
             var id = $('body').attr('id');
             if (pageids.indexOf(id) > -1) {
                 AJAX.call([{
